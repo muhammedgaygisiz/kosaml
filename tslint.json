@@ -18,7 +18,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      "kosaml",
       "kebab-case"
     ],
     "import-blacklist": [
