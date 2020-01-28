@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
+  selector: 'kosaml-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
