@@ -3,7 +3,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span>KOSAML</span>
+    <span>{{ title | uppercase }}</span>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
