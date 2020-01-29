@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import * as SiteActions from '../store/site.actions';
+
 
 @Component({
   selector: 'kosaml-header',
@@ -8,9 +12,15 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   title = 'kosaml';
 
-  constructor() { }
+  constructor(
+    private store: Store<fromApp.AppState>
+  ) { }
 
   ngOnInit() {
+  }
+
+  toggleProjectBar() {
+    this.store.dispatch(new SiteActions.ToggleProjectBar());
   }
 
 }
