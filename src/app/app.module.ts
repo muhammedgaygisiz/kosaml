@@ -15,12 +15,14 @@ import { AppComponent } from './app.component';
 import { BodyComponent } from './site/body/body.component';
 import { HeaderComponent } from './site/header/header.component';
 import * as fromApp from './store/app.reducer';
+import { ContentComponent } from './site/body/content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BodyComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
