@@ -12,9 +12,15 @@ import * as fromApp from '../../store/app.reducer';
 })
 export class BodyComponent implements OnInit {
 
-  isOpen$: Observable<boolean> = this.store.select('site')
+  isProjectBarOpen$: Observable<boolean> = this.store.select('site')
     .pipe(
-      map(siteState => siteState.projectBarOpen),
+      map(siteState => siteState.isProjectBarOpen),
+      shareReplay()
+    );
+
+  isToolBarOpen$: Observable<boolean> = this.store.select('site')
+    .pipe(
+      map(siteState => siteState.isToolBarOpen),
       shareReplay()
     );
 

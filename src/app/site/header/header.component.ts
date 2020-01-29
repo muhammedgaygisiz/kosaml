@@ -23,4 +23,7 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new SiteActions.ToggleProjectBar());
   }
 
+  toggleToolBar() {
+    this.store.dispatch(new SiteActions.ToggleToolBar());
+  }
 }

@@ -1,11 +1,13 @@
 import * as SiteActions from './site.actions';
 
 export interface State {
-    projectBarOpen: boolean;
+    isProjectBarOpen: boolean;
+    isToolBarOpen: boolean;
 }
 
 const initialState: State = {
-    projectBarOpen: false,
+    isProjectBarOpen: false,
+    isToolBarOpen: false,
 };
 
 export function siteReducer(
@@ -16,7 +18,13 @@ export function siteReducer(
         case SiteActions.TOGGLE_PROJECT_BAR:
             return {
                 ...state,
-                projectBarOpen: !state.projectBarOpen
+                isProjectBarOpen: !state.isProjectBarOpen
+            };
+
+        case SiteActions.TOGGLE_TOOL_BAR:
+            return {
+                ...state,
+                isToolBarOpen: !state.isToolBarOpen
             };
 
         default:
