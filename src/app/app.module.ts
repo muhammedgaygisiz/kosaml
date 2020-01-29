@@ -7,14 +7,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { BodyComponent } from './site/body/body.component';
+import { HeaderComponent } from './site/header/header.component';
+import * as fromApp from './store/app.reducer';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,8 @@ import { HeaderComponent } from './header/header.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    StoreModule.forRoot(fromApp.appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]
