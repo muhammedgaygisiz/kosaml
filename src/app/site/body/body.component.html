@@ -2,6 +2,7 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport [fixedTopGap]="56"
         [attr.role]="(isProjectBarOpen$ | async) ? 'navigation' : 'dialog'"
         [mode]="(isProjectBarOpen$ | async) ? 'side' : 'over'" [opened]="(isProjectBarOpen$ | async) === true">
+        <mat-toolbar>Digital Library</mat-toolbar>
         <kosaml-project></kosaml-project>
     </mat-sidenav>
     <mat-sidenav-content>

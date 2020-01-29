@@ -6,7 +6,7 @@ export interface State {
 }
 
 const initialState: State = {
-    isProjectBarOpen: false,
+    isProjectBarOpen: true,
     isToolBarOpen: false,
 };
 
