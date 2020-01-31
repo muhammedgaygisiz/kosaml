@@ -1,8 +1,11 @@
+import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { of as observableOf } from 'rxjs';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { files } from './example-data';
+import { Store } from '@ngrx/store';
+import { Observable, of as observableOf } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import * as fromApp from '../../../store/app.reducer';
+
 
 /** File node data with possible child nodes. */
 export interface FileNode {
@@ -38,7 +41,15 @@ export class ProjectComponent {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
 
-  constructor() {
+  reduxDataSource$: Observable<FileNode[]> = this.store.select('site')
+    .pipe(
+      map(siteState => siteState.projectStructure),
+      shareReplay()
+    );
+
+  constructor(
+    private store: Store<fromApp.AppState>
+  ) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
@@ -47,7 +58,10 @@ export class ProjectComponent {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.dataSource.data = files;
+
+    this.reduxDataSource$.subscribe(files => {
+      this.dataSource.data = files;
+    });
   }
 
   /** Transform the data to something the tree can read. */
@@ -55,7 +69,7 @@ export class ProjectComponent {
     return {
       name: node.name,
       type: node.type,
-      level: level,
+      level,
       expandable: !!node.children
     };
   }
