@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -65,6 +66,7 @@ export class AuthEffects {
         private actions$: Actions,
         private http: HttpClient,
         private authService: AuthService,
+        private router: Router,
     ) { }
 
     @Effect()
@@ -98,4 +100,15 @@ export class AuthEffects {
                 );
         }),
     );
+
+    @Effect({ dispatch: false })
+    authRedirect = this.actions$
+        .pipe(
+            ofType(AuthActions.AUTHENTICATE_SUCCESS),
+            tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+                if (authSuccessAction.payload.redirect) {
+                    this.router.navigate(['/']);
+                }
+            })
+        );
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import * as AuthActions from '../auth/store/auth.actions';
 import * as fromApp from '../store/app.reducer';
 
@@ -18,6 +20,11 @@ export class AuthComponent implements OnInit {
   constructor(
     private store: Store<fromApp.AppState>,
   ) { }
+
+  isLoading$: Observable<boolean> = this.store.select('auth').pipe(
+    map(authState => authState.loading),
+    shareReplay()
+  );
 
   ngOnInit() {
     this.authForm = new FormGroup({

@@ -1,8 +1,8 @@
 <mat-card class="auth-card">
-    <div style="text-align: center;" *ngIf="isLoading">
+    <div style="text-align: center;" *ngIf="(isLoading$ | async)">
         <kosaml-loading-spinner></kosaml-loading-spinner>
     </div>
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!(isLoading$ | async)">
         <div class="formFieldContainer">
             <mat-form-field>
                 <input matInput placeholder="Email" name="email" formControlName="email">
