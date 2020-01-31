@@ -106,28 +106,151 @@ export const files = [
     ]
   },
   {
-    name: 'Use Case Diagram',
+    name: 'Architecture',
     type: 'folder',
     children: [
-      { name: 'gulpfile.js', type: 'file' },
-      { name: 'README.md', type: 'file' }
-    ]
-  },
-  {
-    name: 'Activity Diagram',
-    type: 'folder',
-    children: [
-      { name: 'gulpfile.js', type: 'file' },
-      { name: 'README.md', type: 'file' }
-    ]
-  },
-
-  {
-    name: 'Content Diagram',
-    type: 'folder',
-    children: [
-      { name: 'gulpfile.js', type: 'file' },
-      { name: 'README.md', type: 'file' }
+      {
+        name: 'Glossary',
+        type: 'file',
+      },
+      {
+        name: 'Use Case Diagram',
+        type: 'folder',
+        children: [
+          {
+            name: 'Use Case Diagram',
+            type: 'file'
+          },
+          {
+            name: 'Sections',
+            type: 'folder',
+            children: [
+              { name: 'Search and request resource', type: 'file' },
+              { name: 'View updates and request resource', type: 'file' },
+            ]
+          },
+        ]
+      },
+      {
+        name: 'Schematics',
+        type: 'folder',
+        children: [
+          {
+            name: 'Action Schemes',
+            type: 'folder',
+            children: [
+              { name: 'Search and request resource', type: 'file' },
+              { name: 'View updates and request resource', type: 'file' },
+            ]
+          },
+          {
+            name: 'Data Schemes',
+            type: 'folder',
+            children: [
+              { name: 'CD-ROM', type: 'file' },
+              { name: 'Academic', type: 'file' },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Activity Diagram',
+        type: 'folder',
+        children: [
+          { name: 'Search and request resource', type: 'file' },
+          { name: 'View updates and request resource', type: 'file' },
+        ]
+      },
+      {
+        name: 'Elementary Data Semantics',
+        type: 'folder',
+        children: [
+          {
+            name: 'Elementary Data Semantics',
+            type: 'file'
+          },
+          {
+            name: 'Thing Schematics',
+            type: 'folder',
+            children: [
+              { name: 'CD-ROM', type: 'file' },
+              { name: 'Academic', type: 'file' }
+            ]
+          },
+          {
+            name: 'Sections',
+            type: 'folder',
+            children: [
+              { name: 'Search and request CD-ROM', type: 'file' },
+              { name: 'View updates and request book', type: 'file' },
+            ]
+          },
+        ]
+      },
+      {
+        name: 'Static Object Semantics',
+        type: 'folder',
+        children: [
+          {
+            name: 'Static Object Semantics',
+            type: 'file'
+          },
+          {
+            name: 'Sections',
+            type: 'folder',
+            children: [
+              { name: 'Search and request CD-ROM', type: 'file' },
+              { name: 'View updates and request book', type: 'file' },
+            ]
+          },
+        ]
+      },
+      {
+        name: 'Object Interaction',
+        type: 'folder',
+        children: [
+          { name: 'Search and request resource', type: 'file' },
+          { name: 'View updates and request resource', type: 'file' },
+        ]
+      },
+      {
+        name: 'Component Diagram',
+        type: 'folder',
+        children: [
+          {
+            name: 'Component Implementation Semantics', type: 'folder', children: [
+              {
+                name: 'Sections',
+                type: 'folder',
+                children: [
+                  { name: 'Search and request resource', type: 'file' },
+                  { name: 'View updates and request resource', type: 'file' },
+                ]
+              },
+            ]
+          },
+          {
+            name: 'Component Interface Semantics', type: 'folder', children: [
+              {
+                name: 'Sections',
+                type: 'folder',
+                children: [
+                  { name: 'Search and request resource', type: 'file' },
+                  { name: 'View updates and request resource', type: 'file' },
+                ]
+              },
+            ]
+          }
+        ]
+      },
+      {
+        name: 'Cross Component Behavior',
+        type: 'folder',
+        children: [
+          { name: 'Search and request resource', type: 'file' },
+          { name: 'View updates and request resource', type: 'file' },
+        ]
+      }
     ]
   }
 ];
