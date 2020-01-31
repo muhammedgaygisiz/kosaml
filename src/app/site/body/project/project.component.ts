@@ -1,8 +1,8 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Store } from '@ngrx/store';
-import { Observable, of as observableOf } from 'rxjs';
+import { Observable, of as observableOf, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import * as fromApp from '../../../store/app.reducer';
 
@@ -30,7 +30,9 @@ export interface FlatTreeNode {
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent {
+export class ProjectComponent implements OnDestroy {
+
+  dataSourceSubscription: Subscription;
 
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
@@ -41,7 +43,7 @@ export class ProjectComponent {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
 
-  reduxDataSource$: Observable<FileNode[]> = this.store.select('site')
+  dataSource$: Observable<FileNode[]> = this.store.select('site')
     .pipe(
       map(siteState => siteState.projectStructure),
       shareReplay()
@@ -59,7 +61,7 @@ export class ProjectComponent {
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    this.reduxDataSource$.subscribe(files => {
+    this.dataSourceSubscription = this.dataSource$.subscribe(files => {
       this.dataSource.data = files;
     });
   }
@@ -92,5 +94,9 @@ export class ProjectComponent {
   /** Get the children for the node. */
   getChildren(node: FileNode) {
     return observableOf(node.children);
+  }
+
+  ngOnDestroy() {
+    this.dataSourceSubscription.unsubscribe();
   }
 }
