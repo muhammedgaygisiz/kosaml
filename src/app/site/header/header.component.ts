@@ -11,6 +11,7 @@ import * as SiteActions from '../store/site.actions';
 })
 export class HeaderComponent implements OnInit {
   title = 'kosaml';
+  isAuthenticated = false;
 
   constructor(
     private store: Store<fromApp.AppState>

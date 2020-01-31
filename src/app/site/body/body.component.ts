@@ -11,16 +11,17 @@ import * as fromApp from '../../store/app.reducer';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
+  isAuthenticated = false;
 
   isProjectBarOpen$: Observable<boolean> = this.store.select('site')
     .pipe(
-      map(siteState => siteState.isProjectBarOpen),
+      map(siteState => siteState.isProjectBarOpen && this.isAuthenticated),
       shareReplay()
     );
 
   isToolBarOpen$: Observable<boolean> = this.store.select('site')
     .pipe(
-      map(siteState => siteState.isToolBarOpen),
+      map(siteState => siteState.isToolBarOpen && this.isAuthenticated),
       shareReplay()
     );
 
