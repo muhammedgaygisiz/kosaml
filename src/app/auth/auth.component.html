@@ -1,0 +1,23 @@
+<div>
+    <mat-card class="auth-card">
+        <div style="text-align: center;" *ngIf="isLoading">
+            <kosaml-loading-spinner></kosaml-loading-spinner>
+        </div>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+            <div class="formFieldContainer">
+                <mat-form-field>
+                    <input matInput placeholder="Email">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password">
+                </mat-form-field>
+                <div class="buttonContainer">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+                    <button mat-button color="primary" (click)="onSwitchMode()" type="button">Switch to
+                        {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</div>
