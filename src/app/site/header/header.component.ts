@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 import * as SiteActions from '../store/site.actions';
 
@@ -11,7 +13,10 @@ import * as SiteActions from '../store/site.actions';
 })
 export class HeaderComponent implements OnInit {
   title = 'kosaml';
-  isAuthenticated = false;
+  isAuthenticated$: Observable<boolean> = this.store.select('auth').pipe(
+    map(authState => !!authState.user),
+    shareReplay()
+  );
 
   constructor(
     private store: Store<fromApp.AppState>

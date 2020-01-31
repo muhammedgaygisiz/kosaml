@@ -1,7 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [fixedTopGap]="56"
         [attr.role]="(isProjectBarOpen$ | async) ? 'navigation' : 'dialog'"
-        [mode]="(isProjectBarOpen$ | async) ? 'side' : 'over'" [opened]="(isProjectBarOpen$ | async) === true">
+        [mode]="(isProjectBarOpen$ | async) ? 'side' : 'over'" [opened]="(isProjectBarOpen$ | async) === true"
+        position="start">
         <mat-toolbar>Digital Library</mat-toolbar>
         <kosaml-project></kosaml-project>
     </mat-sidenav>

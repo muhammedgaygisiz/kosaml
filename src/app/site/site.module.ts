@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -25,6 +26,7 @@ import { SiteRoutingModule } from './site-routing.module';
         MatSidenavModule,
         MatListModule,
         MatTreeModule,
+        MatButtonModule,
         SiteRoutingModule
     ],
     exports: [

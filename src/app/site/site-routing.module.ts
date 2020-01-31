@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
-import { BodyComponent } from './body/body.component';
+import { EmptyPageComponent } from '../shared/empty-page/empty-page.component';
 
 const routes: Routes = [
-    { path: '', component: BodyComponent, canActivate: [AuthGuard] }
+    { path: '', component: EmptyPageComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

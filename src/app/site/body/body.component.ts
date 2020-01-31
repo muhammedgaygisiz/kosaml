@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 
@@ -11,19 +11,27 @@ import * as fromApp from '../../store/app.reducer';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-  isAuthenticated = false;
 
-  isProjectBarOpen$: Observable<boolean> = this.store.select('site')
-    .pipe(
-      map(siteState => siteState.isProjectBarOpen && this.isAuthenticated),
-      shareReplay()
-    );
+  isAuthenticated$: Observable<boolean> = this.store.select('auth').pipe(
+    map(authState => !!authState.user)
+  );
 
-  isToolBarOpen$: Observable<boolean> = this.store.select('site')
-    .pipe(
-      map(siteState => siteState.isToolBarOpen && this.isAuthenticated),
-      shareReplay()
-    );
+  isProjectBarOpen$: Observable<boolean> = combineLatest(
+    this.isAuthenticated$,
+    this.store.select('site', 'isProjectBarOpen'),
+  ).pipe(
+    map(([isAuthenticated, isProjectBarOpen]) => isAuthenticated && isProjectBarOpen),
+    shareReplay()
+  );
+
+
+  isToolBarOpen$: Observable<boolean> = combineLatest(
+    this.isAuthenticated$,
+    this.store.select('site', 'isToolBarOpen'),
+  ).pipe(
+    map(([isAuthenticated, isToolBarOpen]) => isAuthenticated && isToolBarOpen),
+    shareReplay(),
+  );
 
   constructor(
     private store: Store<fromApp.AppState>
