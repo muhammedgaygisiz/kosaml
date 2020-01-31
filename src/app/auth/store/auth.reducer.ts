@@ -42,6 +42,12 @@ export function authReducer(
                 loading: false,
             };
 
+        case AuthActions.LOGOUT:
+            return {
+                ...state,
+                user: null,
+            };
+
         default:
             return state;
     }
