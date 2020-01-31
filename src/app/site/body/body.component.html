@@ -2,12 +2,8 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport [fixedTopGap]="56"
         [attr.role]="(isProjectBarOpen$ | async) ? 'navigation' : 'dialog'"
         [mode]="(isProjectBarOpen$ | async) ? 'side' : 'over'" [opened]="(isProjectBarOpen$ | async) === true">
-        <mat-toolbar>Menu</mat-toolbar>
-        <mat-nav-list>
-            <a mat-list-item href="#">Link 1</a>
-            <a mat-list-item href="#">Link 2</a>
-            <a mat-list-item href="#">Link 3</a>
-        </mat-nav-list>
+        <mat-toolbar>Digital Library</mat-toolbar>
+        <kosaml-project></kosaml-project>
     </mat-sidenav>
     <mat-sidenav-content>
         <!-- Add Content Here -->
