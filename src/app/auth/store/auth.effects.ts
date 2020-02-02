@@ -100,6 +100,40 @@ export class AuthEffects {
         }),
     );
 
+    @Effect()
+    authSignup = this.actions$.pipe(
+        ofType(AuthActions.SIGNUP_START),
+        switchMap(
+            (signupAction: AuthActions.SignupStart) => {
+                return this.http
+                    .post<AuthResponseData>(
+                        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
+                        {
+                            email: signupAction.payload.email,
+                            password: signupAction.payload.password,
+                            returnSecureToken: true,
+                        })
+                    .pipe(
+                        tap(resDate => {
+                            this.authService.setLogoutTimer(+resDate.expiresIn * 1000);
+                        }),
+                        map(resData => {
+                            return handleAuthentication(
+                                +resData.expiresIn,
+                                resData.email,
+                                resData.localId,
+                                resData.idToken,
+                            );
+                        }),
+                        catchError(errorRes => {
+                            return handleError(errorRes);
+                        }),
+                    );
+
+            }
+        )
+    );
+
     @Effect({ dispatch: false })
     authRedirect = this.actions$
         .pipe(
