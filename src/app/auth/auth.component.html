@@ -12,9 +12,6 @@
                 <mat-error *ngIf="emailFormControl.hasError('required')">
                     Email is <strong>required</strong>
                 </mat-error>
-                <mat-error *ngIf="(authError$ | async) === true">
-                    Email or password is not correct
-                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Password" type="password" name="password" formControlName="password">
@@ -24,9 +21,6 @@
                 </mat-error>
                 <mat-error *ngIf="passwordFormControl.hasError('required')">
                     Passoword is <strong>required</strong>
-                </mat-error>
-                <mat-error *ngIf="(authError$ | async) === true">
-                    Email or password is not correct
                 </mat-error>
             </mat-form-field>
             <div class="buttonContainer">
