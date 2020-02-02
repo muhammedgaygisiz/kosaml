@@ -21,15 +21,21 @@ export class AuthComponent implements OnInit {
       return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
     }
   })();
-  emailFormControl: FormControl = new FormControl(null, [Validators.required, Validators.email]);
-  passwordFormControl: FormControl = new FormControl(null, [Validators.required, Validators.minLength(6)]);
+  emailFormControl: FormControl
+    = new FormControl(null, [Validators.required, Validators.email]);
+  passwordFormControl: FormControl
+    = new FormControl(null, [Validators.required, Validators.minLength(6)]);
 
   constructor(
     private store: Store<fromApp.AppState>,
   ) { }
 
-  isLoading$: Observable<boolean> = this.store.select('auth').pipe(
-    map(authState => authState.loading),
+  isLoading$: Observable<boolean> = this.store.select('auth', 'loading').pipe(
+    shareReplay()
+  );
+
+  isAuthError$: Observable<boolean> = this.store.select('auth', 'authError').pipe(
+    map(authError => !!authError),
     shareReplay()
   );
 
@@ -45,6 +51,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.authForm);
     if (!this.authForm.value) {
       return;
     }
