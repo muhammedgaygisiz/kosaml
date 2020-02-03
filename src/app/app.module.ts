@@ -7,7 +7,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppEffects } from './app.effects';
 import { AuthModule } from './auth/auth.module';
 import { SiteModule } from './site/site.module';
 import * as fromApp from './store/app.reducer';
@@ -22,7 +21,7 @@ import * as fromApp from './store/app.reducer';
     LayoutModule,
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([]),
     AuthModule,
     SiteModule,
   ],
