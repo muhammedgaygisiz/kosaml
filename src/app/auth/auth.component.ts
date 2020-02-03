@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import * as AuthActions from '../auth/store/auth.actions';
 import * as fromApp from '../store/app.reducer';
+import { AuthErrorMatcher } from './AuthErrorMatcher';
 
 @Component({
   selector: 'kosaml-auth',
@@ -15,12 +15,7 @@ import * as fromApp from '../store/app.reducer';
 export class AuthComponent implements OnInit {
   isLoginMode = true;
   authForm: FormGroup;
-  matcher = new (class ErrorMatcher extends ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-      const isSubmitted = form && form.submitted;
-      return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-  })();
+  matcher = new AuthErrorMatcher();
   emailFormControl: FormControl
     = new FormControl(null, [Validators.required, Validators.email]);
   passwordFormControl: FormControl
@@ -51,7 +46,6 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.authForm);
     if (!this.authForm.value) {
       return;
     }

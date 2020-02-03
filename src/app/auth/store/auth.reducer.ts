@@ -1,6 +1,7 @@
 import { User } from '../models/user.model';
 import * as AuthActions from './auth.actions';
 
+export const authFeatureKey = 'auth';
 
 export interface State {
     user: User;
@@ -14,7 +15,7 @@ const initialState: State = {
     loading: false,
 };
 
-export function authReducer(
+export function authReducers(
     state = initialState,
     action: AuthActions.AuthActions
 ) {
