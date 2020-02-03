@@ -15,7 +15,7 @@ const initialState: State = {
     loading: false,
 };
 
-export function authReducers(
+export function authReducer(
     state = initialState,
     action: AuthActions.AuthActions
 ) {

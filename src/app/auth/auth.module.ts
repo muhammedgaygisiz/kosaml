@@ -27,7 +27,7 @@ import * as fromAuth from './store/auth.reducer';
         MatButtonModule,
         HttpClientModule,
         RouterModule.forChild([{ path: '', component: AuthComponent }]),
-        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducers),
+        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
         EffectsModule.forFeature([AuthEffects])
     ]
 })
