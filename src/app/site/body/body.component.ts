@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import * as AuthActions from '../../auth/store/auth.actions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as fromApp from '../../store/app.reducer';
 
 
@@ -17,23 +16,6 @@ export class BodyComponent implements OnInit {
     map(authState => !!authState.user)
   );
 
-  isProjectBarOpen$: Observable<boolean> = combineLatest(
-    this.isAuthenticated$,
-    this.store.select('site', 'isProjectBarOpen'),
-  ).pipe(
-    map(([isAuthenticated, isProjectBarOpen]) => isAuthenticated && isProjectBarOpen),
-    shareReplay()
-  );
-
-
-  isToolBarOpen$: Observable<boolean> = combineLatest(
-    this.isAuthenticated$,
-    this.store.select('site', 'isToolBarOpen'),
-  ).pipe(
-    map(([isAuthenticated, isToolBarOpen]) => isAuthenticated && isToolBarOpen),
-    shareReplay(),
-  );
-
   constructor(
     private store: Store<fromApp.AppState>
   ) { }
@@ -41,9 +23,4 @@ export class BodyComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  onLogout() {
-    this.store.dispatch(new AuthActions.Logout());
-  }
-
 }

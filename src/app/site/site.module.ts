@@ -11,6 +11,7 @@ import { ContentComponent } from './body/content/content.component';
 import { ProjectComponent } from './body/project/project.component';
 import { HeaderComponent } from './header/header.component';
 import { SiteRoutingModule } from './site-routing.module';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { SiteRoutingModule } from './site-routing.module';
         BodyComponent,
         ProjectComponent,
         ContentComponent,
+        SidebarComponent,
     ],
     imports: [
         MatIconModule,
