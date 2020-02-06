@@ -1,14 +1,19 @@
+import * as AuthActions from '../actions/auth.actions';
+// Correct here
 import { User } from '../models/user.model';
-import * as AuthActions from './auth.actions';
 
+
+// Correct here
 export const authFeatureKey = 'auth';
 
+// Correct here
 export interface State {
     user: User;
     authError: string;
     loading: boolean;
 }
 
+// Correct here
 const initialState: State = {
     user: null,
     authError: null,

@@ -9,15 +9,18 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared/shared.module';
-import { AuthComponent } from './auth.component';
-import { AuthEffects } from './store/auth.effects';
-import * as fromAuth from './store/auth.reducer';
+import { AuthComponent } from './components';
+import { AuthPageComponent } from './containers/auth-page.component';
+import { AuthEffects } from './effects/auth.effects';
+import * as fromAuth from './reducers/auth.reducer';
 
+export const COMPONENTS = [
+    AuthPageComponent,
+    AuthComponent,
+];
 
 @NgModule({
-    declarations: [
-        AuthComponent,
-    ],
+    declarations: COMPONENTS,
     imports: [
         SharedModule,
         ReactiveFormsModule,
@@ -26,7 +29,7 @@ import * as fromAuth from './store/auth.reducer';
         MatInputModule,
         MatButtonModule,
         HttpClientModule,
-        RouterModule.forChild([{ path: '', component: AuthComponent }]),
+        RouterModule.forChild([{ path: '', component: AuthPageComponent }]),
         StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
         EffectsModule.forFeature([AuthEffects])
     ]

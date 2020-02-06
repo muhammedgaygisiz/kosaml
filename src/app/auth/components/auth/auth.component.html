@@ -1,8 +1,8 @@
 <mat-card class="auth-card">
-    <div style="text-align: center;" *ngIf="(isLoading$ | async)">
+    <div style="text-align: center;" *ngIf="isLoading">
         <kosaml-loading-spinner></kosaml-loading-spinner>
     </div>
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!(isLoading$ | async)">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
         <div class="formFieldContainer">
             <mat-form-field>
                 <input matInput placeholder="Email" name="email" formControlName="email" [errorStateMatcher]="matcher">
@@ -29,7 +29,7 @@
                 <button mat-button color="primary" (click)="onSwitchMode()" type="button">Switch to
                     {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
             </div>
-            <mat-error *ngIf="(isAuthError$ | async) === true">
+            <mat-error *ngIf="isAuthError">
                 Authentication failed
             </mat-error>
         </div>

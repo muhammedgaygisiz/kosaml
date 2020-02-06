@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import * as AuthActions from '../../auth/store/auth.actions';
+import * as AuthActions from '../../auth/actions/auth.actions';
 import * as fromApp from '../../store/app.reducer';
 
 
