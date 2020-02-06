@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthErrorMatcher } from '../../AuthErrorMatcher';
 import { Credentials } from '../../models/Credentials';
+import { AuthErrorMatcher } from './AuthErrorMatcher';
 
 @Component({
   selector: 'kosaml-auth',

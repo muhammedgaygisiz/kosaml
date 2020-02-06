@@ -6,8 +6,8 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import * as AuthActions from '../actions/auth.actions';
-import { AuthService } from '../auth.service';
 import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 export interface AuthResponseData {
     idToken: string;
