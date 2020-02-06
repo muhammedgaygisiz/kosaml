@@ -6,21 +6,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 import { SharedModule } from '../shared/shared.module';
-import { BodyComponent } from './body/body.component';
-import { ContentComponent } from './body/content/content.component';
-import { ProjectComponent } from './body/project/project.component';
-import { HeaderComponent } from './header/header.component';
+import { BodyComponent } from './components/body/body.component';
+import { ProjectComponent } from './components/body/project/project.component';
+import { ContentComponent } from './components/content/content.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AppComponent } from './containers/app.component';
 import { SiteRoutingModule } from './site-routing.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
+
+export const COMPONENTS = [
+    HeaderComponent,
+    BodyComponent,
+    ProjectComponent,
+    ContentComponent,
+    SidebarComponent,
+    AppComponent
+];
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        BodyComponent,
-        ProjectComponent,
-        ContentComponent,
-        SidebarComponent,
-    ],
+    declarations: COMPONENTS,
     imports: [
         MatIconModule,
         MatToolbarModule,

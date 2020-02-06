@@ -1,10 +1,8 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnDestroy } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { Store } from '@ngrx/store';
-import { Observable, of as observableOf, Subscription } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import * as fromApp from '../../../store/app.reducer';
+import { of as observableOf, Subscription } from 'rxjs';
+// import * as fromApp from '../../../../store/app.reducer';
 
 
 /** File node data with possible child nodes. */
@@ -43,14 +41,14 @@ export class ProjectComponent implements OnDestroy {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
 
-  dataSource$: Observable<FileNode[]> = this.store.select('site')
-    .pipe(
-      map(siteState => siteState.projectStructure),
-      shareReplay()
-    );
+  // dataSource$: Observable<FileNode[]> = this.store.select('site')
+  //   .pipe(
+  //     map(siteState => siteState.projectStructure),
+  //     shareReplay()
+  //   );
 
   constructor(
-    private store: Store<fromApp.AppState>
+    // private store: Store<fromApp.AppState>
   ) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
@@ -61,9 +59,9 @@ export class ProjectComponent implements OnDestroy {
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    this.dataSourceSubscription = this.dataSource$.subscribe(files => {
-      this.dataSource.data = files;
-    });
+    // this.dataSourceSubscription = this.dataSource$.subscribe(files => {
+    //   this.dataSource.data = files;
+    // });
   }
 
   /** Transform the data to something the tree can read. */

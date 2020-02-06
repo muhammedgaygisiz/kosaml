@@ -6,14 +6,13 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { AppComponent } from './site/containers/app.component';
 import { SiteModule } from './site/site.module';
 import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent,
   ],
   imports: [
     AppRoutingModule,
