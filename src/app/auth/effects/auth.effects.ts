@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import * as moment from 'moment';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -25,12 +24,12 @@ const handleAuthentication = (
     userId: string,
     token: string
 ) => {
-    const expirationDate = moment(
+    const expirationDate = new Date(
         new Date().getTime() + expiresIn * 1000
-    );
+    ).toJSON();
 
     return AuthActions.authenticationSucceeded({
-        user: { email, id: userId, token, tokenExpirationDate: expirationDate.toJSON() },
+        user: { email, id: userId, token, tokenExpirationDate: expirationDate },
         redirect: true
     });
 };
@@ -59,7 +58,7 @@ const handleError = (errorRes) => {
 
 const isTokenExpired = (user: User): boolean => {
     if (!user.tokenExpirationDate
-        || moment().toDate() > moment(user.tokenExpirationDate).toDate()) {
+        || new Date() > new Date(user.tokenExpirationDate)) {
 
         return true;
     }
@@ -180,8 +179,8 @@ export class AuthEffects {
 
                 if (!isTokenExpired(loadedUser)) {
                     const expirationDuration =
-                        moment(userData.tokenExpirationDate).toDate().getTime() -
-                        moment().toDate().getTime();
+                        new Date(userData.tokenExpirationDate).getTime() -
+                        new Date().getTime();
                     this.authService.setLogoutTimer(expirationDuration);
                     return AuthActions.authenticationSucceeded({
                         user: loadedUser,
