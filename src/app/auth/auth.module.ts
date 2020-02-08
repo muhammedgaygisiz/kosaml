@@ -12,7 +12,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components';
 import { AuthPageComponent } from './containers';
 import { AuthEffects } from './effects';
-import fromAuth from './reducers';
+import { fromAuth } from './reducers';
 
 export const COMPONENTS = [
     AuthPageComponent,
@@ -30,7 +30,7 @@ export const COMPONENTS = [
         MatButtonModule,
         HttpClientModule,
         AuthRoutingModule,
-        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
+        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
         EffectsModule.forFeature([AuthEffects])
     ]
 })

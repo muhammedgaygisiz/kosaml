@@ -28,11 +28,8 @@ const handleAuthentication = (
         new Date().getTime() + expiresIn * 1000
     );
 
-    return new AuthActions.AuthenticateSuccess({
-        email,
-        userId,
-        token,
-        expirationDate,
+    return AuthActions.AUTHENTICATE_SUCCESS({
+        user: new User(email, userId, token, expirationDate),
         redirect: true
     });
 };
@@ -41,7 +38,7 @@ const handleError = (errorRes) => {
     let errorMessage = 'An unknown error occured!';
 
     if (!errorRes.error || !errorRes.error.error) {
-        return of(new AuthActions.AuthenticateFail(errorMessage));
+        return of(AuthActions.AUTHENTICATE_FAIL({ error: errorMessage }));
     }
 
     switch (errorRes.error.error.message) {
@@ -56,7 +53,7 @@ const handleError = (errorRes) => {
             break;
     }
 
-    return of(new AuthActions.AuthenticateFail(errorMessage));
+    return of(AuthActions.AUTHENTICATE_FAIL({ error: errorMessage }));
 };
 
 @Injectable()
@@ -71,14 +68,14 @@ export class AuthEffects {
     @Effect()
     authLogin = this.actions$.pipe(
         ofType(AuthActions.LOGIN_START),
-        switchMap((authData: AuthActions.LoginStart) => {
+        switchMap((authData) => {
             return this.http
                 .post<AuthResponseData>(
                     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
                     environment.firebaseAPIKey,
                     {
-                        email: authData.payload.email,
-                        password: authData.payload.password,
+                        email: authData.email,
+                        password: authData.password,
                         returnSecureToken: true,
                     })
                 .pipe(
@@ -104,13 +101,13 @@ export class AuthEffects {
     authSignup = this.actions$.pipe(
         ofType(AuthActions.SIGNUP_START),
         switchMap(
-            (signupAction: AuthActions.SignupStart) => {
+            (signupAction) => {
                 return this.http
                     .post<AuthResponseData>(
                         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
                         {
-                            email: signupAction.payload.email,
-                            password: signupAction.payload.password,
+                            email: signupAction.email,
+                            password: signupAction.password,
                             returnSecureToken: true,
                         })
                     .pipe(
@@ -138,17 +135,9 @@ export class AuthEffects {
     authRedirect = this.actions$
         .pipe(
             ofType(AuthActions.AUTHENTICATE_SUCCESS),
-            tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-                if (authSuccessAction.payload.redirect) {
-
-                    const user = new User(
-                        authSuccessAction.payload.email,
-                        authSuccessAction.payload.userId,
-                        authSuccessAction.payload.token,
-                        authSuccessAction.payload.expirationDate,
-                    );
-
-                    localStorage.setItem('userData', JSON.stringify(user));
+            tap((authSuccessAction) => {
+                if (authSuccessAction.redirect) {
+                    localStorage.setItem('userData', JSON.stringify(authSuccessAction.user));
                     this.router.navigate(['/']);
                 }
             })
@@ -186,12 +175,9 @@ export class AuthEffects {
                         new Date(userData._tokenExpirationDate).getTime() -
                         new Date().getTime();
                     this.authService.setLogoutTimer(expirationDuration);
-                    return new AuthActions.AuthenticateSuccess({
-                        email: loadedUser.email,
-                        userId: loadedUser.id,
-                        token: loadedUser.token,
-                        expirationDate: new Date(userData._tokenExpirationDate),
-                        redirect: false
+                    return AuthActions.AUTHENTICATE_SUCCESS({
+                        user: loadedUser,
+                        redirect: false,
                     });
                 }
 

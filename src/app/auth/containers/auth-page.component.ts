@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import fromApp from '../../store';
+import { fromApp } from '../../store';
 import { AuthActions } from '../actions';
 import { Credentials } from '../models';
 
@@ -29,14 +29,14 @@ export class AuthPageComponent {
     );
 
     constructor(
-        private store: Store<fromApp.AppState>,
+        private store: Store<fromApp.State>,
     ) { }
 
     onSubmitLogin(credentials: Credentials) {
-        this.store.dispatch(new AuthActions.LoginStart(credentials));
+        this.store.dispatch(AuthActions.LOGIN_START(credentials));
     }
 
     onSubmitRegistration(credentials: Credentials) {
-        this.store.dispatch(new AuthActions.SignupStart(credentials));
+        this.store.dispatch(AuthActions.SIGNUP_START(credentials));
     }
 }

@@ -7,13 +7,13 @@ import { AuthActions } from '../actions';
 export class AuthService {
 
     constructor(
-        private store: Store<fromApp.AppState>
+        private store: Store<fromApp.State>
     ) { }
     private tokenExpirationTimer: any = null;
 
     setLogoutTimer(expirtationDuration: number) {
         this.tokenExpirationTimer = setTimeout(() => {
-            this.store.dispatch(new AuthActions.Logout());
+            this.store.dispatch(AuthActions.LOGOUT());
         }, expirtationDuration);
     }
 
@@ -25,6 +25,6 @@ export class AuthService {
     }
 
     logout() {
-        this.store.dispatch(new AuthActions.Logout());
+        this.store.dispatch(AuthActions.LOGOUT());
     }
 }

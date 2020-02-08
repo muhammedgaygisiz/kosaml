@@ -1,5 +1,8 @@
+import { createReducer, on } from '@ngrx/store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
+
+export const siteFeatureKey = 'site';
 
 export interface State {
     isProjectBarOpen: boolean;
@@ -267,24 +270,8 @@ const initialState: State = {
     ]
 };
 
-export function siteReducer(
-    state: State = initialState,
-    action: SiteActions.SiteActions
-) {
-    switch (action.type) {
-        case SiteActions.TOGGLE_PROJECT_BAR:
-            return {
-                ...state,
-                isProjectBarOpen: !state.isProjectBarOpen
-            };
-
-        case SiteActions.TOGGLE_TOOL_BAR:
-            return {
-                ...state,
-                isToolBarOpen: !state.isToolBarOpen
-            };
-
-        default:
-            return state;
-    }
-}
+export const reducer = createReducer(
+    initialState,
+    on(SiteActions.TOGGLE_PROJECT_BAR, state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })),
+    on(SiteActions.TOGGLE_TOOL_BAR, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen }))
+);

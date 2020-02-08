@@ -40,18 +40,18 @@ export class AppComponent implements OnInit {
     .select('site', 'projectStructure');
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.State>
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new AuthActions.AutoLogin());
+    this.store.dispatch(AuthActions.AUTO_LOGIN());
   }
 
   onToggleProjectBar() {
-    this.store.dispatch(new SiteActions.ToggleProjectBar());
+    this.store.dispatch(SiteActions.TOGGLE_PROJECT_BAR());
   }
 
   onToggleToolBar() {
-    this.store.dispatch(new SiteActions.ToggleToolBar());
+    this.store.dispatch(SiteActions.TOGGLE_TOOL_BAR());
   }
 }
