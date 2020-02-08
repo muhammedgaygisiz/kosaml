@@ -1,16 +1,10 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { of as observableOf, Subscription } from 'rxjs';
+import { of as observableOf } from 'rxjs';
+import { FileNode } from '../../../models/FileNode';
 // import * as fromApp from '../../../../store/app.reducer';
 
-
-/** File node data with possible child nodes. */
-export interface FileNode {
-  name: string;
-  type: string;
-  children?: FileNode[];
-}
 
 /**
  * Flattened tree node that has been created from a FileNode through the flattener. Flattened
@@ -28,9 +22,7 @@ export interface FlatTreeNode {
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnDestroy {
-
-  dataSourceSubscription: Subscription;
+export class ProjectComponent implements OnInit {
 
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
@@ -41,11 +33,9 @@ export class ProjectComponent implements OnDestroy {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<FileNode, FlatTreeNode>;
 
-  // dataSource$: Observable<FileNode[]> = this.store.select('site')
-  //   .pipe(
-  //     map(siteState => siteState.projectStructure),
-  //     shareReplay()
-  //   );
+  @Input()
+  project: FileNode[];
+
 
   constructor(
     // private store: Store<fromApp.AppState>
@@ -58,10 +48,10 @@ export class ProjectComponent implements OnDestroy {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  }
 
-    // this.dataSourceSubscription = this.dataSource$.subscribe(files => {
-    //   this.dataSource.data = files;
-    // });
+  ngOnInit() {
+    this.dataSource.data = this.project;
   }
 
   /** Transform the data to something the tree can read. */
@@ -92,9 +82,5 @@ export class ProjectComponent implements OnDestroy {
   /** Get the children for the node. */
   getChildren(node: FileNode) {
     return observableOf(node.children);
-  }
-
-  ngOnDestroy() {
-    this.dataSourceSubscription.unsubscribe();
   }
 }

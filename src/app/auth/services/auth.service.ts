@@ -5,11 +5,11 @@ import * as AuthActions from '../actions/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private tokenExpirationTimer: any = null;
 
     constructor(
         private store: Store<fromApp.AppState>
     ) { }
+    private tokenExpirationTimer: any = null;
 
     setLogoutTimer(expirtationDuration: number) {
         this.tokenExpirationTimer = setTimeout(() => {
@@ -22,5 +22,9 @@ export class AuthService {
             clearTimeout(this.tokenExpirationTimer);
             this.tokenExpirationTimer = null;
         }
+    }
+
+    logout() {
+        this.store.dispatch(new AuthActions.Logout());
     }
 }

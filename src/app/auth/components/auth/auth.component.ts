@@ -64,8 +64,4 @@ export class AuthComponent implements OnInit {
   get controls() {
     return this.authForm.controls;
   }
-
-  onLogout() {
-    console.log('Puuuh');
-  }
 }

@@ -1,5 +1,5 @@
 import * as SiteActions from '../actions/site.actions';
-import { FileNode } from '../components/body/project/project.component';
+import { FileNode } from '../models/FileNode';
 
 export interface State {
     isProjectBarOpen: boolean;

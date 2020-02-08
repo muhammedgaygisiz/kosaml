@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { FileNode } from '../../models/FileNode';
 
 
 @Component({
@@ -14,14 +16,15 @@ export class SidebarComponent {
   @Input()
   isToolBarOpen: boolean;
 
-  @Output()
-  logout = new EventEmitter();
+  @Input()
+  project: FileNode[];
 
   constructor(
+    private authService: AuthService
   ) { }
 
   onLogout() {
-    this.logout.emit();
+    this.authService.logout();
   }
 
 }

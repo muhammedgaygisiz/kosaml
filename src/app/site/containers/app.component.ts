@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AuthActions } from '../../auth/actions';
 import * as fromApp from '../../store/app.reducer';
 import { SiteActions } from '../actions';
+import { FileNode } from '../models/FileNode';
 
 @Component({
   selector: 'kosaml-root',
@@ -17,7 +18,8 @@ import { SiteActions } from '../actions';
     <kosaml-body
       [isAuthenticated]="isAuthenticated$ | async"
       [isProjectBarOpen]="isProjectBarOpen$ | async"
-      [isToolBarOpen]="isToolBarOpen$ | async">
+      [isToolBarOpen]="isToolBarOpen$ | async"
+      [project]="project$ | async">
     </kosaml-body>
   `,
 })
@@ -33,6 +35,9 @@ export class AppComponent implements OnInit {
 
   isToolBarOpen$: Observable<boolean> = this.store
     .select('site', 'isToolBarOpen');
+
+  project$: Observable<FileNode[]> = this.store
+    .select('site', 'projectStructure');
 
   constructor(
     private store: Store<fromApp.AppState>

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FileNode } from '../../models/FileNode';
 
 @Component({
   selector: 'kosaml-body',
@@ -16,15 +17,9 @@ export class BodyComponent {
   @Input()
   isToolBarOpen: boolean;
 
-  @Output()
-  logout = new EventEmitter();
+  @Input()
+  project: FileNode[];
 
   constructor() {
-  }
-
-  onLogout() {
-    // Does not work from here!!
-    console.log('First');
-    this.logout.emit();
   }
 }
