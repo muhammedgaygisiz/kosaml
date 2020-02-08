@@ -1,6 +1,6 @@
-import * as AuthActions from '../actions/auth.actions';
+import { AuthActions } from '../actions';
 // Correct here
-import { User } from '../models/user.model';
+import { User } from '../models';
 
 
 // Correct here

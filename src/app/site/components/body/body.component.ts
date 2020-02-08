@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FileNode } from '../../models/FileNode';
+import { FileNode } from '../../models';
 
 @Component({
   selector: 'kosaml-body',

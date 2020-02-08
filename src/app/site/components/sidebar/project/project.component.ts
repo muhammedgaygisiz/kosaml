@@ -2,8 +2,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { of as observableOf } from 'rxjs';
-import { FileNode } from '../../../models/FileNode';
-// import * as fromApp from '../../../../store/app.reducer';
+import { FileNode } from '../../../models';
 
 
 /**

@@ -7,12 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components';
-import { AuthPageComponent } from './containers/auth-page.component';
-import { AuthEffects } from './effects/auth.effects';
-import * as fromAuth from './reducers/auth.reducer';
+import { AuthPageComponent } from './containers';
+import { AuthEffects } from './effects';
+import fromAuth from './reducers';
 
 export const COMPONENTS = [
     AuthPageComponent,

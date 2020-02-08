@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from '../../models/Credentials';
+import { Credentials } from '../../models';
 import { AuthErrorMatcher } from './AuthErrorMatcher';
 
 @Component({

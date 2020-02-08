@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import * as fromApp from '../../store/app.reducer';
+import fromApp from '../../store';
 import { AuthActions } from '../actions';
-import { Credentials } from '../models/Credentials';
-
+import { Credentials } from '../models';
 
 @Component({
     selector: 'kosaml-auth-page',

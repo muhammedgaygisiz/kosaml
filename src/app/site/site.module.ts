@@ -5,13 +5,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
-import { SharedModule } from '../shared/shared.module';
-import { BodyComponent } from './components/body/body.component';
-import { ContentComponent } from './components/content/content.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ProjectComponent } from './components/sidebar/project/project.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AppComponent } from './containers/app.component';
+import { SharedModule } from '../shared';
+import { BodyComponent, ContentComponent, HeaderComponent, ProjectComponent, SidebarComponent } from './components';
+import { AppComponent } from './containers';
 import { SiteRoutingModule } from './site-routing.module';
 
 export const COMPONENTS = [

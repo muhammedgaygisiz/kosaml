@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthActions } from '../../auth/actions';
-import * as fromApp from '../../store/app.reducer';
+import { fromApp } from '../../store';
 import { SiteActions } from '../actions';
-import { FileNode } from '../models/FileNode';
+import { FileNode } from '../models';
 
 @Component({
   selector: 'kosaml-root',

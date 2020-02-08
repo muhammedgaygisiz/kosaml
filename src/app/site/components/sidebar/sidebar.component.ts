@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { FileNode } from '../../models/FileNode';
+import { AuthService } from 'src/app/auth/services';
+import { FileNode } from '../../models';
 
 
 @Component({
