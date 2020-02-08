@@ -60,10 +60,7 @@ const handleError = (errorRes) => {
 const isTokenExpired = (user: User): boolean => {
     if (!user.tokenExpirationDate
         || moment().toDate() > moment(user.tokenExpirationDate).toDate()) {
-        console.log(moment().toDate());
-        console.log(moment(user.tokenExpirationDate).toDate());
 
-        debugger;
         return true;
     }
 
@@ -174,7 +171,7 @@ export class AuthEffects {
                     email: userData.email,
                     id: userData.id,
                     token: userData.token,
-                    tokenExpirationDate: new Date(userData.tokenExpirationDate).toISOString()
+                    tokenExpirationDate: userData.tokenExpirationDate
                 };
 
                 if (!userData) {
