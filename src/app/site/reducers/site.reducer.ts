@@ -272,6 +272,6 @@ const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(SiteActions.TOGGLE_PROJECT_BAR, state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })),
-    on(SiteActions.TOGGLE_TOOL_BAR, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen }))
+    on(SiteActions.toggleProjectBar, state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })),
+    on(SiteActions.toggleToolBar, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen }))
 );

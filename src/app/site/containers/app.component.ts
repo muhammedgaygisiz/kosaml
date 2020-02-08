@@ -44,14 +44,14 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(AuthActions.AUTO_LOGIN());
+    this.store.dispatch(AuthActions.autoLogin());
   }
 
   onToggleProjectBar() {
-    this.store.dispatch(SiteActions.TOGGLE_PROJECT_BAR());
+    this.store.dispatch(SiteActions.toggleProjectBar());
   }
 
   onToggleToolBar() {
-    this.store.dispatch(SiteActions.TOGGLE_TOOL_BAR());
+    this.store.dispatch(SiteActions.toggleToolBar());
   }
 }

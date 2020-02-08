@@ -33,10 +33,10 @@ export class AuthPageComponent {
     ) { }
 
     onSubmitLogin(credentials: Credentials) {
-        this.store.dispatch(AuthActions.LOGIN_START(credentials));
+        this.store.dispatch(AuthActions.startLogin(credentials));
     }
 
     onSubmitRegistration(credentials: Credentials) {
-        this.store.dispatch(AuthActions.SIGNUP_START(credentials));
+        this.store.dispatch(AuthActions.startSignUp(credentials));
     }
 }

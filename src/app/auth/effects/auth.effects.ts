@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import * as moment from 'moment';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -24,12 +25,12 @@ const handleAuthentication = (
     userId: string,
     token: string
 ) => {
-    const expirationDate = new Date(
+    const expirationDate = moment(
         new Date().getTime() + expiresIn * 1000
     );
 
-    return AuthActions.AUTHENTICATE_SUCCESS({
-        user: new User(email, userId, token, expirationDate),
+    return AuthActions.authenticationSucceeded({
+        user: { email, id: userId, token, tokenExpirationDate: expirationDate.toJSON() },
         redirect: true
     });
 };
@@ -38,7 +39,7 @@ const handleError = (errorRes) => {
     let errorMessage = 'An unknown error occured!';
 
     if (!errorRes.error || !errorRes.error.error) {
-        return of(AuthActions.AUTHENTICATE_FAIL({ error: errorMessage }));
+        return of(AuthActions.authenticationFailed({ error: errorMessage }));
     }
 
     switch (errorRes.error.error.message) {
@@ -53,7 +54,20 @@ const handleError = (errorRes) => {
             break;
     }
 
-    return of(AuthActions.AUTHENTICATE_FAIL({ error: errorMessage }));
+    return of(AuthActions.authenticationFailed({ error: errorMessage }));
+};
+
+const isTokenExpired = (user: User): boolean => {
+    if (!user.tokenExpirationDate
+        || moment().toDate() > moment(user.tokenExpirationDate).toDate()) {
+        console.log(moment().toDate());
+        console.log(moment(user.tokenExpirationDate).toDate());
+
+        debugger;
+        return true;
+    }
+
+    return false;
 };
 
 @Injectable()
@@ -67,7 +81,7 @@ export class AuthEffects {
 
     @Effect()
     authLogin = this.actions$.pipe(
-        ofType(AuthActions.LOGIN_START),
+        ofType(AuthActions.startLogin),
         switchMap((authData) => {
             return this.http
                 .post<AuthResponseData>(
@@ -99,7 +113,7 @@ export class AuthEffects {
 
     @Effect()
     authSignup = this.actions$.pipe(
-        ofType(AuthActions.SIGNUP_START),
+        ofType(AuthActions.startSignUp),
         switchMap(
             (signupAction) => {
                 return this.http
@@ -134,7 +148,7 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     authRedirect = this.actions$
         .pipe(
-            ofType(AuthActions.AUTHENTICATE_SUCCESS),
+            ofType(AuthActions.authenticationSucceeded),
             tap((authSuccessAction) => {
                 if (authSuccessAction.redirect) {
                     localStorage.setItem('userData', JSON.stringify(authSuccessAction.user));
@@ -146,36 +160,33 @@ export class AuthEffects {
     @Effect()
     autoLogin = this.actions$
         .pipe(
-            ofType(AuthActions.AUTO_LOGIN),
+            ofType(AuthActions.autoLogin),
             map(() => {
-                const userData: {
-                    email: string;
-                    id: string;
-                    _token: string;
-                    _tokenExpirationDate: string;
-                } = JSON.parse(localStorage.getItem('userData'));
+                const userData: User =
+                    JSON.parse(localStorage.getItem('userData'));
 
                 if (!userData) {
                     return { type: 'DUMMY' };
                 }
 
-                const loadedUser = new User(
-                    userData.email,
-                    userData.id,
-                    userData._token,
-                    new Date(userData._tokenExpirationDate)
-                );
+
+                const loadedUser: User = {
+                    email: userData.email,
+                    id: userData.id,
+                    token: userData.token,
+                    tokenExpirationDate: new Date(userData.tokenExpirationDate).toISOString()
+                };
 
                 if (!userData) {
                     return { type: 'DUMMY' };
                 }
 
-                if (loadedUser.token) {
+                if (!isTokenExpired(loadedUser)) {
                     const expirationDuration =
-                        new Date(userData._tokenExpirationDate).getTime() -
-                        new Date().getTime();
+                        moment(userData.tokenExpirationDate).toDate().getTime() -
+                        moment().toDate().getTime();
                     this.authService.setLogoutTimer(expirationDuration);
-                    return AuthActions.AUTHENTICATE_SUCCESS({
+                    return AuthActions.authenticationSucceeded({
                         user: loadedUser,
                         redirect: false,
                     });
@@ -188,7 +199,7 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     authLogout = this.actions$
         .pipe(
-            ofType(AuthActions.LOGOUT),
+            ofType(AuthActions.logout),
             tap(() => {
                 this.authService.clearLogoutTimer();
                 localStorage.removeItem('userData');

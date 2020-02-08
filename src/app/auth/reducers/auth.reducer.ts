@@ -23,15 +23,15 @@ const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(AuthActions.LOGIN_START, AuthActions.SIGNUP_START, state => ({ ...state, authError: null, loading: true })),
-    on(AuthActions.AUTHENTICATE_SUCCESS, (state, { user }) => {
+    on(AuthActions.startLogin, AuthActions.startSignUp, state => ({ ...state, authError: null, loading: true })),
+    on(AuthActions.authenticationSucceeded, (state, { user }) => {
         return {
             ...state,
             authError: null,
-            user,
+            user: { ...user },
             loading: false,
         };
     }),
-    on(AuthActions.LOGOUT, state => ({ ...state, user: null })),
-    on(AuthActions.AUTHENTICATE_FAIL, (state, { error }) => ({ ...state, authError: error }))
+    on(AuthActions.logout, state => ({ ...state, user: null })),
+    on(AuthActions.authenticationFailed, (state, { error }) => ({ ...state, authError: error }))
 );
