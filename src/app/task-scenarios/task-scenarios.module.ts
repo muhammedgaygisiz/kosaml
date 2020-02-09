@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '../shared';
+import { TaskScenarioPageComponent } from './containers/task-scenario-page/task-scenario-page.component';
 import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
 
+export const COMPONENTS = [
+  TaskScenarioPageComponent
+];
 
 @NgModule({
-  declarations: [],
+  declarations: COMPONENTS,
   imports: [
-    CommonModule,
-    TaskScenariosRoutingModule
+    SharedModule,
+    TaskScenariosRoutingModule,
   ]
 })
 export class TaskScenariosModule { }
