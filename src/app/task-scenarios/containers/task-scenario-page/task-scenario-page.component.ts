@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'kosaml-task-scenario-page',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-scenario-page.component.scss']
 })
 export class TaskScenarioPageComponent implements OnInit {
+  taskScenarioForm: FormGroup;
+
+  titleFormControl: FormControl
+    = new FormControl(null);
+  descriptionFormControl: FormControl
+    = new FormControl(null);
 
   constructor() { }
 
   ngOnInit() {
+    this.taskScenarioForm = new FormGroup({
+      title: this.titleFormControl,
+      description: this.descriptionFormControl,
+    });
   }
 
 }
