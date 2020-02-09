@@ -12,8 +12,7 @@ import { AppComponent } from './site/containers';
 import { fromApp } from './store';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
