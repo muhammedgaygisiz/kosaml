@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "kosaml"
+  "defaultProject": "kosaml",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

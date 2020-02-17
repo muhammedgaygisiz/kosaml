@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared';
-import { TaskScenarioPageComponent } from './containers';
-import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
 import { TaskScenarioComponent } from './components';
+import { TaskScenarioPageComponent } from './containers';
+import { fromTaskScenarios } from './reducers';
+import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
 
 export const COMPONENTS = [
   TaskScenarioPageComponent,
@@ -14,6 +16,10 @@ export const COMPONENTS = [
   imports: [
     SharedModule,
     TaskScenariosRoutingModule,
+    StoreModule.forFeature(
+      fromTaskScenarios.taskScenariosFeatureKey,
+      fromTaskScenarios.reducer
+    ),
   ]
 })
 export class TaskScenariosModule { }
