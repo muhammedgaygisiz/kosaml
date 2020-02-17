@@ -1,26 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { TaskScenario } from '../../models';
 
 @Component({
   selector: 'kosaml-task-scenario-page',
-  templateUrl: './task-scenario-page.component.html',
-  styleUrls: ['./task-scenario-page.component.scss']
+  template: `
+    <kosaml-task-scenario [model]="selectedTaskScenario"></kosaml-task-scenario>
+  `,
+  styles: []
 })
 export class TaskScenarioPageComponent implements OnInit {
-  taskScenarioForm: FormGroup;
 
-  titleFormControl: FormControl
-    = new FormControl(null);
-  descriptionFormControl: FormControl
-    = new FormControl(null);
+  selectedTaskScenario: TaskScenario = {
+    title: "Some dummy title",
+    description: 'Lorem ipsum dolor sit amet, '
+      + 'consetetur sadipscing elitr, sed diam nonumy '
+      + 'eirmod tempor invidunt ut labore et dolore '
+      + 'magna aliquyam erat, sed diam voluptua. At '
+      + 'vero eos et accusam et justo duo dolores et ea '
+      + 'rebum. Stet clita kasd gubergren, no sea takimata '
+      + 'sanctus est Lorem ipsum dolor sit amet. Lorem '
+      + 'ipsum dolor sit amet, consetetur sadipscing elitr, '
+      + 'sed diam nonumy eirmod tempor invidunt ut labore et '
+      + 'dolore magna aliquyam erat, sed diam voluptua. At '
+      + 'vero eos et accusam et justo duo dolores et ea rebum. '
+      + 'Stet clita kasd gubergren, no sea takimata sanctus est '
+      + 'Lorem ipsum dolor sit amet.'
+  }
 
   constructor() { }
 
   ngOnInit() {
-    this.taskScenarioForm = new FormGroup({
-      title: this.titleFormControl,
-      description: this.descriptionFormControl,
-    });
   }
 
 }

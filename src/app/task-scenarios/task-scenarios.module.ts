@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared';
-import { TaskScenarioPageComponent } from './containers/task-scenario-page/task-scenario-page.component';
+import { TaskScenarioPageComponent } from './containers';
 import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
+import { TaskScenarioComponent } from './components';
 
 export const COMPONENTS = [
-  TaskScenarioPageComponent
+  TaskScenarioPageComponent,
+  TaskScenarioComponent
 ];
 
 @NgModule({
