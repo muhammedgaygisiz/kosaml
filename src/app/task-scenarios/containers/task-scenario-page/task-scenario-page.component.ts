@@ -1,4 +1,4 @@
-mport { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskScenario } from '../../models';
 
 @Component({
@@ -11,7 +11,7 @@ import { TaskScenario } from '../../models';
 export class TaskScenarioPageComponent implements OnInit {
 
   selectedTaskScenario: TaskScenario = {
-    title: "Some dummy title",
+    title: 'Some dummy title',
     description: 'Lorem ipsum dolor sit amet, '
       + 'consetetur sadipscing elitr, sed diam nonumy '
       + 'eirmod tempor invidunt ut labore et dolore '
@@ -25,7 +25,7 @@ export class TaskScenarioPageComponent implements OnInit {
       + 'vero eos et accusam et justo duo dolores et ea rebum. '
       + 'Stet clita kasd gubergren, no sea takimata sanctus est '
       + 'Lorem ipsum dolor sit amet.'
-  }
+  };
 
   constructor() { }
 
