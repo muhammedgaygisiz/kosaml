@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class TaskScenarioPageComponent implements OnInit {
   taskScenarioForm: FormGroup;
+
+  @Input()
+  title: string;
+
+  @Input()
+  description: string;
 
   titleFormControl: FormControl
     = new FormControl(null);
