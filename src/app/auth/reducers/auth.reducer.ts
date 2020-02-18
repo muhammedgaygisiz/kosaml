@@ -11,27 +11,18 @@ export const authFeatureKey = 'auth';
 export interface State {
     user: User;
     authError: string;
-    loading: boolean;
 }
 
 // Correct here
 const initialState: State = {
     user: null,
     authError: null,
-    loading: false,
 };
 
 export const reducer = createReducer(
     initialState,
-    on(AuthActions.startLogin, AuthActions.startSignUp, state => ({ ...state, authError: null, loading: true })),
-    on(AuthActions.authenticationSucceeded, (state, { user }) => {
-        return {
-            ...state,
-            authError: null,
-            user: { ...user },
-            loading: false,
-        };
-    }),
+    on(AuthActions.startLogin, AuthActions.startSignUp, state => ({ ...state, authError: null })),
+    on(AuthActions.authenticationSucceeded, (state, { user }) => ({ ...state, authError: null, user: { ...user } })),
     on(AuthActions.logout, state => ({ ...state, user: null })),
     on(AuthActions.authenticationFailed, (state, { error }) => ({ ...state, authError: error }))
 );

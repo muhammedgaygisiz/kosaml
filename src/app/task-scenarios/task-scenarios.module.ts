@@ -5,6 +5,8 @@ import { TaskScenarioComponent } from './components';
 import { TaskScenarioPageComponent } from './containers';
 import { fromTaskScenarios } from './reducers';
 import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { TaskScenariosEffects } from './effects';
 
 export const COMPONENTS = [
   TaskScenarioPageComponent,
@@ -20,6 +22,7 @@ export const COMPONENTS = [
       fromTaskScenarios.taskScenariosFeatureKey,
       fromTaskScenarios.reducer
     ),
+    EffectsModule.forFeature([TaskScenariosEffects])
   ]
 })
 export class TaskScenariosModule { }

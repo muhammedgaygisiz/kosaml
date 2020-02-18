@@ -1,35 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { shareReplay, tap } from 'rxjs/operators';
+import { fromApp } from 'src/app/store';
+import { TaskScenarioPageActions } from '../../actions';
 import { TaskScenario } from '../../models';
+import { fromTaskScenarios } from '../../reducers';
 
 @Component({
   selector: 'kosaml-task-scenario-page',
   template: `
-    <kosaml-task-scenario [model]="selectedTaskScenario"></kosaml-task-scenario>
+    <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
+    <kosaml-task-scenario 
+      *ngIf="(isLoading$ | async) === false"
+      [model]="selectedTaskScenario$ | async"
+    ></kosaml-task-scenario>
   `,
   styles: []
 })
 export class TaskScenarioPageComponent implements OnInit {
 
-  selectedTaskScenario: TaskScenario = {
-    title: 'Some dummy title',
-    description: 'Lorem ipsum dolor sit amet, '
-      + 'consetetur sadipscing elitr, sed diam nonumy '
-      + 'eirmod tempor invidunt ut labore et dolore '
-      + 'magna aliquyam erat, sed diam voluptua. At '
-      + 'vero eos et accusam et justo duo dolores et ea '
-      + 'rebum. Stet clita kasd gubergren, no sea takimata '
-      + 'sanctus est Lorem ipsum dolor sit amet. Lorem '
-      + 'ipsum dolor sit amet, consetetur sadipscing elitr, '
-      + 'sed diam nonumy eirmod tempor invidunt ut labore et '
-      + 'dolore magna aliquyam erat, sed diam voluptua. At '
-      + 'vero eos et accusam et justo duo dolores et ea rebum. '
-      + 'Stet clita kasd gubergren, no sea takimata sanctus est '
-      + 'Lorem ipsum dolor sit amet.'
-  };
+  isLoading$: Observable<boolean> = this.store.select('site', 'loading').pipe(
+    shareReplay()
+  );
 
-  constructor() { }
+  selectedTaskScenario$: Observable<TaskScenario> = this.store.pipe(
+    select(fromTaskScenarios.getTaskScenarioEntityById(1)),
+  );
+
+  constructor(
+    private store: Store<fromApp.State>
+  ) { }
 
   ngOnInit() {
+    this.store.dispatch(
+      TaskScenarioPageActions.fetchTaskScenarios()
+    );
   }
 
 }

@@ -1,7 +1,8 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on, createSelector, createFeatureSelector } from '@ngrx/store';
 import * as TaskScenarioActions from '../actions/task-scenario.actions';
 import { TaskScenario } from '../models';
+import { TaskScenarioPageActions } from '../actions';
 
 export const taskScenariosFeatureKey = 'taskScenarios';
 
@@ -17,6 +18,7 @@ export const initialState: State = adapter.getInitialState({
 
 const taskScenarioReducer = createReducer(
   initialState,
+  on(TaskScenarioPageActions.fetchTaskScenarios, state => ({...state, loading: true})),
   on(TaskScenarioActions.addTaskScenario,
     (state, action) => adapter.addOne(action.taskScenario, state)
   ),
@@ -59,3 +61,13 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
+
+export const taskScenarioState = createFeatureSelector<State>(
+  taskScenariosFeatureKey
+);
+
+export const getTaskScenarioEntityById
+  = (id: number) => createSelector(
+    taskScenarioState,
+    (state: State) => state.entities[id]
+  )

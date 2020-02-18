@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
+import { AuthActions } from 'src/app/auth/actions';
+import { TaskScenarioPageActions, TaskScenarioActions } from 'src/app/task-scenarios/actions';
 
 export const siteFeatureKey = 'site';
 
@@ -8,11 +10,13 @@ export interface State {
     isProjectBarOpen: boolean;
     isToolBarOpen: boolean;
     projectStructure: FileNode[];
+    loading: boolean;
 }
 
 const initialState: State = {
     isProjectBarOpen: true,
     isToolBarOpen: false,
+    loading: false,
     projectStructure: [
         {
             name: 'Work Reengineering & Conceptual Design',
@@ -272,6 +276,11 @@ const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
+    // todo: Move toggling of loading spinner to own effect
+    on(AuthActions.startLogin, AuthActions.startSignUp, state => ({ ...state, loading: true })),
+    on(TaskScenarioActions.loadTaskScenarios, state => ({ ...state, loading: false })),
+    on(AuthActions.authenticationSucceeded, (state) => ({ ...state, loading: false })),
+    on(TaskScenarioPageActions.fetchTaskScenarios, state => ({...state, loading: true})),
     on(SiteActions.toggleProjectBar, state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })),
     on(SiteActions.toggleToolBar, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen }))
 );

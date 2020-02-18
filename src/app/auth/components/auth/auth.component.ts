@@ -19,9 +19,6 @@ export class AuthComponent implements OnInit {
   matcher = new AuthErrorMatcher();
 
   @Input()
-  isLoading: boolean;
-
-  @Input()
   isAuthError: boolean;
 
   @Output()

@@ -1,7 +1,4 @@
 <kosaml-card>
-    <div style="text-align: center;" *ngIf="isLoading">
-        <kosaml-loading-spinner></kosaml-loading-spinner>
-    </div>
     <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="formFieldContainer">
         <mat-form-field>
             <input matInput placeholder="Email" name="email" formControlName="email" [errorStateMatcher]="matcher">
