@@ -35,9 +35,7 @@ export class ProjectComponent implements OnInit {
   @Input()
   project: FileNode[];
 
-
   constructor(
-    // private store: Store<fromApp.AppState>
   ) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
@@ -59,7 +57,8 @@ export class ProjectComponent implements OnInit {
       name: node.name,
       type: node.type,
       level,
-      expandable: !!node.children
+      expandable: !!node.children,
+      link: node.link
     };
   }
 

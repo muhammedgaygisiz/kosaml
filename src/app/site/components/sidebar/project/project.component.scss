@@ -2,3 +2,35 @@
   color: #757575;
   margin-right: 5px;
 }
+
+.mat-tree-node {
+  min-height: 40px;
+
+  &:hover {
+    background-color: #dbdbdb;
+    color: #3f51b5;
+  
+    a {
+      color: #3f51b5;
+    }
+
+    .type-icon {
+      color: #3f51b5,
+    }
+  }
+
+  &.active {
+    a {
+      color: #3f51b5;
+    }
+
+    .type-icon {
+      color: #3f51b5,
+    }
+  }
+}
+
+a {
+  color: #757576;
+  text-decoration: none;
+}
