@@ -1,8 +1,8 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { HeaderComponent } from "../header.component";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeaderComponent } from '../header.component';
 
-describe("HeaderComponent", () => {
+describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
   let component: HeaderComponent;
 
@@ -17,7 +17,7 @@ describe("HeaderComponent", () => {
     component = fixture.componentInstance;
   });
 
-  it("should compile", () => {
+  it('should compile', () => {
     fixture.detectChanges();
 
     /**
