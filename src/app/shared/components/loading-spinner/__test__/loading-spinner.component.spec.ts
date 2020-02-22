@@ -1,9 +1,9 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ReactiveFormsModule } from "@angular/forms";
-import { LoadingSpinnerComponent } from "../loading-spinner.component";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from '../loading-spinner.component';
 
-describe("LoadingSpinnerComponent", () => {
+describe('LoadingSpinnerComponent', () => {
   let fixture: ComponentFixture<LoadingSpinnerComponent>;
   let component: LoadingSpinnerComponent;
 
@@ -18,7 +18,7 @@ describe("LoadingSpinnerComponent", () => {
     component = fixture.componentInstance;
   });
 
-  it("should compile", () => {
+  it('should compile', () => {
     fixture.detectChanges();
 
     /**
