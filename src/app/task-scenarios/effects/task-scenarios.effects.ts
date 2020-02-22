@@ -39,15 +39,14 @@ export class TaskScenariosEffects {
     this.actions$.pipe(
       ofType(TaskScenarioPageActions.fetchTaskScenarios),
       switchMap(() => {
-        return taskScenariosPromise().then(
-          (receivedTaskScenarios: TaskScenario[]) =>
-            TaskScenarioActions.loadTaskScenarios({
-              taskScenarios: receivedTaskScenarios
-            })
-        );
+        return taskScenariosPromise()
+          .then((receivedTaskScenarios: TaskScenario[]) => TaskScenarioActions.loadTaskScenarios({ taskScenarios: receivedTaskScenarios })
+          );
       })
     )
   );
 
-  constructor(private actions$: Actions) { }
+  constructor(
+    private actions$: Actions
+  ) { }
 }
