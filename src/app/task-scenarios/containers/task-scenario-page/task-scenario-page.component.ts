@@ -11,7 +11,7 @@ import { fromTaskScenarios } from '../../reducers';
   selector: 'kosaml-task-scenario-page',
   template: `
     <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
-    <kosaml-task-scenario 
+    <kosaml-task-scenario
       *ngIf="(isLoading$ | async) === false"
       [model]="selectedTaskScenario$ | async"
     ></kosaml-task-scenario>

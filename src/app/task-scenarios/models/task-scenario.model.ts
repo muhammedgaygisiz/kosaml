@@ -1,5 +1,5 @@
 export interface TaskScenario {
-    id: number,
+    id: number;
     title: string;
     description: string;
 }
