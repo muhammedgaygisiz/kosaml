@@ -3,8 +3,11 @@ name: Docker
 on:
   push:
     # Publish `master` as Docker `latest` image.
+    # TODO: When build works change to master
+    #branches:
+    #  - master
     branches:
-      - master
+        - 'feature-dockerize' 
 
     # Publish `v1.2.3` tags as releases.
     tags:
