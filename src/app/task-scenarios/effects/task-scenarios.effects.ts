@@ -49,5 +49,5 @@ export class TaskScenariosEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 }
