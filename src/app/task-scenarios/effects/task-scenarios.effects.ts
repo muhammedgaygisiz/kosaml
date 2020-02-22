@@ -40,7 +40,7 @@ export class TaskScenariosEffects {
       ofType(TaskScenarioPageActions.fetchTaskScenarios),
       switchMap(() => {
         return taskScenariosPromise()
-          .then((receivedTaskScenarios: TaskScenario[]) => TaskScenarioActions.loadTaskScenarios({ taskScenarios: receivedTaskScenarios })
+          .then((taskScenarios: TaskScenario[]) => TaskScenarioActions.loadTaskScenarios({ taskScenarios })
           );
       })
     )
