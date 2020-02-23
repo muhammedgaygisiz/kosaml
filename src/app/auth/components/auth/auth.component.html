@@ -1,5 +1,5 @@
 <kosaml-card>
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" class="formFieldContainer">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="formFieldContainer">
         <mat-form-field>
             <input matInput placeholder="Email" name="email" formControlName="email" [errorStateMatcher]="matcher">
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
