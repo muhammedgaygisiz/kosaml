@@ -11,10 +11,10 @@ export class ScenarioComponent implements OnInit {
   @Input()
   model: Scenario;
 
-  taskScenarioForm: FormGroup;
+  scenarioForm: FormGroup;
 
   ngOnInit() {
-    this.taskScenarioForm = new FormGroup({
+    this.scenarioForm = new FormGroup({
       title: new FormControl(this.model.title),
       description: new FormControl(this.model.description),
     });
