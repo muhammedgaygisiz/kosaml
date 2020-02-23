@@ -6,11 +6,11 @@ export default {
   title: 'Loading Spinner',
   decorators: [
     moduleMetadata({
-      imports: [SharedModule]
-    })
-  ]
+      imports: [SharedModule],
+    }),
+  ],
 };
 
 export const loadingSpinner = () => ({
-  component: LoadingSpinnerComponent
+  component: LoadingSpinnerComponent,
 });

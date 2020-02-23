@@ -22,12 +22,12 @@ import { FileNode } from '../models';
       [project]="project$ | async"
     >
     </kosaml-body>
-  `
+  `,
 })
 export class AppComponent implements OnInit {
   isAuthenticated$: Observable<boolean> = this.store.select('auth').pipe(
     map(authState => !!authState.user),
-    shareReplay()
+    shareReplay(),
   );
 
   isProjectBarOpen$: Observable<boolean> = this.store.select('site', 'isProjectBarOpen');

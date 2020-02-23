@@ -5,7 +5,7 @@ export const startLogin = createAction('[Auth] Login Start', props<Credentials>(
 
 export const authenticationSucceeded = createAction(
   '[Auth] Login Successful',
-  props<{ user: User; redirect: boolean }>()
+  props<{ user: User; redirect: boolean }>(),
 );
 
 export const authenticationFailed = createAction('[Auth] Login Fail', props<{ error: string }>());

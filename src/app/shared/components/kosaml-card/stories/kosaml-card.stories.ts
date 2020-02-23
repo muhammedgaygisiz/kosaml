@@ -6,11 +6,11 @@ export default {
   title: 'Card',
   decorators: [
     moduleMetadata({
-      imports: [SharedModule]
-    })
-  ]
+      imports: [SharedModule],
+    }),
+  ],
 };
 
 export const emptyCard = () => ({
-  component: KosamlCardComponent
+  component: KosamlCardComponent,
 });

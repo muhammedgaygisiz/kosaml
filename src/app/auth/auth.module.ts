@@ -20,7 +20,7 @@ export const COMPONENTS = [AuthPageComponent, AuthComponent];
     HttpClientModule,
     AuthRoutingModule,
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
-    EffectsModule.forFeature([AuthEffects])
-  ]
+    EffectsModule.forFeature([AuthEffects]),
+  ],
 })
 export class AuthModule {}

@@ -17,14 +17,14 @@ import { Credentials } from '../models';
       [isAuthError]="isAuthError$ | async"
     >
     </kosaml-auth>
-  `
+  `,
 })
 export class AuthPageComponent {
   isLoading$: Observable<boolean> = this.store.select('site', 'loading').pipe(shareReplay());
 
   isAuthError$: Observable<boolean> = this.store.select('auth', 'authError').pipe(
     map(authError => !!authError),
-    shareReplay()
+    shareReplay(),
   );
 
   constructor(private store: Store<fromApp.State>) {}

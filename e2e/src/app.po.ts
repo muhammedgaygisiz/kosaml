@@ -6,6 +6,8 @@ export class AppPage {
   }
 
   getTitleText() {
-    return element(by.css('kosaml-root kosaml-header mat-toolbar span')).getText() as Promise<string>;
+    return element(by.css('kosaml-root kosaml-header mat-toolbar span')).getText() as Promise<
+      string
+    >;
   }
 }

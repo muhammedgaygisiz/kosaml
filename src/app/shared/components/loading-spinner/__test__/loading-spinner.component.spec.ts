@@ -11,7 +11,7 @@ describe('LoadingSpinnerComponent', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [LoadingSpinnerComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     });
 
     fixture = TestBed.createComponent(LoadingSpinnerComponent);

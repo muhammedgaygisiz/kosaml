@@ -4,7 +4,7 @@ import { FileNode } from '../../models';
 @Component({
   selector: 'kosaml-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+  styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent {
   @Input()

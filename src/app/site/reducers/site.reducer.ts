@@ -29,13 +29,13 @@ const initialState: State = {
             {
               name: 'Search and request resource',
               type: 'file',
-              link: '../task-scenarios'
+              link: '../task-scenarios',
             },
             {
               name: 'View updates and request resource',
-              type: 'file'
-            }
-          ]
+              type: 'file',
+            },
+          ],
         },
         {
           name: 'Use Scenarios',
@@ -43,13 +43,13 @@ const initialState: State = {
           children: [
             {
               name: 'Search and request resource',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'View updates and request resource',
-              type: 'file'
-            }
-          ]
+              type: 'file',
+            },
+          ],
         },
         {
           name: 'Essential Use Cases',
@@ -57,13 +57,13 @@ const initialState: State = {
           children: [
             {
               name: 'Search and request resource',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'View updates and request resource',
-              type: 'file'
-            }
-          ]
+              type: 'file',
+            },
+          ],
         },
         {
           name: 'Concrete Use Cases',
@@ -71,21 +71,21 @@ const initialState: State = {
           children: [
             {
               name: 'Search and request CD-ROM',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'View updates and request book',
-              type: 'file'
-            }
-          ]
+              type: 'file',
+            },
+          ],
         },
         {
           name: 'Task Objects',
           type: 'folder',
           children: [
             { name: 'CD-ROM', type: 'file' },
-            { name: 'Academic', type: 'file' }
-          ]
+            { name: 'Academic', type: 'file' },
+          ],
         },
         {
           name: 'Content Diagram',
@@ -93,7 +93,7 @@ const initialState: State = {
           children: [
             {
               name: 'Content Diagram',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'Containers',
@@ -101,28 +101,28 @@ const initialState: State = {
               children: [
                 { name: 'Main', type: 'file' },
                 { name: 'Enter search criteria', type: 'file' },
-                { name: 'View search results', type: 'file' }
-              ]
+                { name: 'View search results', type: 'file' },
+              ],
             },
             {
               name: 'Sections',
               type: 'folder',
               children: [
                 { name: 'Search and request CD-ROM', type: 'file' },
-                { name: 'View updates and request book', type: 'file' }
-              ]
+                { name: 'View updates and request book', type: 'file' },
+              ],
             },
             {
               name: 'Screen Design',
               type: 'folder',
               children: [
                 { name: 'Enter search criteria', type: 'file' },
-                { name: 'View search results', type: 'file' }
-              ]
-            }
-          ]
-        }
-      ]
+                { name: 'View search results', type: 'file' },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'Architecture',
@@ -130,7 +130,7 @@ const initialState: State = {
       children: [
         {
           name: 'Glossary',
-          type: 'file'
+          type: 'file',
         },
         {
           name: 'Use Case Diagram',
@@ -138,17 +138,17 @@ const initialState: State = {
           children: [
             {
               name: 'Use Case Diagram',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'Sections',
               type: 'folder',
               children: [
                 { name: 'Search and request resource', type: 'file' },
-                { name: 'View updates and request resource', type: 'file' }
-              ]
-            }
-          ]
+                { name: 'View updates and request resource', type: 'file' },
+              ],
+            },
+          ],
         },
         {
           name: 'Schematics',
@@ -159,26 +159,26 @@ const initialState: State = {
               type: 'folder',
               children: [
                 { name: 'Search and request resource', type: 'file' },
-                { name: 'View updates and request resource', type: 'file' }
-              ]
+                { name: 'View updates and request resource', type: 'file' },
+              ],
             },
             {
               name: 'Data Schemes',
               type: 'folder',
               children: [
                 { name: 'CD-ROM', type: 'file' },
-                { name: 'Academic', type: 'file' }
-              ]
-            }
-          ]
+                { name: 'Academic', type: 'file' },
+              ],
+            },
+          ],
         },
         {
           name: 'Activity Diagram',
           type: 'folder',
           children: [
             { name: 'Search and request resource', type: 'file' },
-            { name: 'View updates and request resource', type: 'file' }
-          ]
+            { name: 'View updates and request resource', type: 'file' },
+          ],
         },
         {
           name: 'Elementary Data Semantics',
@@ -186,25 +186,25 @@ const initialState: State = {
           children: [
             {
               name: 'Elementary Data Semantics',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'Thing Schematics',
               type: 'folder',
               children: [
                 { name: 'CD-ROM', type: 'file' },
-                { name: 'Academic', type: 'file' }
-              ]
+                { name: 'Academic', type: 'file' },
+              ],
             },
             {
               name: 'Sections',
               type: 'folder',
               children: [
                 { name: 'Search and request CD-ROM', type: 'file' },
-                { name: 'View updates and request book', type: 'file' }
-              ]
-            }
-          ]
+                { name: 'View updates and request book', type: 'file' },
+              ],
+            },
+          ],
         },
         {
           name: 'Static Object Semantics',
@@ -212,25 +212,25 @@ const initialState: State = {
           children: [
             {
               name: 'Static Object Semantics',
-              type: 'file'
+              type: 'file',
             },
             {
               name: 'Sections',
               type: 'folder',
               children: [
                 { name: 'Search and request CD-ROM', type: 'file' },
-                { name: 'View updates and request book', type: 'file' }
-              ]
-            }
-          ]
+                { name: 'View updates and request book', type: 'file' },
+              ],
+            },
+          ],
         },
         {
           name: 'Object Interaction',
           type: 'folder',
           children: [
             { name: 'Search and request resource', type: 'file' },
-            { name: 'View updates and request resource', type: 'file' }
-          ]
+            { name: 'View updates and request resource', type: 'file' },
+          ],
         },
         {
           name: 'Component Diagram',
@@ -245,10 +245,10 @@ const initialState: State = {
                   type: 'folder',
                   children: [
                     { name: 'Search and request resource', type: 'file' },
-                    { name: 'View updates and request resource', type: 'file' }
-                  ]
-                }
-              ]
+                    { name: 'View updates and request resource', type: 'file' },
+                  ],
+                },
+              ],
             },
             {
               name: 'Component Interface Semantics',
@@ -259,24 +259,24 @@ const initialState: State = {
                   type: 'folder',
                   children: [
                     { name: 'Search and request resource', type: 'file' },
-                    { name: 'View updates and request resource', type: 'file' }
-                  ]
-                }
-              ]
-            }
-          ]
+                    { name: 'View updates and request resource', type: 'file' },
+                  ],
+                },
+              ],
+            },
+          ],
         },
         {
           name: 'Cross Component Behavior',
           type: 'folder',
           children: [
             { name: 'Search and request resource', type: 'file' },
-            { name: 'View updates and request resource', type: 'file' }
-          ]
-        }
-      ]
-    }
-  ]
+            { name: 'View updates and request resource', type: 'file' },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export const reducer = createReducer(
@@ -286,6 +286,9 @@ export const reducer = createReducer(
   on(TaskScenarioActions.loadTaskScenarios, state => ({ ...state, loading: false })),
   on(AuthActions.authenticationSucceeded, state => ({ ...state, loading: false })),
   on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state, loading: true })),
-  on(SiteActions.toggleProjectBar, state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })),
-  on(SiteActions.toggleToolBar, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen }))
+  on(SiteActions.toggleProjectBar, state => ({
+    ...state,
+    isProjectBarOpen: !state.isProjectBarOpen,
+  })),
+  on(SiteActions.toggleToolBar, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen })),
 );

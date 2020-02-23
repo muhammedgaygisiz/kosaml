@@ -12,15 +12,21 @@ const COMPONENTS = [LoadingSpinnerComponent, EmptyPageComponent, KosamlCardCompo
 
 @NgModule({
   declarations: COMPONENTS,
-  imports: [ReactiveFormsModule, NgxSkeletonLoaderModule, MatFormFieldModule, MatInputModule, MatCardModule],
+  imports: [
+    ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+  ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     LoadingSpinnerComponent,
     KosamlCardComponent,
     MatFormFieldModule,
-    MatInputModule
-  ]
+    MatInputModule,
+  ],
 })
 export class SharedModule {}
 

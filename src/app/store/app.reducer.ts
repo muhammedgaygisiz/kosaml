@@ -15,13 +15,16 @@ export interface State {
  * These reducer functions are called with each dispatched action
  * and the current or initial state and return a new immutable state.
  */
-export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>('Root reducers token', {
-  factory: () => ({
-    [fromSite.siteFeatureKey]: fromSite.reducer,
-    [fromAuth.authFeatureKey]: fromAuth.reducer,
-    router: fromRouter.routerReducer
-  })
-});
+export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>(
+  'Root reducers token',
+  {
+    factory: () => ({
+      [fromSite.siteFeatureKey]: fromSite.reducer,
+      [fromAuth.authFeatureKey]: fromAuth.reducer,
+      router: fromRouter.routerReducer,
+    }),
+  },
+);
 
 // console.log all actions
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {

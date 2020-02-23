@@ -10,7 +10,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [HeaderComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     });
 
     fixture = TestBed.createComponent(HeaderComponent);

@@ -22,8 +22,13 @@ const handleAuthentication = (expiresIn: number, email: string, userId: string, 
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000).toJSON();
 
   return AuthActions.authenticationSucceeded({
-    user: { email, id: userId, token, tokenExpirationDate: expirationDate },
-    redirect: true
+    user: {
+      email,
+      token,
+      id: userId,
+      tokenExpirationDate: expirationDate
+    },
+    redirect: true,
   });
 };
 
@@ -63,8 +68,8 @@ export class AuthEffects {
     private actions$: Actions,
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) { }
 
   @Effect()
   authLogin = this.actions$.pipe(
@@ -72,25 +77,31 @@ export class AuthEffects {
     switchMap(authData => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
+          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+          `${environment.firebaseAPIKey}`,
           {
             email: authData.email,
             password: authData.password,
-            returnSecureToken: true
-          }
+            returnSecureToken: true,
+          },
         )
         .pipe(
           tap(resDate => {
             this.authService.setLogoutTimer(+resDate.expiresIn * 1000);
           }),
           map(resData => {
-            return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken);
+            return handleAuthentication(
+              +resData.expiresIn,
+              resData.email,
+              resData.localId,
+              resData.idToken,
+            );
           }),
           catchError(errorRes => {
             return handleError(errorRes);
-          })
+          }),
         );
-    })
+    }),
   );
 
   @Effect()
@@ -99,25 +110,31 @@ export class AuthEffects {
     switchMap(signupAction => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+          `${environment.firebaseAPIKey}`,
           {
             email: signupAction.email,
             password: signupAction.password,
-            returnSecureToken: true
-          }
+            returnSecureToken: true,
+          },
         )
         .pipe(
           tap(resDate => {
             this.authService.setLogoutTimer(+resDate.expiresIn * 1000);
           }),
           map(resData => {
-            return handleAuthentication(+resData.expiresIn, resData.email, resData.localId, resData.idToken);
+            return handleAuthentication(
+              +resData.expiresIn,
+              resData.email,
+              resData.localId,
+              resData.idToken,
+            );
           }),
           catchError(errorRes => {
             return handleError(errorRes);
-          })
+          }),
         );
-    })
+    }),
   );
 
   @Effect({ dispatch: false })
@@ -128,7 +145,7 @@ export class AuthEffects {
         localStorage.setItem('userData', JSON.stringify(authSuccessAction.user));
         this.router.navigate(['/']);
       }
-    })
+    }),
   );
 
   @Effect()
@@ -145,7 +162,7 @@ export class AuthEffects {
         email: userData.email,
         id: userData.id,
         token: userData.token,
-        tokenExpirationDate: userData.tokenExpirationDate
+        tokenExpirationDate: userData.tokenExpirationDate,
       };
 
       if (!userData) {
@@ -153,16 +170,17 @@ export class AuthEffects {
       }
 
       if (!isTokenExpired(loadedUser)) {
-        const expirationDuration = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
+        const expirationDuration =
+          new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
         this.authService.setLogoutTimer(expirationDuration);
         return AuthActions.authenticationSucceeded({
           user: loadedUser,
-          redirect: false
+          redirect: false,
         });
       }
 
       return { type: 'DUMMY' };
-    })
+    }),
   );
 
   @Effect({ dispatch: false })
@@ -172,6 +190,6 @@ export class AuthEffects {
       this.authService.clearLogoutTimer();
       localStorage.removeItem('userData');
       this.router.navigate(['/auth']);
-    })
+    }),
   );
 }

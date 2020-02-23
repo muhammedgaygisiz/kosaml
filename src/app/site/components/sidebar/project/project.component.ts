@@ -18,7 +18,7 @@ export interface FlatTreeNode {
 @Component({
   selector: 'kosaml-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
@@ -34,7 +34,12 @@ export class ProjectComponent implements OnInit {
   project: FileNode[];
 
   constructor() {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
+    this.treeFlattener = new MatTreeFlattener(
+      this.transformer,
+      this.getLevel,
+      this.isExpandable,
+      this.getChildren,
+    );
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
@@ -47,11 +52,11 @@ export class ProjectComponent implements OnInit {
   /** Transform the data to something the tree can read. */
   transformer(node: FileNode, level: number) {
     return {
+      level,
       name: node.name,
       type: node.type,
-      level,
       expandable: !!node.children,
-      link: node.link
+      link: node.link,
     };
   }
 

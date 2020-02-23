@@ -16,7 +16,7 @@ export const COMPONENTS = [TaskScenarioPageComponent, TaskScenarioComponent];
     SharedModule,
     TaskScenariosRoutingModule,
     StoreModule.forFeature(fromTaskScenarios.taskScenariosFeatureKey, fromTaskScenarios.reducer),
-    EffectsModule.forFeature([TaskScenariosEffects])
-  ]
+    EffectsModule.forFeature([TaskScenariosEffects]),
+  ],
 })
 export class TaskScenariosModule {}

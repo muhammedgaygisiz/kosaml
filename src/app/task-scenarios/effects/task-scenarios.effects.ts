@@ -21,16 +21,16 @@ const taskScenarios: TaskScenario[] = [
       'dolore magna aliquyam erat, sed diam voluptua. At ' +
       'vero eos et accusam et justo duo dolores et ea rebum. ' +
       'Stet clita kasd gubergren, no sea takimata sanctus est ' +
-      'Lorem ipsum dolor sit amet.'
-  }
+      'Lorem ipsum dolor sit amet.',
+  },
 ];
 
 const taskScenariosPromise = () =>
-  new Promise(resolve => {
+  new Promise(resolve =>
     setTimeout(() => {
       resolve(taskScenarios);
-    }, 2000);
-  });
+    }, 2000),
+  );
 
 @Injectable()
 export class TaskScenariosEffects {
@@ -39,11 +39,11 @@ export class TaskScenariosEffects {
     this.actions$.pipe(
       ofType(TaskScenarioPageActions.fetchTaskScenarios),
       switchMap(() => {
-        return taskScenariosPromise().then((taskScenarios: TaskScenario[]) =>
-          TaskScenarioActions.loadTaskScenarios({ taskScenarios })
+        return taskScenariosPromise().then((receivedTaskScenarios: TaskScenario[]) =>
+          TaskScenarioActions.loadTaskScenarios({ taskScenarios: receivedTaskScenarios }),
         );
-      })
-    )
+      }),
+    ),
   );
 
   constructor(private actions$: Actions) {}
