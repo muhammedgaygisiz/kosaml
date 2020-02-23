@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoadingSpinnerComponent should compile 1`] = `
+exports[`HeaderComponent should compile 1`] = `
 <kosaml-header
   title={[Function String]}
   toggleProjectBar={[Function EventEmitter]}
