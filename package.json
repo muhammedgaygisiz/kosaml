@@ -14,7 +14,7 @@
     "format:fix": "pretty-quick --staged",
     "precommit": "run-s format:fix lint",
     "format:check:ci": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
-    "prettier:fix": "prettier --write \"**/*.{json,md,scss,yaml,yml,ts,html}\""
+    "prettier:fix": "prettier --write \"**/*.{json,md,scss,yaml,yml,ts,tsx,js,jsx,html}\""
   },
   "private": true,
   "dependencies": {
