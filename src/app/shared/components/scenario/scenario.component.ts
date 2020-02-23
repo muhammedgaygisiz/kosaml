@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TaskScenario } from '../../models';
+import { Scenario } from '../../model';
 
 @Component({
-  selector: 'kosaml-task-scenario',
-  templateUrl: './task-scenario.component.html',
-  styleUrls: ['./task-scenario.component.scss'],
+  selector: 'kosaml-scenario',
+  templateUrl: './scenario.component.html',
+  styleUrls: ['./scenario.component.scss']
 })
-export class TaskScenarioComponent implements OnInit {
+export class ScenarioComponent implements OnInit {
   @Input()
-  model: TaskScenario;
+  model: Scenario;
 
   taskScenarioForm: FormGroup;
 
