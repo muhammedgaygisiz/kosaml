@@ -60,4 +60,4 @@ import { fromApp } from './store';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

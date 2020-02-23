@@ -1,22 +1,26 @@
 import { NgModule } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared';
-import { TaskScenarioComponent } from './components';
 import { TaskScenarioPageComponent } from './containers';
+import { TaskScenariosEffects } from './effects';
 import { fromTaskScenarios } from './reducers';
 import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
-import { EffectsModule } from '@ngrx/effects';
-import { TaskScenariosEffects } from './effects';
 
-export const COMPONENTS = [TaskScenarioPageComponent, TaskScenarioComponent];
+export const COMPONENTS = [
+  TaskScenarioPageComponent,
+];
 
 @NgModule({
   declarations: COMPONENTS,
   imports: [
     SharedModule,
     TaskScenariosRoutingModule,
-    StoreModule.forFeature(fromTaskScenarios.taskScenariosFeatureKey, fromTaskScenarios.reducer),
+    StoreModule.forFeature(
+      fromTaskScenarios.taskScenariosFeatureKey,
+      fromTaskScenarios.reducer,
+    ),
     EffectsModule.forFeature([TaskScenariosEffects]),
   ],
 })
-export class TaskScenariosModule {}
+export class TaskScenariosModule { }

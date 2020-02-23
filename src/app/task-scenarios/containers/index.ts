@@ -1,1 +1,2 @@
-export * from './task-scenario-page/task-scenario-page.component';
+export * from './task-scenario-page.component';
+

@@ -18,7 +18,7 @@ export const initialState: State = adapter.getInitialState({
 
 const taskScenarioReducer = createReducer(
   initialState,
-  on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state, loading: true })),
+  on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state })),
   on(TaskScenarioActions.addTaskScenario, (state, action) =>
     adapter.addOne(action.taskScenario, state),
   ),

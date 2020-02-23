@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthActions } from 'src/app/auth/actions';
 import { TaskScenarioActions, TaskScenarioPageActions } from 'src/app/task-scenarios/actions';
+import { UseScenarioActions, UseScenarioPageActions } from 'src/app/use-scenarios/actions';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
 
@@ -44,6 +45,7 @@ const initialState: State = {
             {
               name: 'Search and request resource',
               type: 'file',
+              link: '../use-scenarios',
             },
             {
               name: 'View updates and request resource',
@@ -282,13 +284,31 @@ const initialState: State = {
 export const reducer = createReducer(
   initialState,
   // todo: Move toggling of loading spinner to own effect
-  on(AuthActions.startLogin, AuthActions.startSignUp, state => ({ ...state, loading: true })),
-  on(TaskScenarioActions.loadTaskScenarios, state => ({ ...state, loading: false })),
-  on(AuthActions.authenticationSucceeded, state => ({ ...state, loading: false })),
-  on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state, loading: true })),
-  on(SiteActions.toggleProjectBar, state => ({
-    ...state,
-    isProjectBarOpen: !state.isProjectBarOpen,
-  })),
-  on(SiteActions.toggleToolBar, state => ({ ...state, isToolBarOpen: !state.isToolBarOpen })),
+  on(
+    AuthActions.startLogin,
+    AuthActions.startSignUp,
+    state => ({ ...state, loading: true })
+  ),
+  on(
+    TaskScenarioActions.loadTaskScenarios,
+    UseScenarioActions.loadUseScenarios,
+    state => ({ ...state, loading: false })
+  ),
+  on(
+    AuthActions.authenticationSucceeded,
+    state => ({ ...state, loading: false })
+  ),
+  on(
+    TaskScenarioPageActions.fetchTaskScenarios,
+    UseScenarioPageActions.fetchUseScenarios,
+    state => ({ ...state, loading: true })
+  ),
+  on(
+    SiteActions.toggleProjectBar,
+    state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })
+  ),
+  on(
+    SiteActions.toggleToolBar,
+    state => ({ ...state, isToolBarOpen: !state.isToolBarOpen })
+  ),
 );

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { switchMap } from 'rxjs/operators';
-import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
-import { TaskScenario } from '../models';
+import { UseScenarioActions, UseScenarioPageActions } from '../actions';
+import { UseScenario } from '../models';
 
-const taskScenarios: TaskScenario[] = [
+const useScenarios: UseScenario[] = [
   {
     id: 1,
-    title: 'Task Scenario 1',
+    title: 'Use Scenario 1',
     description:
       'Lorem ipsum dolor sit amet, ' +
       'consetetur sadipscing elitr, sed diam nonumy ' +
@@ -25,22 +25,22 @@ const taskScenarios: TaskScenario[] = [
   },
 ];
 
-const taskScenariosPromise = () =>
+const useScenariosPromise = () =>
   new Promise(resolve =>
     setTimeout(() => {
-      resolve(taskScenarios);
+      resolve(useScenarios);
     }, 2000),
   );
 
 @Injectable()
-export class TaskScenariosEffects {
+export class UseScenariosEffects {
   @Effect()
-  loadTaskScenatios$ = createEffect(() =>
+  loadUseScenatios$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TaskScenarioPageActions.fetchTaskScenarios),
+      ofType(UseScenarioPageActions.fetchUseScenarios),
       switchMap(() => {
-        return taskScenariosPromise().then((receivedTaskScenarios: TaskScenario[]) =>
-          TaskScenarioActions.loadTaskScenarios({ taskScenarios: receivedTaskScenarios }),
+        return useScenariosPromise().then((receivedUseScenarios: UseScenario[]) =>
+          UseScenarioActions.loadUseScenarios({ useScenarios: receivedUseScenarios }),
         );
       }),
     ),

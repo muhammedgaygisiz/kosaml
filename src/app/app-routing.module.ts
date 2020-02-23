@@ -16,10 +16,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./task-scenarios/task-scenarios.module').then(module => module.TaskScenariosModule),
   },
+  {
+    path: 'use-scenarios',
+    loadChildren: () =>
+      import('./use-scenarios/use-scenarios.module').then(module => module.UseScenariosModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
