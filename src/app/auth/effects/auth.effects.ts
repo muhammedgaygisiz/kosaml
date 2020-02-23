@@ -69,7 +69,7 @@ export class AuthEffects {
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   @Effect()
   authLogin = this.actions$.pipe(
@@ -77,8 +77,7 @@ export class AuthEffects {
     switchMap(authData => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-            `${environment.firebaseAPIKey}`,
+          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
           {
             email: authData.email,
             password: authData.password,
@@ -110,8 +109,7 @@ export class AuthEffects {
     switchMap(signupAction => {
       return this.http
         .post<AuthResponseData>(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-            `${environment.firebaseAPIKey}`,
+          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
           {
             email: signupAction.email,
             password: signupAction.password,
