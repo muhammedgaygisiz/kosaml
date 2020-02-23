@@ -24,7 +24,7 @@ import { fromApp } from './store';
         strictStateImmutability: true,
         strictActionImmutability: true,
         strictStateSerializability: true,
-        strictActionSerializability: true,
+        strictActionSerializability: true
       }
     }),
 
@@ -46,7 +46,7 @@ import { fromApp } from './store';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrument({
-      name: 'Kosaml App',
+      name: 'Kosaml App'
 
       // In a production build you would want to disable the Store Devtools
       // logOnly: environment.production,
@@ -55,9 +55,9 @@ import { fromApp } from './store';
     EffectsModule.forRoot([]),
 
     AuthModule,
-    SiteModule,
+    SiteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

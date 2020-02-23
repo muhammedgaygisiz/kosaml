@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-
 @Component({
   selector: 'kosaml-header',
   templateUrl: './header.component.html',
@@ -18,10 +17,9 @@ export class HeaderComponent implements OnInit {
   @Output()
   toggleToolBar = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onToggleProjectBar() {
     this.toggleProjectBar.emit();

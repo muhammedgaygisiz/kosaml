@@ -5,19 +5,10 @@
     "module": "commonjs",
     "outDir": "./out-tsc/spec",
     "target": "es5",
-    "types": [
-      "jest",
-      "node"
-    ],
+    "types": ["jest", "node"],
     "allowJs": true,
     "emitDecoratorMetadata": true
   },
-  "files": [
-    "src/test.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/test.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }

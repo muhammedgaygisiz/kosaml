@@ -10,22 +10,17 @@ import { AuthPageComponent } from './containers';
 import { AuthEffects } from './effects';
 import { fromAuth } from './reducers';
 
-export const COMPONENTS = [
-    AuthPageComponent,
-    AuthComponent,
-];
+export const COMPONENTS = [AuthPageComponent, AuthComponent];
 
 @NgModule({
-    declarations: COMPONENTS,
-    imports: [
-        SharedModule,
-        MatButtonModule,
-        HttpClientModule,
-        AuthRoutingModule,
-        StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
-        EffectsModule.forFeature([AuthEffects])
-    ]
+  declarations: COMPONENTS,
+  imports: [
+    SharedModule,
+    MatButtonModule,
+    HttpClientModule,
+    AuthRoutingModule,
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
+    EffectsModule.forFeature([AuthEffects])
+  ]
 })
-export class AuthModule {
-
-}
+export class AuthModule {}

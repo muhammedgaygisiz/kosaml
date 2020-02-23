@@ -2,7 +2,6 @@ import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { TaskScenario } from '../models';
 
-
 export const loadTaskScenarios = createAction(
   '[TaskScenario/API] Load TaskScenarios',
   props<{ taskScenarios: TaskScenario[] }>()
@@ -38,16 +37,8 @@ export const updateTaskScenarios = createAction(
   props<{ taskScenarios: Update<TaskScenario>[] }>()
 );
 
-export const deleteTaskScenario = createAction(
-  '[TaskScenario/API] Delete TaskScenario',
-  props<{ id: string }>()
-);
+export const deleteTaskScenario = createAction('[TaskScenario/API] Delete TaskScenario', props<{ id: string }>());
 
-export const deleteTaskScenarios = createAction(
-  '[TaskScenario/API] Delete TaskScenarios',
-  props<{ ids: string[] }>()
-);
+export const deleteTaskScenarios = createAction('[TaskScenario/API] Delete TaskScenarios', props<{ ids: string[] }>());
 
-export const clearTaskScenarios = createAction(
-  '[TaskScenario/API] Clear TaskScenarios'
-);
+export const clearTaskScenarios = createAction('[TaskScenario/API] Clear TaskScenarios');

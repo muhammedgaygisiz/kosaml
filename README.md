@@ -14,7 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests 
+## Running unit tests
 
 Run `npm test` to execute the unit tests via [Jest](https://github.com/facebook/jest).
 
@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Angular:
 https://angular.io/
 
-Angular Material: 
+Angular Material:
 https://material.angular.io/ (https://github.com/angular/components)
 
 Jest:

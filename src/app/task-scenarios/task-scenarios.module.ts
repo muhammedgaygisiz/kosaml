@@ -8,21 +8,15 @@ import { TaskScenariosRoutingModule } from './task-scenarios-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskScenariosEffects } from './effects';
 
-export const COMPONENTS = [
-  TaskScenarioPageComponent,
-  TaskScenarioComponent
-];
+export const COMPONENTS = [TaskScenarioPageComponent, TaskScenarioComponent];
 
 @NgModule({
   declarations: COMPONENTS,
   imports: [
     SharedModule,
     TaskScenariosRoutingModule,
-    StoreModule.forFeature(
-      fromTaskScenarios.taskScenariosFeatureKey,
-      fromTaskScenarios.reducer
-    ),
+    StoreModule.forFeature(fromTaskScenarios.taskScenariosFeatureKey, fromTaskScenarios.reducer),
     EffectsModule.forFeature([TaskScenariosEffects])
   ]
 })
-export class TaskScenariosModule { }
+export class TaskScenariosModule {}

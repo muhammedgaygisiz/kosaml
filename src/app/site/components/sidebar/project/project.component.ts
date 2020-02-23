@@ -4,7 +4,6 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { of as observableOf } from 'rxjs';
 import { FileNode } from '../../../models';
 
-
 /**
  * Flattened tree node that has been created from a FileNode through the flattener. Flattened
  * nodes include level index and whether they can be expanded or not.
@@ -22,7 +21,6 @@ export interface FlatTreeNode {
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit {
-
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -35,13 +33,8 @@ export class ProjectComponent implements OnInit {
   @Input()
   project: FileNode[];
 
-  constructor(
-  ) {
-    this.treeFlattener = new MatTreeFlattener(
-      this.transformer,
-      this.getLevel,
-      this.isExpandable,
-      this.getChildren);
+  constructor() {
+    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);

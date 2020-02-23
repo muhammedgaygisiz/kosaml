@@ -8,19 +8,17 @@ import { TaskScenario } from '../../models';
   styleUrls: ['./task-scenario.component.scss']
 })
 export class TaskScenarioComponent implements OnInit {
-
   @Input()
   model: TaskScenario;
 
   taskScenarioForm: FormGroup;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.taskScenarioForm = new FormGroup({
       title: new FormControl(this.model.title),
-      description: new FormControl(this.model.description),
+      description: new FormControl(this.model.description)
     });
   }
-
 }

@@ -19,55 +19,25 @@ export const initialState: State = adapter.getInitialState({
 const taskScenarioReducer = createReducer(
   initialState,
   on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state, loading: true })),
-  on(TaskScenarioActions.addTaskScenario,
-    (state, action) => adapter.addOne(action.taskScenario, state)
-  ),
-  on(TaskScenarioActions.upsertTaskScenario,
-    (state, action) => adapter.upsertOne(action.taskScenario, state)
-  ),
-  on(TaskScenarioActions.addTaskScenarios,
-    (state, action) => adapter.addMany(action.taskScenarios, state)
-  ),
-  on(TaskScenarioActions.upsertTaskScenarios,
-    (state, action) => adapter.upsertMany(action.taskScenarios, state)
-  ),
-  on(TaskScenarioActions.updateTaskScenario,
-    (state, action) => adapter.updateOne(action.taskScenario, state)
-  ),
-  on(TaskScenarioActions.updateTaskScenarios,
-    (state, action) => adapter.updateMany(action.taskScenarios, state)
-  ),
-  on(TaskScenarioActions.deleteTaskScenario,
-    (state, action) => adapter.removeOne(action.id, state)
-  ),
-  on(TaskScenarioActions.deleteTaskScenarios,
-    (state, action) => adapter.removeMany(action.ids, state)
-  ),
-  on(TaskScenarioActions.loadTaskScenarios,
-    (state, action) => adapter.addAll(action.taskScenarios, state)
-  ),
-  on(TaskScenarioActions.clearTaskScenarios,
-    state => adapter.removeAll(state)
-  ),
+  on(TaskScenarioActions.addTaskScenario, (state, action) => adapter.addOne(action.taskScenario, state)),
+  on(TaskScenarioActions.upsertTaskScenario, (state, action) => adapter.upsertOne(action.taskScenario, state)),
+  on(TaskScenarioActions.addTaskScenarios, (state, action) => adapter.addMany(action.taskScenarios, state)),
+  on(TaskScenarioActions.upsertTaskScenarios, (state, action) => adapter.upsertMany(action.taskScenarios, state)),
+  on(TaskScenarioActions.updateTaskScenario, (state, action) => adapter.updateOne(action.taskScenario, state)),
+  on(TaskScenarioActions.updateTaskScenarios, (state, action) => adapter.updateMany(action.taskScenarios, state)),
+  on(TaskScenarioActions.deleteTaskScenario, (state, action) => adapter.removeOne(action.id, state)),
+  on(TaskScenarioActions.deleteTaskScenarios, (state, action) => adapter.removeMany(action.ids, state)),
+  on(TaskScenarioActions.loadTaskScenarios, (state, action) => adapter.addAll(action.taskScenarios, state)),
+  on(TaskScenarioActions.clearTaskScenarios, state => adapter.removeAll(state))
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return taskScenarioReducer(state, action);
 }
 
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
+export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
 
-export const taskScenarioState = createFeatureSelector<State>(
-  taskScenariosFeatureKey
-);
+export const taskScenarioState = createFeatureSelector<State>(taskScenariosFeatureKey);
 
-export const getTaskScenarioEntityById
-  = (id: number) => createSelector(
-    taskScenarioState,
-    (state: State) => state.entities[id]
-  );
+export const getTaskScenarioEntityById = (id: number) =>
+  createSelector(taskScenarioState, (state: State) => state.entities[id]);

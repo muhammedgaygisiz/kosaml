@@ -8,33 +8,20 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EmptyPageComponent, LoadingSpinnerComponent } from './components';
 import { KosamlCardComponent } from './components/kosaml-card/kosaml-card.component';
 
-const COMPONENTS = [
-    LoadingSpinnerComponent,
-    EmptyPageComponent,
-    KosamlCardComponent,
-];
+const COMPONENTS = [LoadingSpinnerComponent, EmptyPageComponent, KosamlCardComponent];
 
 @NgModule({
-    declarations: COMPONENTS,
-    imports: [
-        ReactiveFormsModule,
-        NgxSkeletonLoaderModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCardModule,
-    ],
-    exports: [
-        CommonModule,
-        ReactiveFormsModule,
-        LoadingSpinnerComponent,
-        KosamlCardComponent,
-        MatFormFieldModule,
-        MatInputModule,
-    ]
+  declarations: COMPONENTS,
+  imports: [ReactiveFormsModule, NgxSkeletonLoaderModule, MatFormFieldModule, MatInputModule, MatCardModule],
+  exports: [
+    CommonModule,
+    ReactiveFormsModule,
+    LoadingSpinnerComponent,
+    KosamlCardComponent,
+    MatFormFieldModule,
+    MatInputModule
+  ]
 })
-export class SharedModule {
-
-}
+export class SharedModule {}
 
 // MatFormFieldModule,
-

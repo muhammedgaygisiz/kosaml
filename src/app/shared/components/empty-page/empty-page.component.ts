@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./empty-page.component.scss']
 })
 export class EmptyPageComponent {
-
-  constructor() { }
-
+  constructor() {}
 }

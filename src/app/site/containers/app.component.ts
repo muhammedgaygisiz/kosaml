@@ -14,34 +14,29 @@ import { FileNode } from '../models';
       [isAuthenticated]="isAuthenticated$ | async"
       (toggleProjectBar)="onToggleProjectBar()"
       (toggleToolBar)="onToggleToolBar()"
-      ></kosaml-header>
+    ></kosaml-header>
     <kosaml-body
       [isAuthenticated]="isAuthenticated$ | async"
       [isProjectBarOpen]="isProjectBarOpen$ | async"
       [isToolBarOpen]="isToolBarOpen$ | async"
-      [project]="project$ | async">
+      [project]="project$ | async"
+    >
     </kosaml-body>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
-  isAuthenticated$: Observable<boolean> = this.store
-    .select('auth').pipe(
-      map(authState => !!authState.user),
-      shareReplay()
-    );
+  isAuthenticated$: Observable<boolean> = this.store.select('auth').pipe(
+    map(authState => !!authState.user),
+    shareReplay()
+  );
 
-  isProjectBarOpen$: Observable<boolean> = this.store
-    .select('site', 'isProjectBarOpen');
+  isProjectBarOpen$: Observable<boolean> = this.store.select('site', 'isProjectBarOpen');
 
-  isToolBarOpen$: Observable<boolean> = this.store
-    .select('site', 'isToolBarOpen');
+  isToolBarOpen$: Observable<boolean> = this.store.select('site', 'isToolBarOpen');
 
-  project$: Observable<FileNode[]> = this.store
-    .select('site', 'projectStructure');
+  project$: Observable<FileNode[]> = this.store.select('site', 'projectStructure');
 
-  constructor(
-    private store: Store<fromApp.State>
-  ) { }
+  constructor(private store: Store<fromApp.State>) {}
 
   ngOnInit() {
     this.store.dispatch(AuthActions.autoLogin());

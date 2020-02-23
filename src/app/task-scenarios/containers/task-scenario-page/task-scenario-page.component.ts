@@ -19,23 +19,15 @@ import { fromTaskScenarios } from '../../reducers';
   styles: []
 })
 export class TaskScenarioPageComponent implements OnInit {
-
-  isLoading$: Observable<boolean> = this.store.select('site', 'loading').pipe(
-    shareReplay()
-  );
+  isLoading$: Observable<boolean> = this.store.select('site', 'loading').pipe(shareReplay());
 
   selectedTaskScenario$: Observable<TaskScenario> = this.store.pipe(
-    select(fromTaskScenarios.getTaskScenarioEntityById(1)),
+    select(fromTaskScenarios.getTaskScenarioEntityById(1))
   );
 
-  constructor(
-    private store: Store<fromApp.State>
-  ) { }
+  constructor(private store: Store<fromApp.State>) {}
 
   ngOnInit() {
-    this.store.dispatch(
-      TaskScenarioPageActions.fetchTaskScenarios()
-    );
+    this.store.dispatch(TaskScenarioPageActions.fetchTaskScenarios());
   }
-
 }

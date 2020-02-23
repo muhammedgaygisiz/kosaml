@@ -7,7 +7,6 @@ import { FileNode } from '../../models';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent {
-
   @Input()
   isAuthenticated: boolean;
 
@@ -20,6 +19,5 @@ export class BodyComponent {
   @Input()
   project: FileNode[];
 
-  constructor() {
-  }
+  constructor() {}
 }

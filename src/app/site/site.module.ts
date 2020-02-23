@@ -13,32 +13,27 @@ import { fromSite } from './reducers';
 import { SiteRoutingModule } from './site-routing.module';
 
 export const COMPONENTS = [
-    HeaderComponent,
-    BodyComponent,
-    ProjectComponent,
-    ContentComponent,
-    SidebarComponent,
-    AppComponent
+  HeaderComponent,
+  BodyComponent,
+  ProjectComponent,
+  ContentComponent,
+  SidebarComponent,
+  AppComponent
 ];
 
 @NgModule({
-    declarations: COMPONENTS,
-    imports: [
-        MatIconModule,
-        MatToolbarModule,
-        SharedModule,
-        MatSidenavModule,
-        MatListModule,
-        MatTreeModule,
-        MatButtonModule,
-        SiteRoutingModule,
-        StoreModule.forFeature(fromSite.siteFeatureKey, fromSite.reducer)
-    ],
-    exports: [
-        HeaderComponent,
-        BodyComponent,
-    ]
+  declarations: COMPONENTS,
+  imports: [
+    MatIconModule,
+    MatToolbarModule,
+    SharedModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTreeModule,
+    MatButtonModule,
+    SiteRoutingModule,
+    StoreModule.forFeature(fromSite.siteFeatureKey, fromSite.reducer)
+  ],
+  exports: [HeaderComponent, BodyComponent]
 })
-export class SiteModule {
-
-}
+export class SiteModule {}
