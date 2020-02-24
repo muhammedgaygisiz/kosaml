@@ -1,11 +1,8 @@
 <ng-container *ngTemplateOutlet="isAuthenticated ? authContent : unauthContent"></ng-container>
 
 <ng-template #authContent>
-  <kosaml-sidebar
-    [isProjectBarOpen]="isProjectBarOpen"
-    [isToolBarOpen]="isToolBarOpen"
-    [project]="project"
-  >
+  <kosaml-sidebar [isProjectBarOpen]="isProjectBarOpen" [isToolBarOpen]="isToolBarOpen" [project]="project"
+    (logout)="onLogout()">
     <kosaml-content></kosaml-content>
   </kosaml-sidebar>
 </ng-template>

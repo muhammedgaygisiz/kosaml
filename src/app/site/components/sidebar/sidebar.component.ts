@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { AuthService } from 'src/app/auth/services';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileNode } from '../../models';
 
 @Component({
@@ -17,9 +16,15 @@ export class SidebarComponent {
   @Input()
   project: FileNode[];
 
-  constructor(private authService: AuthService) {}
+  @Input()
+  marginTop: number = 56;
+
+  @Output()
+  logout = new EventEmitter();
+
+  constructor() { }
 
   onLogout() {
-    this.authService.logout();
+    this.logout.emit()
   }
 }

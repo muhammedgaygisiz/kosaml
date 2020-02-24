@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/auth/services';
 import { FileNode } from '../../models';
 
 @Component({
@@ -19,5 +20,11 @@ export class BodyComponent {
   @Input()
   project: FileNode[];
 
-  constructor() {}
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

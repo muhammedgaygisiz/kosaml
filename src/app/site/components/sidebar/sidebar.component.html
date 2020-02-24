@@ -1,13 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    class="sidenav"
-    fixedInViewport
-    [fixedTopGap]="56"
-    [attr.role]="isProjectBarOpen ? 'navigation' : 'dialog'"
-    [mode]="isProjectBarOpen ? 'side' : 'over'"
-    [opened]="isProjectBarOpen"
-    position="start"
-  >
+  <mat-sidenav class="sidenav" fixedInViewport [fixedTopGap]="marginTop"
+    [attr.role]="isProjectBarOpen ? 'navigation' : 'dialog'" [mode]="isProjectBarOpen ? 'side' : 'over'"
+    [opened]="isProjectBarOpen" position="start">
     <mat-toolbar>Digital Library</mat-toolbar>
     <kosaml-project [project]="project"></kosaml-project>
     <mat-nav-list>
@@ -18,15 +12,9 @@
     <!-- Add Content Here -->
     <ng-content></ng-content>
   </mat-sidenav-content>
-  <mat-sidenav
-    class="sidenav"
-    fixedInViewport
-    [fixedTopGap]="56"
-    [attr.role]="isToolBarOpen ? 'navigation' : 'dialog'"
-    [mode]="isToolBarOpen ? 'side' : 'over'"
-    [opened]="isToolBarOpen"
-    position="end"
-  >
+  <mat-sidenav class="sidenav" fixedInViewport [fixedTopGap]="marginTop"
+    [attr.role]="isToolBarOpen ? 'navigation' : 'dialog'" [mode]="isToolBarOpen ? 'side' : 'over'"
+    [opened]="isToolBarOpen" position="end">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#">Link 1</a>
