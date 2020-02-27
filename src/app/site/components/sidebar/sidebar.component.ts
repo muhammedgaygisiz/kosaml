@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FileNode } from '../../models';
 
 @Component({
@@ -21,6 +21,13 @@ export class SidebarComponent {
 
   @Output()
   logout = new EventEmitter();
+
+  @ViewChild("sidenav", { static: false, read: ElementRef })
+  matSideNav: ElementRef;
+
+  startingXPosition: number;
+  isResizing: boolean = false;
+  mouseLastSeen: number = -1;
 
   constructor() { }
 
