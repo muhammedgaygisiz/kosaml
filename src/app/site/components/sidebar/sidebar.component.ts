@@ -17,7 +17,7 @@ export class SidebarComponent implements AfterViewInit {
   project: FileNode[];
 
   @Input()
-  marginTop: number = 56;
+  marginTop: number = 40 + 36;
 
   @Input()
   width: number;
