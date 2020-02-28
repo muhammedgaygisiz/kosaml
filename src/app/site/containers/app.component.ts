@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
   project$: Observable<FileNode[]> = this.store.select('site', 'projectStructure');
 
-  sidebarWidth$: Observable<number> = this.store.select('site', 'sidebarWidth');
+  sidebarWidth$: Observable<string> = this.store.select('site', 'sidebarWidth');
 
   constructor(private store: Store<fromApp.State>) { }
 
