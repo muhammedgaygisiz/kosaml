@@ -36,5 +36,6 @@ export const emptySidebar = () => ({
         }],
         isProjectBarOpen: true,
         marginTop: 0,
+        width: 250,
     }
 })

@@ -12,6 +12,7 @@ export interface State {
   isToolBarOpen: boolean;
   projectStructure: FileNode[];
   loading: boolean;
+  sidebarWidth: string;
 }
 
 const initialState: State = {
@@ -279,6 +280,7 @@ const initialState: State = {
       ],
     },
   ],
+  sidebarWidth: "250px",
 };
 
 export const reducer = createReducer(
@@ -311,4 +313,8 @@ export const reducer = createReducer(
     SiteActions.toggleToolBar,
     state => ({ ...state, isToolBarOpen: !state.isToolBarOpen })
   ),
+  on(
+    SiteActions.sidebarWidthChange,
+    (state, { width }) => ({ ...state, sidebarWidth: width })
+  )
 );

@@ -20,6 +20,8 @@ import { FileNode } from '../models';
       [isProjectBarOpen]="isProjectBarOpen$ | async"
       [isToolBarOpen]="isToolBarOpen$ | async"
       [project]="project$ | async"
+      [sidebarWidth]="sidebarWidth$ | async"
+      (sidebarWidthChange)="onSidebarWidthChange($event)"
     >
     </kosaml-body>
   `,
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit {
 
   project$: Observable<FileNode[]> = this.store.select('site', 'projectStructure');
 
-  constructor(private store: Store<fromApp.State>) {}
+  sidebarWidth$: Observable<number> = this.store.select('site', 'sidebarWidth');
+
+  constructor(private store: Store<fromApp.State>) { }
 
   ngOnInit() {
     this.store.dispatch(AuthActions.autoLogin());
@@ -48,5 +52,9 @@ export class AppComponent implements OnInit {
 
   onToggleToolBar() {
     this.store.dispatch(SiteActions.toggleToolBar());
+  }
+
+  onSidebarWidthChange(sidebarWidth) {
+    this.store.dispatch(SiteActions.sidebarWidthChange({ width: sidebarWidth }))
   }
 }
