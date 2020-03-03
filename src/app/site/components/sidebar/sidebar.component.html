@@ -5,7 +5,10 @@
     <mat-toolbar>EXPLORER</mat-toolbar>
     <kosaml-project [project]="project"></kosaml-project>
     <mat-nav-list>
-      <a mat-list-item (click)="onLogout()">Logout</a>
+      <a mat-list-item (click)="onLogout()">
+        <mat-icon matListIcon>logout</mat-icon>
+        Logout
+      </a>
     </mat-nav-list>
     <div class="right border" (mousedown)="onMouseDown($event)" (window:mouseup)="onMouseUp($event)"
       (window:mousemove)="onMouseMove($event)">

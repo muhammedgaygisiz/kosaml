@@ -4,11 +4,13 @@
 }
 
 .mat-tree-node {
-  min-height: 40px;
+  min-height: 32px;
+  font-size: 12px;
 
   &:hover {
     background-color: #dbdbdb;
     color: #3f51b5;
+    cursor: pointer;
 
     a {
       color: #3f51b5;
