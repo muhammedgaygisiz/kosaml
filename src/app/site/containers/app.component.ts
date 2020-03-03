@@ -15,7 +15,6 @@ import { FileNode } from '../models';
       (toggleProjectBar)="onToggleProjectBar()"
       (toggleToolBar)="onToggleToolBar()"
     ></kosaml-header>
-    <kosaml-menu-bar></kosaml-menu-bar>
     <kosaml-body
       [isAuthenticated]="isAuthenticated$ | async"
       [isProjectBarOpen]="isProjectBarOpen$ | async"
