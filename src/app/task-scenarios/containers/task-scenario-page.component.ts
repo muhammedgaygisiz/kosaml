@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { fromApp } from 'src/app/store';
 import { TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
@@ -25,9 +26,21 @@ export class TaskScenarioPageComponent implements OnInit {
     select(fromTaskScenarios.getTaskScenarioEntityById(1)),
   );
 
-  constructor(private store: Store<fromApp.State>) { }
+  constructor(
+    private store: Store<fromApp.State>,
+    private route: ActivatedRoute
+  ) {
+    this.route.params
+      .pipe(
+        map(params => {
+          if (params.id && +params.id) {
+            this.store.dispatch(TaskScenarioPageActions.fetchTaskScenarios());
+          }
+        })
+      )
+      .subscribe();
+  }
 
   ngOnInit() {
-    this.store.dispatch(TaskScenarioPageActions.fetchTaskScenarios());
   }
 }

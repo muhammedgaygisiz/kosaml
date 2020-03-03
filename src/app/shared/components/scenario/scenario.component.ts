@@ -9,7 +9,7 @@ import { Scenario } from '../../model';
 })
 export class ScenarioComponent implements OnInit {
   @Input()
-  model: Scenario;
+  model: Scenario = { id: undefined, title: "", description: "" };
 
   scenarioForm: FormGroup;
 

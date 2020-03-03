@@ -16,13 +16,7 @@ export default {
 };
 
 export const emptyScenario = () => ({
-    component: ScenarioComponent,
-    props: {
-        model: {
-            title: "",
-            description: "",
-        }
-    }
+    component: ScenarioComponent
 });
 
 export const filledScenario = () => ({
