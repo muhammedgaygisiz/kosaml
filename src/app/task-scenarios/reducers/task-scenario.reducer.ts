@@ -55,6 +55,9 @@ const taskScenarioReducer = createReducer(
     adapter.addAll(action.taskScenarios, state),
   ),
   on(TaskScenarioActions.clearTaskScenarios, state => adapter.removeAll(state)),
+  on(TaskScenarioPageActions.selectTaskScenario, (state, { id }) =>
+    ({ ...state, selectedTaskScenarioId: id })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

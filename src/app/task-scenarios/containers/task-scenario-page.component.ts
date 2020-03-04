@@ -33,7 +33,7 @@ export class TaskScenarioPageComponent implements OnDestroy {
   ) {
     this.actionsSubscription = this.route.params
       .pipe(map(params => +params.id
-        ? TaskScenarioPageActions.selectTaskScenario({ id: params.id })
+        ? TaskScenarioPageActions.selectTaskScenario({ id: +params.id })
         : TaskScenarioPageActions.newTaskScenario()
       ))
       .subscribe(action => store.dispatch(action));

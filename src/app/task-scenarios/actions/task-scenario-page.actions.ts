@@ -6,7 +6,7 @@ export const fetchTaskScenarios = createAction(
 
 export const selectTaskScenario = createAction(
     '[View TaskScenario Page] Select TaskScenario',
-    props<{ id: string }>()
+    props<{ id: number }>()
 )
 
 export const newTaskScenario = createAction(

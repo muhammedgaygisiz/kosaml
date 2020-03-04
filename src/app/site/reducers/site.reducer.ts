@@ -31,7 +31,7 @@ const initialState: State = {
             {
               name: 'Search and request resource',
               type: 'file',
-              link: '../task-scenarios',
+              link: '../task-scenarios/1',
             },
             {
               name: 'View updates and request resource',
