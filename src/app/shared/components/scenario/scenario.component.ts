@@ -9,11 +9,15 @@ import { Scenario } from '../../model';
 })
 export class ScenarioComponent implements OnInit {
   @Input()
-  model: Scenario = { id: undefined, title: "", description: "" };
+  model: Scenario;
 
   scenarioForm: FormGroup;
 
   ngOnInit() {
+    if (!this.model) {
+      this.model = { id: undefined, title: "", description: "" }
+    }
+
     this.scenarioForm = new FormGroup({
       title: new FormControl(this.model.title),
       description: new FormControl(this.model.description),
