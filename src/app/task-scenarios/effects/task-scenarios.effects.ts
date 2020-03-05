@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import { switchMap } from 'rxjs/operators';
-import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
+import { Actions } from '@ngrx/effects';
 import { TaskScenario } from '../models';
 
 const taskScenarios: TaskScenario[] = [
@@ -34,17 +32,6 @@ const taskScenariosPromise = () =>
 
 @Injectable()
 export class TaskScenariosEffects {
-  @Effect()
-  loadTaskScenatios$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TaskScenarioPageActions.fetchTaskScenarios),
-      switchMap(() => {
-        return taskScenariosPromise().then((receivedTaskScenarios: TaskScenario[]) =>
-          TaskScenarioActions.loadTaskScenarios({ taskScenarios: receivedTaskScenarios }),
-        );
-      }),
-    ),
-  );
 
   constructor(private actions$: Actions) { }
 }

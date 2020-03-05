@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthActions } from 'src/app/auth/actions';
-import { TaskScenarioActions, TaskScenarioPageActions } from 'src/app/task-scenarios/actions';
+import { TaskScenarioActions } from 'src/app/task-scenarios/actions';
 import { UseScenarioActions, UseScenarioPageActions } from 'src/app/use-scenarios/actions';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
@@ -301,7 +301,6 @@ export const reducer = createReducer(
     state => ({ ...state, loading: false })
   ),
   on(
-    TaskScenarioPageActions.fetchTaskScenarios,
     UseScenarioPageActions.fetchUseScenarios,
     state => ({ ...state, loading: true })
   ),

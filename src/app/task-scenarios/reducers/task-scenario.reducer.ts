@@ -26,7 +26,6 @@ export const initialState: State = adapter.getInitialState({
 
 const taskScenarioReducer = createReducer(
   initialState,
-  on(TaskScenarioPageActions.fetchTaskScenarios, state => ({ ...state })),
   on(TaskScenarioActions.addTaskScenario, (state, action) =>
     adapter.addOne(action.taskScenario, state),
   ),
@@ -80,13 +79,10 @@ export const selectSelectedTaskScenarioId = createSelector(
   state => state.selectedTaskScenarioId
 )
 
-export const { selectIds, selectEntities: selectTaskScenarioEntities, selectAll, selectTotal } = adapter.getSelectors();
+export const { selectEntities: selectTaskScenarioEntities } = adapter.getSelectors();
 
 export const selectSelectedTaskScenario = createSelector(
   selectTaskScenarioEntities,
   selectSelectedTaskScenarioId,
   (entities, selectedId) => selectedId && entities[selectedId]
 )
-
-// export const getTaskScenarioEntityById = (id: number) =>
-  // createSelector(taskScenarioState, (state: State) => state.entities[id]);
