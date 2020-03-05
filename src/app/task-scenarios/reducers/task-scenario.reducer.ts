@@ -75,7 +75,7 @@ export const selectTaskScenarioEntitiesState = createSelector(
 );
 
 export const selectSelectedTaskScenarioId = createSelector(
-  selectTaskScenarioEntitiesState,
+  selectTaskScenarioState,
   state => state.selectedTaskScenarioId
 )
 
@@ -84,5 +84,7 @@ export const { selectEntities: selectTaskScenarioEntities } = adapter.getSelecto
 export const selectSelectedTaskScenario = createSelector(
   selectTaskScenarioEntities,
   selectSelectedTaskScenarioId,
-  (entities, selectedId) => selectedId && entities[selectedId]
+  (entities, selectedId) => {
+    return selectedId && entities && entities[selectedId]
+  }
 )
