@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared';
@@ -16,11 +15,10 @@ export const COMPONENTS = [AuthPageComponent, AuthComponent];
   declarations: COMPONENTS,
   imports: [
     SharedModule,
-    MatButtonModule,
     HttpClientModule,
     AuthRoutingModule,
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
 })
-export class AuthModule {}
+export class AuthModule { }

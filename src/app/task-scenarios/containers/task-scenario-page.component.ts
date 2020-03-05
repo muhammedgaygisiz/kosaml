@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { fromApp } from 'src/app/store';
-import { TaskScenarioPageActions } from '../actions';
+import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
 import { fromTaskScenarios } from '../reducers';
 
@@ -15,6 +15,7 @@ import { fromTaskScenarios } from '../reducers';
     <kosaml-scenario
       *ngIf="(isLoading$ | async) === false"
       [model]="selectedTaskScenario$ | async"
+      (saveScenario)="onSaveScenario($event)"
     ></kosaml-scenario>
   `,
   styles: [],
@@ -41,5 +42,9 @@ export class TaskScenarioPageComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.actionsSubscription.unsubscribe();
+  }
+
+  onSaveScenario(scenario: TaskScenario) {
+    this.store.dispatch(TaskScenarioActions.addTaskScenario({ taskScenario: scenario }))
   }
 }

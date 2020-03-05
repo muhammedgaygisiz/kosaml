@@ -1,10 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { TaskScenarioActions } from '../actions';
 import { TaskScenario } from '../models';
+import { fromTaskScenarios } from '../reducers';
 
 const taskScenarios: TaskScenario[] = [
   {
-    id: 1,
     title: 'Task Scenario 1',
     description:
       'Lorem ipsum dolor sit amet, ' +
@@ -33,5 +37,22 @@ const taskScenariosPromise = () =>
 @Injectable()
 export class TaskScenariosEffects {
 
-  constructor(private actions$: Actions) { }
+  @Effect({ dispatch: false })
+  storeTaskScenario = this.actions$.pipe(
+    ofType(TaskScenarioActions.addTaskScenario),
+    withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectTaskScenarioEntitiesState))),
+    switchMap(([latestAction, scenarios]) => {
+      return this.http
+        .put(
+          'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
+          scenarios
+        )
+    }),
+  )
+
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private store: Store<fromTaskScenarios.State>
+  ) { }
 }

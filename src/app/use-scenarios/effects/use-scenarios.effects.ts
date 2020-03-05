@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { switchMap } from 'rxjs/operators';
+import { uuid } from 'uuidv4';
 import { UseScenarioActions, UseScenarioPageActions } from '../actions';
 import { UseScenario } from '../models';
 
 const useScenarios: UseScenario[] = [
   {
-    id: 1,
+    id: uuid(),
     title: 'Use Scenario 1',
     description:
       'Lorem ipsum dolor sit amet, ' +

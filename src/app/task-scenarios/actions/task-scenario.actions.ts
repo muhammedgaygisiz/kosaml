@@ -48,3 +48,12 @@ export const deleteTaskScenarios = createAction(
 );
 
 export const clearTaskScenarios = createAction('[TaskScenario/API] Clear TaskScenarios');
+
+export const fetchTaskScenarioById = createAction(
+  '[TaskScenario/API] Fetch Task Scenario by id',
+  props<{ id: number }>(),
+)
+
+export const fetchedTaskScenario = createAction(
+  '[TaskScenario/API] Fetched Task Scenario'
+)
