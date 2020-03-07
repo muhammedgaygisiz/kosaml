@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { fromSite } from 'src/app/site/reducers';
 import { fromApp } from '../../store';
 import { AuthActions } from '../actions';
 import { Credentials } from '../models';
+import { fromAuth } from '../reducers';
 
 @Component({
   selector: 'kosaml-auth-page',
@@ -20,9 +22,13 @@ import { Credentials } from '../models';
   `,
 })
 export class AuthPageComponent {
-  isLoading$: Observable<boolean> = this.store.select('site', 'loading').pipe(shareReplay());
+  isLoading$: Observable<boolean> = this.store.pipe(
+    select(fromSite.selectIsLoading),
+    shareReplay()
+  );
 
-  isAuthError$: Observable<boolean> = this.store.select('auth', 'authError').pipe(
+  isAuthError$: Observable<boolean> = this.store.pipe(
+    select(fromAuth.selectAuthError),
     map(authError => !!authError),
     shareReplay(),
   );

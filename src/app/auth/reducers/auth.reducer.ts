@@ -1,19 +1,21 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { fromApp } from 'src/app/store';
 import { AuthActions } from '../actions';
-// Correct here
 import { User } from '../models';
 
-// Correct here
 export const authFeatureKey = 'auth';
 
-// Correct here
-export interface State {
+export interface AuthState {
   user: User;
   authError: string;
 }
 
+export interface State extends fromApp.State {
+  [authFeatureKey]: AuthState;
+}
+
 // Correct here
-const initialState: State = {
+const initialState: AuthState = {
   user: null,
   authError: null,
 };
@@ -29,3 +31,21 @@ export const reducer = createReducer(
   on(AuthActions.logout, state => ({ ...state, user: null })),
   on(AuthActions.authenticationFailed, (state, { error }) => ({ ...state, authError: error })),
 );
+
+/**
+ * The createFeatureSelector function selects a piece of state from the root of the state object.
+ * This is used for selecting feature states that are loaded eagerly or lazily.
+ */
+export const selectAuthState = createFeatureSelector<State, AuthState>(
+  authFeatureKey
+);
+
+export const selectUser = createSelector(
+  selectAuthState,
+  state => state.user
+);
+
+export const selectAuthError = createSelector(
+  selectAuthState,
+  state => state.authError
+)

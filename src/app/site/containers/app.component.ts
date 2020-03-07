@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { fromAuth } from 'src/app/auth/reducers';
 import { AuthActions } from '../../auth/actions';
 import { fromApp } from '../../store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
+import { fromSite } from '../reducers';
 
 @Component({
   selector: 'kosaml-root',
@@ -27,18 +29,27 @@ import { FileNode } from '../models';
   `,
 })
 export class AppComponent implements OnInit {
-  isAuthenticated$: Observable<boolean> = this.store.select('auth').pipe(
-    map(authState => !!authState.user),
+  isAuthenticated$: Observable<boolean> = this.store.pipe(
+    select(fromAuth.selectUser),
+    map(user => !!user),
     shareReplay(),
   );
 
-  isProjectBarOpen$: Observable<boolean> = this.store.select('site', 'isProjectBarOpen');
+  isProjectBarOpen$: Observable<boolean> = this.store.pipe(
+    select(fromSite.selectIsProjectBarOpen)
+  );
 
-  isToolBarOpen$: Observable<boolean> = this.store.select('site', 'isToolBarOpen');
+  isToolBarOpen$: Observable<boolean> = this.store.pipe(
+    select(fromSite.selectIsToolBarOpen)
+  );
 
-  project$: Observable<FileNode[]> = this.store.select('site', 'projectStructure');
+  project$: Observable<FileNode[]> = this.store.pipe(
+    select(fromSite.selectProjectStructure)
+  );
 
-  sidebarWidth$: Observable<string> = this.store.select('site', 'sidebarWidth');
+  sidebarWidth$: Observable<string> = this.store.pipe(
+    select(fromSite.selectSidebarWidth)
+  );
 
   constructor(private store: Store<fromApp.State>) { }
 

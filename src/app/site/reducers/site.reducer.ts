@@ -1,5 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { AuthActions } from 'src/app/auth/actions';
+import { fromApp } from 'src/app/store';
 import { TaskScenarioActions } from 'src/app/task-scenarios/actions';
 import { UseScenarioActions, UseScenarioPageActions } from 'src/app/use-scenarios/actions';
 import { SiteActions } from '../actions';
@@ -7,7 +8,7 @@ import { FileNode } from '../models';
 
 export const siteFeatureKey = 'site';
 
-export interface State {
+export interface SiteState {
   isProjectBarOpen: boolean;
   isToolBarOpen: boolean;
   projectStructure: FileNode[];
@@ -15,7 +16,11 @@ export interface State {
   sidebarWidth: string;
 }
 
-const initialState: State = {
+export interface State extends fromApp.State {
+  [siteFeatureKey]: SiteState
+}
+
+const initialState: SiteState = {
   isProjectBarOpen: true,
   isToolBarOpen: false,
   loading: false,
@@ -316,4 +321,38 @@ export const reducer = createReducer(
     SiteActions.sidebarWidthChange,
     (state, { width }) => ({ ...state, sidebarWidth: width })
   )
+);
+
+
+/**
+ * The createFeatureSelector function selects a piece of state from the root of the state object.
+ * This is used for selecting feature states that are loaded eagerly or lazily.
+ */
+export const selectSiteState = createFeatureSelector<State, SiteState>(
+  siteFeatureKey
+);
+
+export const selectIsProjectBarOpen = createSelector(
+  selectSiteState,
+  state => state.isProjectBarOpen
+);
+
+export const selectIsToolBarOpen = createSelector(
+  selectSiteState,
+  state => state.isToolBarOpen
+);
+
+export const selectProjectStructure = createSelector(
+  selectSiteState,
+  state => state.projectStructure
+);
+
+export const selectSidebarWidth = createSelector(
+  selectSiteState,
+  state => state.sidebarWidth
+);
+
+export const selectIsLoading = createSelector(
+  selectSiteState,
+  state => state.loading
 );

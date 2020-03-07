@@ -3,11 +3,8 @@ import * as fromRouter from '@ngrx/router-store';
 import { Action, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 import { fromAuth } from '../auth/reducers';
-import { fromSite } from '../site/reducers';
 
 export interface State {
-  [fromSite.siteFeatureKey]: fromSite.State;
-  [fromAuth.authFeatureKey]: fromAuth.State;
 }
 
 /**
@@ -19,7 +16,6 @@ export const ROOT_REDUCERS = new InjectionToken<ActionReducerMap<State, Action>>
   'Root reducers token',
   {
     factory: () => ({
-      [fromSite.siteFeatureKey]: fromSite.reducer,
       [fromAuth.authFeatureKey]: fromAuth.reducer,
       router: fromRouter.routerReducer,
     }),
@@ -47,6 +43,6 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
  */
 export const metaReducers: MetaReducer<State>[] = !environment.production
   ? [
-      /*logger*/
-    ]
+    /*logger*/
+  ]
   : [];
