@@ -26,7 +26,6 @@ export class ScenarioComponent implements OnInit {
   ngOnInit() {
     this.showSaveButton = !this.model;
 
-
     if (this.model) {
       this.titleFormControl.setValue(this.model.title);
       this.descriptionFormControl.setValue(this.model.description);
