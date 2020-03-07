@@ -47,6 +47,6 @@ export class ScenarioComponent implements OnInit {
 
     this.saveScenario.emit({ title, description, id: uuid(), });
 
-    // this.scenarioForm.reset();
+    // todo: do some smart thing here
   }
 }
