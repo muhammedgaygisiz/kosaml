@@ -1,5 +1,5 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { of as observableOf } from 'rxjs';
 import { FileNode } from '../../../models';
@@ -20,7 +20,7 @@ export interface FlatTreeNode {
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss'],
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, OnChanges {
   /** The TreeControl controls the expand/collapse state of tree nodes.  */
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -47,6 +47,14 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.data = this.project;
+    this.treeControl.expandAll();
+  }
+
+  ngOnChanges(changes) {
+    if (changes.project) {
+      this.dataSource.data = changes.project.currentValue;
+      this.treeControl.expandAll();
+    }
   }
 
   /** Transform the data to something the tree can read. */

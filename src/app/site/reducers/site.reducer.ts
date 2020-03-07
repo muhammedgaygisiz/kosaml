@@ -320,6 +320,46 @@ export const reducer = createReducer(
   on(
     SiteActions.sidebarWidthChange,
     (state, { width }) => ({ ...state, sidebarWidth: width })
+  ),
+  on(
+    TaskScenarioActions.addTaskScenario,
+    (state: SiteState, { taskScenario }) => {
+
+      const { projectStructure } = state;
+      const newProjectStructe = [
+        {
+          ...projectStructure[0],
+          children: [
+            {
+              ...projectStructure[0].children[0],
+              children: [
+                ...projectStructure[0].children[0].children,
+                {
+                  name: taskScenario.title,
+                  type: "file",
+                  link: `../task-scenarios/${taskScenario.id}`,
+                }
+              ]
+            },
+            {
+              ...projectStructure[0].children[1],
+              children: [
+                ...projectStructure[0].children[1].children,
+                {
+                  name: taskScenario.title,
+                  type: "file",
+                  link: `../use-scenarios/${taskScenario.id}`,
+                }
+              ]
+            },
+            ...projectStructure[0].children.slice(1)
+          ]
+        },
+        { ...projectStructure[1] }
+      ]
+
+      return { ...state, projectStructure: [...newProjectStructe] };
+    }
   )
 );
 
