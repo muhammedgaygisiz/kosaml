@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { AuthActions } from 'src/app/auth/actions';
 import { fromApp } from 'src/app/store';
 import { TaskScenarioActions } from 'src/app/task-scenarios/actions';
 import { UseScenarioActions } from 'src/app/use-scenarios/actions';
@@ -34,7 +35,7 @@ export class SiteEffects {
 
     fetchProject$ = createEffect(
         () => this.actions$.pipe(
-            ofType(SiteActions.fetchProject),
+            ofType(AuthActions.authenticationSucceeded, AuthActions.autoLogin),
             switchMap(() => this.http$
                 .get<FileNode[]>(
                     'https://angular-course-370fd.firebaseio.com/project.json'
