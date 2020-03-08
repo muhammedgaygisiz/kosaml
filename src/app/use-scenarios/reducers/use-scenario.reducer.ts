@@ -1,23 +1,30 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { UseScenarioActions, UseScenarioPageActions } from '../actions';
+import { UseScenarioActions } from '../actions';
 import { UseScenario } from '../models';
 
 export const useScenariosFeatureKey = 'useScenarios';
 
 export interface State extends EntityState<UseScenario> {
   // additional entities state properties
+  selectedUseScenarioId: string | null
 }
 
-export const adapter: EntityAdapter<UseScenario> = createEntityAdapter<UseScenario>();
+export function selectedUseScenarioId(ts: UseScenario) {
+  return ts.id;
+}
+
+export const adapter: EntityAdapter<UseScenario> = createEntityAdapter<UseScenario>({
+  selectId: selectedUseScenarioId
+});
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
+  selectedUseScenarioId: null
 });
 
 const useScenarioReducer = createReducer(
   initialState,
-  on(UseScenarioPageActions.fetchUseScenarios, state => ({ ...state })),
   on(UseScenarioActions.addUseScenario, (state, action) =>
     adapter.addOne(action.useScenario, state),
   ),
@@ -52,9 +59,27 @@ export function reducer(state: State | undefined, action: Action) {
   return useScenarioReducer(state, action);
 }
 
-export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
+// ------------------
 
-export const useScenarioState = createFeatureSelector<State>(useScenariosFeatureKey);
+export const selectUseScenarioState = createFeatureSelector<State>(
+  useScenariosFeatureKey
+);
 
-export const getUseScenarioEntityById = (id: number) =>
-  createSelector(useScenarioState, (state: State) => state.entities[id]);
+export const selectUseScenarioEntitiesState = createSelector(
+  selectUseScenarioState,
+  state => state.entities
+)
+
+export const selectSelectedUseScenarioId = createSelector(
+  selectUseScenarioState,
+  state => state.selectedUseScenarioId
+)
+
+export const { selectEntities: selectUseScenarioEntities } = adapter.getSelectors();
+
+export const selectSelectedUseScenario = createSelector(
+  selectUseScenarioEntities,
+  selectSelectedUseScenarioId,
+  (entities, selectedId) => selectedId && entities && entities[selectedId]
+)
+

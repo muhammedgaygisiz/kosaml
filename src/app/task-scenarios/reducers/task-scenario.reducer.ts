@@ -8,7 +8,7 @@ export const taskScenariosFeatureKey = 'taskScenarios';
 
 export interface State extends EntityState<TaskScenario> {
   // additional entities state properties
-  selectedTaskScenarioId: number | null
+  selectedTaskScenarioId: string | null
 }
 
 export function selectedTaskScenarioId(ts: TaskScenario) {
@@ -84,7 +84,5 @@ export const { selectEntities: selectTaskScenarioEntities } = adapter.getSelecto
 export const selectSelectedTaskScenario = createSelector(
   selectTaskScenarioEntities,
   selectSelectedTaskScenarioId,
-  (entities, selectedId) => {
-    return selectedId && entities && entities[selectedId]
-  }
+  (entities, selectedId) => selectedId && entities && entities[selectedId]
 )

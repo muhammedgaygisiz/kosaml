@@ -2,7 +2,7 @@ import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/
 import { AuthActions } from 'src/app/auth/actions';
 import { fromApp } from 'src/app/store';
 import { TaskScenarioActions } from 'src/app/task-scenarios/actions';
-import { UseScenarioActions, UseScenarioPageActions } from 'src/app/use-scenarios/actions';
+import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
 
@@ -304,10 +304,6 @@ export const reducer = createReducer(
   on(
     AuthActions.authenticationSucceeded,
     state => ({ ...state, loading: false })
-  ),
-  on(
-    UseScenarioPageActions.fetchUseScenarios,
-    state => ({ ...state, loading: true })
   ),
   on(
     SiteActions.toggleProjectBar,

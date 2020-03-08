@@ -5,7 +5,11 @@ import { UseScenarioPageComponent } from './containers';
 
 
 const routes: Routes = [
-  { path: '', component: UseScenarioPageComponent, canActivate: [AuthGuard] },
+  {
+    path: ':id',
+    component: UseScenarioPageComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

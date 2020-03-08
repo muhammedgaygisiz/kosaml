@@ -1,10 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
-import { switchMap } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { uuid } from 'uuidv4';
-import { UseScenarioActions, UseScenarioPageActions } from '../actions';
+import { UseScenarioActions } from '../actions';
 import { UseScenario } from '../models';
+import { fromUseScenarios } from '../reducers';
 
+// todo: this and the promise has to be removed as soon as 
+// the task scenarios are received from the backend
 const useScenarios: UseScenario[] = [
   {
     id: uuid(),
@@ -35,17 +40,26 @@ const useScenariosPromise = () =>
 
 @Injectable()
 export class UseScenariosEffects {
-  @Effect()
-  loadUseScenatios$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UseScenarioPageActions.fetchUseScenarios),
-      switchMap(() => {
-        return useScenariosPromise().then((receivedUseScenarios: UseScenario[]) =>
-          UseScenarioActions.loadUseScenarios({ useScenarios: receivedUseScenarios }),
-        );
+
+  @Effect({ dispatch: false })
+  storeUseScenario$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(UseScenarioActions.addUseScenario),
+      withLatestFrom(this.store.pipe(select(fromUseScenarios.selectUseScenarioEntitiesState))),
+      switchMap(([latestAction, scenarios]) => {
+        return this.http
+          .put(
+            'https://angular-course-370fd.firebaseio.com/useScenarios.json',
+            scenarios
+          )
       }),
     ),
+    { dispatch: false }
   );
 
-  constructor(private actions$: Actions) { }
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private store: Store<fromUseScenarios.State>
+  ) { }
 }

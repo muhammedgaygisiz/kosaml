@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
 import { TaskScenarioActions } from '../actions';
 import { TaskScenario } from '../models';
 import { fromTaskScenarios } from '../reducers';
 
+// todo: this and the promise has to be removed as soon as 
+// the task scenarios are received from the backend
 const taskScenarios: TaskScenario[] = [
   {
     title: 'Task Scenario 1',
@@ -38,16 +40,19 @@ const taskScenariosPromise = () =>
 export class TaskScenariosEffects {
 
   @Effect({ dispatch: false })
-  storeTaskScenario = this.actions$.pipe(
-    ofType(TaskScenarioActions.addTaskScenario),
-    withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectTaskScenarioEntitiesState))),
-    switchMap(([latestAction, scenarios]) => {
-      return this.http
-        .put(
-          'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
-          scenarios
-        )
-    }),
+  storeTaskScenario$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(TaskScenarioActions.addTaskScenario),
+      withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectTaskScenarioEntitiesState))),
+      switchMap(([latestAction, scenarios]) => {
+        return this.http
+          .put(
+            'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
+            scenarios
+          )
+      }),
+    ),
+    { dispatch: false }
   )
 
   constructor(

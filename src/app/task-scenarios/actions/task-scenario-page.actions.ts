@@ -3,7 +3,7 @@ import { TaskScenario } from '../models';
 
 export const selectTaskScenario = createAction(
     '[View TaskScenario Page] Select TaskScenario',
-    props<{ id: number }>()
+    props<{ id: string }>()
 )
 
 export const newTaskScenario = createAction(
