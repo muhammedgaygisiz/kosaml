@@ -11,7 +11,7 @@ import { fromUseScenarios } from '../reducers';
 @Injectable()
 export class UseScenariosEffects {
 
-  @Effect()
+  @Effect({ dispatch: false })
   storeUseScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(UseScenarioActions.addUseScenario),

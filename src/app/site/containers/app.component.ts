@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(AuthActions.autoLogin());
+    this.store.dispatch(SiteActions.fetchProject());
   }
 
   onToggleProjectBar() {
