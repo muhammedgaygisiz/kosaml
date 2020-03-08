@@ -3,7 +3,7 @@
 <ng-template #authContent>
   <kosaml-menu-bar></kosaml-menu-bar>
   <kosaml-sidebar [isProjectBarOpen]="isProjectBarOpen" [isToolBarOpen]="isToolBarOpen" [project]="project"
-    (logout)="onLogout()" [width]="sidebarWidth" (widthChange)="widthChange($event)">
+    [width]="sidebarWidth" (logout)="onLogout()" (widthChange)="widthChange($event)">
     <kosaml-content></kosaml-content>
   </kosaml-sidebar>
 </ng-template>

@@ -82,11 +82,6 @@ export class SidebarComponent implements AfterViewInit {
     document.documentElement.style.cursor = "col-resize";
   }
 
-  private calculateNewWidth(event) {
-    return this.matSideNav.nativeElement.scrollWidth
-      + (event.screenX - this.xOffset)
-  }
-
   private setNewWidth(newWidth: number) {
     this.matSideNav.nativeElement.style.width =
       `${newWidth}px`;

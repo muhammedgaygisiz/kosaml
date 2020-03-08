@@ -329,6 +329,35 @@ export const reducer = createReducer(
     }
   ),
   on(
+    TaskScenarioActions.upsertTaskScenarios,
+    (state: SiteState, { taskScenarios }) => {
+      const { projectStructure } = state;
+      const newProjectStructe = [
+        {
+          ...projectStructure[0],
+          children: [
+            {
+              ...projectStructure[0].children[0],
+              children: [
+                ...taskScenarios.map<FileNode>(
+                  scenario => ({
+                    name: scenario.title,
+                    type: "file",
+                    link: `../task-scenarios/${scenario.id}`,
+                  })
+                )
+              ]
+            },
+            ...projectStructure[0].children.slice(1)
+          ]
+        },
+        { ...projectStructure[1] }
+      ]
+
+      return { ...state, projectStructure: [...newProjectStructe] };
+    }
+  ),
+  on(
     UseScenarioActions.addUseScenario,
     (state: SiteState, { useScenario }) => {
 
@@ -357,7 +386,37 @@ export const reducer = createReducer(
 
       return { ...state, projectStructure: [...newProjectStructe] };
     }
-  )
+  ),
+  on(
+    UseScenarioActions.upsertUseScenarios,
+    (state: SiteState, { useScenarios }) => {
+      const { projectStructure } = state;
+      const newProjectStructe = [
+        {
+          ...projectStructure[0],
+          children: [
+            { ...projectStructure[0].children[0] },
+            {
+              ...projectStructure[0].children[1],
+              children: [
+                ...useScenarios.map<FileNode>(
+                  scenario => ({
+                    name: scenario.title,
+                    type: "file",
+                    link: `../task-scenarios/${scenario.id}`,
+                  })
+                )
+              ]
+            },
+            ...projectStructure[0].children.slice(1)
+          ]
+        },
+        { ...projectStructure[1] }
+      ]
+
+      return { ...state, projectStructure: [...newProjectStructe] };
+    }
+  ),
 );
 
 

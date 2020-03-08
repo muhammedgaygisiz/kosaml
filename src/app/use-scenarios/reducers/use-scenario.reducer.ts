@@ -75,11 +75,19 @@ export const selectSelectedUseScenarioId = createSelector(
   state => state.selectedUseScenarioId
 )
 
-export const { selectEntities: selectUseScenarioEntities } = adapter.getSelectors();
+export const {
+  selectEntities: selectUseScenarioEntities,
+  selectAll,
+} = adapter.getSelectors();
 
 export const selectSelectedUseScenario = createSelector(
   selectUseScenarioEntities,
   selectSelectedUseScenarioId,
   (entities, selectedId) => selectedId && entities && entities[selectedId]
+)
+
+export const selectAllUseScenarios = createSelector(
+  selectUseScenarioState,
+  selectAll,
 )
 
