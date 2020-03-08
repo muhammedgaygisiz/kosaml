@@ -33,30 +33,12 @@ const initialState: SiteState = {
           name: 'Task Scenarios',
           type: 'folder',
           children: [
-            {
-              name: 'Search and request resource',
-              type: 'file',
-              link: '../task-scenarios/1',
-            },
-            {
-              name: 'View updates and request resource',
-              type: 'file',
-            },
           ],
         },
         {
           name: 'Use Scenarios',
           type: 'folder',
           children: [
-            {
-              name: 'Search and request resource',
-              type: 'file',
-              link: '../use-scenarios',
-            },
-            {
-              name: 'View updates and request resource',
-              type: 'file',
-            },
           ],
         },
         {
@@ -337,18 +319,37 @@ export const reducer = createReducer(
                 }
               ]
             },
+            ...projectStructure[0].children.slice(1)
+          ]
+        },
+        { ...projectStructure[1] }
+      ]
+
+      return { ...state, projectStructure: [...newProjectStructe] };
+    }
+  ),
+  on(
+    UseScenarioActions.addUseScenario,
+    (state: SiteState, { useScenario }) => {
+
+      const { projectStructure } = state;
+      const newProjectStructe = [
+        {
+          ...projectStructure[0],
+          children: [
+            { ...projectStructure[0].children[0] },
             {
               ...projectStructure[0].children[1],
               children: [
                 ...projectStructure[0].children[1].children,
                 {
-                  name: taskScenario.title,
+                  name: useScenario.title,
                   type: "file",
-                  link: `../use-scenarios/${taskScenario.id}`,
+                  link: `../use-scenarios/${useScenario.id}`,
                 }
               ]
             },
-            ...projectStructure[0].children.slice(1)
+            ...projectStructure[0].children.slice(2)
           ]
         },
         { ...projectStructure[1] }

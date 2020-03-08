@@ -2,62 +2,43 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { TaskScenarioActions } from '../actions';
 import { TaskScenario } from '../models';
 import { fromTaskScenarios } from '../reducers';
 
-// todo: this and the promise has to be removed as soon as 
-// the task scenarios are received from the backend
-const taskScenarios: TaskScenario[] = [
-  {
-    title: 'Task Scenario 1',
-    description:
-      'Lorem ipsum dolor sit amet, ' +
-      'consetetur sadipscing elitr, sed diam nonumy ' +
-      'eirmod tempor invidunt ut labore et dolore ' +
-      'magna aliquyam erat, sed diam voluptua. At ' +
-      'vero eos et accusam et justo duo dolores et ea ' +
-      'rebum. Stet clita kasd gubergren, no sea takimata ' +
-      'sanctus est Lorem ipsum dolor sit amet. Lorem ' +
-      'ipsum dolor sit amet, consetetur sadipscing elitr, ' +
-      'sed diam nonumy eirmod tempor invidunt ut labore et ' +
-      'dolore magna aliquyam erat, sed diam voluptua. At ' +
-      'vero eos et accusam et justo duo dolores et ea rebum. ' +
-      'Stet clita kasd gubergren, no sea takimata sanctus est ' +
-      'Lorem ipsum dolor sit amet.',
-  },
-];
-
-const taskScenariosPromise = () =>
-  new Promise(resolve =>
-    setTimeout(() => {
-      resolve(taskScenarios);
-    }, 2000),
-  );
-
 @Injectable()
 export class TaskScenariosEffects {
 
-  @Effect({ dispatch: false })
+  @Effect()
   storeTaskScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(TaskScenarioActions.addTaskScenario),
       withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectTaskScenarioEntitiesState))),
       switchMap(([latestAction, scenarios]) => {
-        return this.http
+        return this.http$
           .put(
             'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
             scenarios
           )
+          .pipe(
+            map(resData => {
+              return latestAction.taskScenario
+            })
+          );
       }),
+      map((taskScenario: TaskScenario) => {
+        console.log(taskScenario);
+        return UseScenarioActions.addUseScenario({ useScenario: taskScenario })
+      })
     ),
     { dispatch: false }
   )
 
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
+    private http$: HttpClient,
     private store: Store<fromTaskScenarios.State>
   ) { }
 }
