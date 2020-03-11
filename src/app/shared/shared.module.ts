@@ -11,6 +11,7 @@ import { KosamlCardComponent } from './components/kosaml-card/kosaml-card.compon
 import { MatTableModule } from '@angular/material/table';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const COMPONENTS = [
   LoadingSpinnerComponent,
@@ -32,6 +33,7 @@ const COMPONENTS = [
     MatTableModule,
     MatSliderModule,
     MatPaginatorModule,
+    MatStepperModule,
   ],
   exports: [
     CommonModule,
@@ -42,11 +44,11 @@ const COMPONENTS = [
     MatTableModule,
     MatSliderModule,
     MatPaginatorModule,
+    MatStepperModule,
+    MatCardModule,
     LoadingSpinnerComponent,
     KosamlCardComponent,
     ScenarioComponent,
   ],
 })
 export class SharedModule { }
-
-// MatFormFieldModule,

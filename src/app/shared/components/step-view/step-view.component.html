@@ -1,0 +1,19 @@
+<div class="container">
+    <mat-card class="card">
+            <mat-horizontal-stepper 
+            (selectionChange)="selectionChanged($event)"
+            [selectedIndex]="selectedIndex"
+            >
+                <mat-step 
+                *ngFor="let step of steps; let i = index"
+                [completed]="stepState.completedStep"
+                >
+                    <router-outlet *ngIf="i === selectedIndex"></router-outlet>
+                </mat-step>
+            </mat-horizontal-stepper>
+            <mat-card-actions align="end">
+                <button mat-button (click)="onBack()" [disabled]="selectedIndex === 0">BACK</button>
+                <button mat-button (click)="onNext()" [disabled]="!(selectedIndex < steps.length-1)">NEXT</button>
+            </mat-card-actions>
+    </mat-card>
+</div>
