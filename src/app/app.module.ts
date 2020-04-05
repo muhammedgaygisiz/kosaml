@@ -2,7 +2,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,9 +32,9 @@ import { fromApp } from './store';
     /**
      * @ngrx/router-store keeps router state up-to-date in the store.
      */
-    StoreRouterConnectingModule.forRoot({
-      routerState: RouterState.Minimal,
-    }),
+    // StoreRouterConnectingModule.forRoot({
+    //   routerState: RouterState.Minimal,
+    // }),
 
     /**
      * Store devtools instrument the store retaining past versions of state

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { uuid } from 'uuidv4';
 import { Scenario } from '../../model';
@@ -9,7 +9,7 @@ import { KosamlErrorMatcher } from './KosamlErrorMatcher';
   templateUrl: './scenario.component.html',
   styleUrls: ['./scenario.component.scss']
 })
-export class ScenarioComponent implements OnInit {
+export class ScenarioComponent implements OnInit, OnChanges {
   @Input()
   model: Scenario;
 
@@ -26,10 +26,7 @@ export class ScenarioComponent implements OnInit {
   ngOnInit() {
     this.showSaveButton = !this.model;
 
-    if (this.model) {
-      this.titleFormControl.setValue(this.model.title);
-      this.descriptionFormControl.setValue(this.model.description);
-    }
+    this.setFormFields(this.model);
 
     this.scenarioForm = new FormGroup({
       title: this.titleFormControl,
@@ -47,6 +44,17 @@ export class ScenarioComponent implements OnInit {
 
     this.saveScenario.emit({ title, description, id: uuid(), });
 
-    // todo: do some smart thing here
+    this.scenarioForm.reset();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.setFormFields(this.model)
+  }
+
+  setFormFields(model: Scenario) {
+    if (this.model) {
+      this.titleFormControl.setValue(model.title);
+      this.descriptionFormControl.setValue(model.description);
+    }
   }
 }

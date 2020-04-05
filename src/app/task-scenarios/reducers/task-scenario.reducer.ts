@@ -12,7 +12,7 @@ export interface State extends EntityState<TaskScenario> {
 }
 
 export function selectedTaskScenarioId(ts: TaskScenario) {
-  return ts.id;
+  return ts && ts.id;
 }
 
 export const adapter: EntityAdapter<TaskScenario> = createEntityAdapter<TaskScenario>({
