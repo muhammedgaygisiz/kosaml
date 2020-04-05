@@ -12,12 +12,14 @@ import { fromTaskScenarios } from '../reducers';
 @Component({
   selector: 'kosaml-task-scenario-page',
   template: `
+  <kosaml-page size="S">
     <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
     <kosaml-scenario
       *ngIf="(isLoading$ | async) === false"
       [model]="selectedTaskScenario$ | async"
       (saveScenario)="onSaveScenario($event)"
     ></kosaml-scenario>
+    </kosaml-page>
   `,
   styles: [],
 })

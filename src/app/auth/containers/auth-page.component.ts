@@ -11,6 +11,7 @@ import { fromAuth } from '../reducers';
 @Component({
   selector: 'kosaml-auth-page',
   template: `
+  <kosaml-page size="S">
     <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
     <kosaml-auth
       *ngIf="(isLoading$ | async) === false"
@@ -19,6 +20,7 @@ import { fromAuth } from '../reducers';
       [isAuthError]="isAuthError$ | async"
     >
     </kosaml-auth>
+    </kosaml-page>
   `,
 })
 export class AuthPageComponent {
@@ -33,7 +35,7 @@ export class AuthPageComponent {
     shareReplay(),
   );
 
-  constructor(private store: Store<fromApp.State>) {}
+  constructor(private store: Store<fromApp.State>) { }
 
   onSubmitLogin(credentials: Credentials) {
     this.store.dispatch(AuthActions.startLogin(credentials));

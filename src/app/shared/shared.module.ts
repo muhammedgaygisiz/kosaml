@@ -5,19 +5,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { EmptyPageComponent, LoadingSpinnerComponent, ScenarioComponent } from './components';
-import { KosamlCardComponent } from './components/kosaml-card/kosaml-card.component';
-import { MatTableModule } from '@angular/material/table';
-import {MatSliderModule} from '@angular/material/slider';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CardComponent, EmptyPageComponent, LoadingSpinnerComponent, ScenarioComponent } from './components';
+import { PageComponent } from './components/page/page.component';
 
 const COMPONENTS = [
   LoadingSpinnerComponent,
   EmptyPageComponent,
-  KosamlCardComponent,
+  CardComponent,
   ScenarioComponent,
+  PageComponent,
 ];
 
 @NgModule({
@@ -47,8 +48,9 @@ const COMPONENTS = [
     MatStepperModule,
     MatCardModule,
     LoadingSpinnerComponent,
-    KosamlCardComponent,
+    CardComponent,
     ScenarioComponent,
+    PageComponent
   ],
 })
 export class SharedModule { }

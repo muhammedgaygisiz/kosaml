@@ -35,7 +35,7 @@ export class SiteEffects {
 
     fetchProject$ = createEffect(
         () => this.actions$.pipe(
-            ofType(AuthActions.authenticationSucceeded, AuthActions.autoLogin),
+            ofType(AuthActions.authenticationSucceeded),
             switchMap(() => this.http$
                 .get<FileNode[]>(
                     'https://angular-course-370fd.firebaseio.com/project.json'
