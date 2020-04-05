@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-course-370fd": {
+      "hosting": {
+        "kosaml": [
+          "angular-course-370fd"
+        ]
+      }
+    }
+  }
+}

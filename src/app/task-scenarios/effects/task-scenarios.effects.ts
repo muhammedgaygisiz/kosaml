@@ -1,34 +1,35 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
 import { fromTaskScenarios } from '../reducers';
 
 @Injectable()
 export class TaskScenariosEffects {
-  // storeTaskScenario$ = createEffect(
-  //   () => this.actions$.pipe(
-  //     ofType(TaskScenarioActions.addTaskScenario),
-  //     withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectAllTaskScenarios))),
-  //     switchMap(([latestAction, scenarios]) => {
-  //       return this.http$
-  //         .put(
-  //           'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
-  //           scenarios
-  //         )
-  //         .pipe(
-  //           map(() => latestAction.taskScenario)
-  //         );
-  //     }),
-  //     map((taskScenario: TaskScenario) =>
-  //       UseScenarioActions.addUseScenario({ useScenario: taskScenario })
-  //     )
-  //   ),
-  // )
+  storeTaskScenario$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(TaskScenarioActions.addTaskScenario),
+      withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectAllTaskScenarios))),
+      switchMap(([latestAction, scenarios]) => {
+        return this.http$
+          .put(
+            'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
+            scenarios
+          )
+          .pipe(
+            map(() => latestAction.taskScenario)
+          );
+      }),
+      map((taskScenario: TaskScenario) =>
+        UseScenarioActions.addUseScenario({ useScenario: taskScenario })
+      )
+    ),
+  )
 
   // fetchTaskScenarios$ = createEffect(
   //   () => this.actions$.pipe(
