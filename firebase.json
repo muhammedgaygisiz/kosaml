@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "kosaml",
+      "public": "dist/kosaml",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

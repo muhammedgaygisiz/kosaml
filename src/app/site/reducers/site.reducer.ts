@@ -61,6 +61,10 @@ export const reducer = createReducer(
     TaskScenarioActions.addTaskScenario,
     (state: SiteState, { taskScenario }) => {
 
+      if (!taskScenario) {
+        return state;
+      }
+
       const { projectStructure } = state;
       const newProjectStructe = [
         {

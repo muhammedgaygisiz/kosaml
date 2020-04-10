@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { select, Store } from '@ngrx/store';
+import { User } from 'firebase';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { fromAuth } from 'src/app/auth/reducers';
-import { AuthActions } from '../../auth/actions';
+import { shareReplay, tap } from 'rxjs/operators';
 import { fromApp } from '../../store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
 import { fromSite } from '../reducers';
+
 
 @Component({
   selector: 'kosaml-root',
@@ -22,17 +23,14 @@ import { fromSite } from '../reducers';
       [isProjectBarOpen]="isProjectBarOpen$ | async"
       [isToolBarOpen]="isToolBarOpen$ | async"
       [project]="project$ | async"
-      [sidebarWidth]="sidebarWidth$ | async"
-      (sidebarWidthChange)="onSidebarWidthChange($event)"
     >
     </kosaml-body>
   `,
 })
-export class AppComponent implements OnInit {
-  isAuthenticated$: Observable<boolean> = this.store.pipe(
-    select(fromAuth.selectUser),
-    map(user => !!user),
-    shareReplay(),
+export class AppComponent implements OnDestroy {
+  isAuthenticated$: Observable<User> = this.fireAuth.authState.pipe(
+    tap(user => { if (user) this.store.dispatch(SiteActions.fetchProject()) }),
+    shareReplay()
   );
 
   isProjectBarOpen$: Observable<boolean> = this.store.pipe(
@@ -47,14 +45,12 @@ export class AppComponent implements OnInit {
     select(fromSite.selectProjectStructure)
   );
 
-  sidebarWidth$: Observable<string> = this.store.pipe(
-    select(fromSite.selectSidebarWidth)
-  );
+  constructor(
+    private store: Store<fromApp.State>,
+    private fireAuth: AngularFireAuth
+  ) { }
 
-  constructor(private store: Store<fromApp.State>) { }
-
-  ngOnInit() {
-    this.store.dispatch(AuthActions.autoLogin());
+  ngOnDestroy() {
   }
 
   onToggleProjectBar() {
@@ -63,9 +59,5 @@ export class AppComponent implements OnInit {
 
   onToggleToolBar() {
     this.store.dispatch(SiteActions.toggleToolBar());
-  }
-
-  onSidebarWidthChange(sidebarWidth) {
-    this.store.dispatch(SiteActions.sidebarWidthChange({ width: sidebarWidth }))
   }
 }
