@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { fromApp } from '../../store';
-import { fromAuth } from '../reducers';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private store: Store<fromApp.State>) { }
+  constructor(
+    private router: Router,
+    private fireAuth: AngularFireAuth
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.store.pipe(
-      select(fromAuth.selectUser),
-      take(1),
+    return this.fireAuth.authState.pipe(
       map(user => {
         const isAuthenticated = !!user;
         if (isAuthenticated) {
@@ -24,7 +23,7 @@ export class AuthGuard implements CanActivate {
         }
 
         return this.router.createUrlTree(['/auth']);
-      }),
+      })
     );
   }
 }

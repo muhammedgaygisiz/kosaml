@@ -1,9 +1,11 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth';
 import { CoreModule } from './core.module';
@@ -18,6 +20,8 @@ import { fromApp } from './store';
     BrowserAnimationsModule,
     LayoutModule,
     CoreModule,
+
+    AngularFireModule.initializeApp(environment.firebase),
 
     StoreModule.forRoot(fromApp.ROOT_REDUCERS, {
       metaReducers: fromApp.metaReducers,

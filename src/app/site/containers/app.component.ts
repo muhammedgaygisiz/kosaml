@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { select, Store } from '@ngrx/store';
+import { User } from 'firebase';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { fromAuth } from 'src/app/auth/reducers';
-import { AuthActions } from '../../auth/actions';
+import { shareReplay, tap } from 'rxjs/operators';
 import { fromApp } from '../../store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
 import { fromSite } from '../reducers';
+
 
 @Component({
   selector: 'kosaml-root',
@@ -26,11 +27,10 @@ import { fromSite } from '../reducers';
     </kosaml-body>
   `,
 })
-export class AppComponent implements OnInit {
-  isAuthenticated$: Observable<boolean> = this.store.pipe(
-    select(fromAuth.selectUser),
-    map(user => !!user),
-    shareReplay(),
+export class AppComponent implements OnDestroy {
+  isAuthenticated$: Observable<User> = this.fireAuth.authState.pipe(
+    tap(user => { if (user) this.store.dispatch(SiteActions.fetchProject()) }),
+    shareReplay()
   );
 
   isProjectBarOpen$: Observable<boolean> = this.store.pipe(
@@ -45,10 +45,12 @@ export class AppComponent implements OnInit {
     select(fromSite.selectProjectStructure)
   );
 
-  constructor(private store: Store<fromApp.State>) { }
+  constructor(
+    private store: Store<fromApp.State>,
+    private fireAuth: AngularFireAuth
+  ) { }
 
-  ngOnInit() {
-    this.store.dispatch(AuthActions.autoLogin());
+  ngOnDestroy() {
   }
 
   onToggleProjectBar() {

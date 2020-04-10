@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { AuthActions } from 'src/app/auth/actions';
-import { fromApp } from 'src/app/store';
 import { SiteActions } from '../actions';
 import { FileNode } from '../models';
 
@@ -30,22 +28,20 @@ export class SiteEffects {
     //     { dispatch: false }
     // )
 
+
     fetchProject$ = createEffect(
         () => this.actions$.pipe(
-            ofType(AuthActions.authenticationSucceeded),
-            switchMap(() => this.http$
-                .get<FileNode[]>(
-                    'https://angular-course-370fd.firebaseio.com/project.json'
-                )
+            ofType(SiteActions.fetchProject),
+            switchMap(() =>
+                from(this.fireDatabase.database.ref('project').once('value'))
             ),
-            map((projectStructure) => SiteActions.fetchedProject({ projectStructure }))
+            map(dataSnapshot => dataSnapshot.val()),
+            map((projectStructure: FileNode[]) => SiteActions.fetchedProject({ projectStructure })),
         ),
-
     )
 
     constructor(
         private actions$: Actions,
-        private http$: HttpClient,
-        private store: Store<fromApp.State>
+        private fireDatabase: AngularFireDatabase,
     ) { }
 }
