@@ -1,5 +1,5 @@
 <kosaml-menu-bar *ngIf="isAuthenticated"></kosaml-menu-bar>
 <kosaml-sidebar *ngIf="isAuthenticated" [isProjectBarOpen]="isProjectBarOpen" [isToolBarOpen]="isToolBarOpen"
-  [project]="project" [width]="sidebarWidth" (logout)="onLogout()" (widthChange)="widthChange($event)">
+  [project]="project" (logout)="onLogout()">
 </kosaml-sidebar>
 <kosaml-content></kosaml-content>

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FileNode } from '../../models';
+import { SidebarWidthService } from '../../services';
 
 @Component({
   selector: 'kosaml-sidebar',
@@ -25,9 +26,6 @@ export class SidebarComponent implements AfterViewInit {
   @Output()
   logout = new EventEmitter();
 
-  @Output()
-  widthChange = new EventEmitter();
-
   @ViewChild("sidenav", { static: true, read: ElementRef })
   matSideNav: ElementRef;
 
@@ -35,7 +33,9 @@ export class SidebarComponent implements AfterViewInit {
   startingWidth: number;
   isResizing: boolean = false;
 
-  constructor() { }
+  constructor(
+    private sidebarWidthService: SidebarWidthService
+  ) { }
 
   ngAfterViewInit() {
     this.setNewWidth(this.width);
@@ -59,7 +59,7 @@ export class SidebarComponent implements AfterViewInit {
   onMouseUp() {
     if (this.isResizing) {
       this.isResizing = false;
-      this.widthChange.next(this.getWidth());
+      this.sidebarWidthService.storeSidebarWidth(this.getWidth());
       this.resetMouseCursor();
     }
   }
@@ -68,9 +68,9 @@ export class SidebarComponent implements AfterViewInit {
     event.preventDefault();
 
     if (this.isResizing) {
-      this.setNewWidth(
-        event.pageX - this.xOffset + this.startingWidth
-      )
+      this.setNewWidth(event.pageX - this.xOffset + this.startingWidth)
+
+      this.sidebarWidthService.next(this.getWidth())
     }
   }
 

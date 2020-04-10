@@ -22,8 +22,6 @@ import { fromSite } from '../reducers';
       [isProjectBarOpen]="isProjectBarOpen$ | async"
       [isToolBarOpen]="isToolBarOpen$ | async"
       [project]="project$ | async"
-      [sidebarWidth]="sidebarWidth$ | async"
-      (sidebarWidthChange)="onSidebarWidthChange($event)"
     >
     </kosaml-body>
   `,
@@ -47,10 +45,6 @@ export class AppComponent implements OnInit {
     select(fromSite.selectProjectStructure)
   );
 
-  sidebarWidth$: Observable<string> = this.store.pipe(
-    select(fromSite.selectSidebarWidth)
-  );
-
   constructor(private store: Store<fromApp.State>) { }
 
   ngOnInit() {
@@ -63,9 +57,5 @@ export class AppComponent implements OnInit {
 
   onToggleToolBar() {
     this.store.dispatch(SiteActions.toggleToolBar());
-  }
-
-  onSidebarWidthChange(sidebarWidth) {
-    this.store.dispatch(SiteActions.sidebarWidthChange({ width: sidebarWidth }))
   }
 }
