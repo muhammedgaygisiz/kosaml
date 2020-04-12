@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LoadingService } from 'src/app/site/services';
 import { PageSize } from './pageSize.enum';
 
 @Component({
@@ -13,7 +14,9 @@ export class PageComponent implements OnInit {
 
   width: number;
 
-  constructor() { }
+  constructor(
+    private loadingService: LoadingService
+  ) { }
 
   ngOnInit() {
     this.adjustWidth();

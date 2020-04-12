@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { LoadingService } from 'src/app/site/services';
 import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
@@ -29,6 +29,7 @@ export class TaskScenariosEffects {
   fetchSelectedTaskScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(TaskScenarioPageActions.selectTaskScenario),
+      tap(() => this.loadingService.startLoading()),
       switchMap(({ id }) =>
         from(
           this.fireDatabase.database.ref('taskScenarios').orderByChild('id').equalTo(id).once('value')
@@ -40,6 +41,7 @@ export class TaskScenariosEffects {
           taskScenario: (Object.values(result) as TaskScenario[])[0]
         });
       }),
+      tap(() => this.loadingService.stopLoading())
     )
   );
 

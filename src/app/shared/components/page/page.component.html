@@ -1,3 +1,4 @@
 <div [ngStyle]="{width: width+'px'}">
-    <ng-content></ng-content>
+    <ng-content *ngIf="(loadingService.isLoading$ | async) === false"></ng-content>
+    <kosaml-loading-spinner *ngIf="loadingService.isLoading$ | async"></kosaml-loading-spinner>
 </div>
