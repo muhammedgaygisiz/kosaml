@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth';
-import { CoreModule } from './core.module';
 import { SiteModule } from './site';
 import { AppComponent } from './site/containers';
 import { fromApp } from './store';
@@ -19,7 +18,6 @@ import { fromApp } from './store';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    CoreModule,
 
     AngularFireModule.initializeApp(environment.firebase),
 

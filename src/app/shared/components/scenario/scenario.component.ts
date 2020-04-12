@@ -48,6 +48,7 @@ export class ScenarioComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(this.model, changes);
     this.setFormFields(this.model)
   }
 

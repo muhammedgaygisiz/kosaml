@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { AuthActions } from 'src/app/auth/actions';
 import { UseScenarioActions } from '../actions';
 import { UseScenario } from '../models';
-import { fromUseScenarios } from '../reducers';
 
 @Injectable()
 export class UseScenariosEffects {
@@ -14,13 +14,12 @@ export class UseScenariosEffects {
   storeUseScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(UseScenarioActions.addUseScenario),
-      withLatestFrom(this.store.pipe(select(fromUseScenarios.selectAllUseScenarios))),
-      switchMap(([_, scenarios]) => {
-        return this.http$
-          .put(
-            'https://angular-course-370fd.firebaseio.com/useScenarios.json',
-            scenarios
-          )
+      map(payload => payload.useScenario),
+      switchMap((useScenario: UseScenario) => {
+        const newTsRef = this.fireDatabase.database.ref('useScenarios').push();
+        return from(newTsRef.set(useScenario)).pipe(
+          map(() => useScenario)
+        );
       }),
     ),
     { dispatch: false }
@@ -44,6 +43,6 @@ export class UseScenariosEffects {
   constructor(
     private actions$: Actions,
     private http$: HttpClient,
-    private store: Store<fromUseScenarios.State>
+    private fireDatabase: AngularFireDatabase,
   ) { }
 }

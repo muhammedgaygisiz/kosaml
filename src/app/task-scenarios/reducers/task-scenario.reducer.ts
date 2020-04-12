@@ -26,7 +26,7 @@ export const initialState: State = adapter.getInitialState({
 
 const taskScenarioReducer = createReducer(
   initialState,
-  on(TaskScenarioActions.addTaskScenario, (state, action) =>
+  on(TaskScenarioActions.addTaskScenario, TaskScenarioActions.addFetchedTaskScenario, (state, action) =>
     adapter.addOne(action.taskScenario, state),
   ),
   on(TaskScenarioActions.upsertTaskScenario, (state, action) =>
