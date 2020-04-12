@@ -85,9 +85,8 @@ export const {
 } = adapter.getSelectors();
 
 export const selectSelectedTaskScenario = createSelector(
-  selectTaskScenarioEntities,
-  selectSelectedTaskScenarioId,
-  (entities, selectedId) => selectedId && entities && entities[selectedId]
+  selectTaskScenarioState,
+  (({ selectedTaskScenarioId, entities }) => entities[selectedTaskScenarioId])
 )
 
 export const selectAllTaskScenarios = createSelector(

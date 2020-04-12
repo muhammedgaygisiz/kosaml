@@ -1,6 +1,3 @@
 <div class="basic-container">
-  <kosaml-page size="S">
-    <kosaml-loading-spinner *ngIf="(loadingService.isLoading$ | async) === true"></kosaml-loading-spinner>
-  </kosaml-page>
-  <router-outlet *ngIf="(loadingService.isLoading$ | async) === false"></router-outlet>
+  <router-outlet></router-outlet>
 </div>

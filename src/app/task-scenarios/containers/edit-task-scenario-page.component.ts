@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { fromSite } from 'src/app/site/reducers';
+import { map, tap } from 'rxjs/operators';
 import { fromApp } from 'src/app/store';
 import { TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
@@ -13,9 +12,8 @@ import { fromTaskScenarios } from '../reducers';
   selector: 'kosaml-edit-task-scenario-page',
   template: `
   <kosaml-page size="S">
-    <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
+    <h1 class="mat-display-1">Edit Task Scenario</h1>
     <kosaml-scenario
-      *ngIf="(isLoading$ | async) === false"
       [model]="selectedTaskScenario$ | async"
       (saveScenario)="onSaveScenario($event)"
     ></kosaml-scenario>
@@ -24,12 +22,7 @@ import { fromTaskScenarios } from '../reducers';
   styles: [],
 })
 export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
-  actionsSubscription: Subscription;
-
-  isLoading$: Observable<boolean> = this.store.pipe(
-    select(fromSite.selectIsLoading),
-    shareReplay()
-  );
+  selectSubscription: Subscription;
 
   selectedTaskScenario$: Observable<TaskScenario> = this.store.pipe(
     select(fromTaskScenarios.selectSelectedTaskScenario),
@@ -38,19 +31,18 @@ export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromApp.State>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.actionsSubscription = this.route.params
-      .pipe(
-        map(params => TaskScenarioPageActions.selectTaskScenario({ id: params.id }))
-      )
-      .subscribe(action => this.store.dispatch(action));
+    this.selectSubscription = this.route.params.pipe(
+      map(params => params.id),
+      tap(id => this.store.dispatch(TaskScenarioPageActions.selectTaskScenario({ id })))
+    ).subscribe();
   }
 
   ngOnDestroy() {
-    this.actionsSubscription.unsubscribe();
+    this.selectSubscription.unsubscribe();
   }
 
   onSaveScenario(scenario: TaskScenario) {

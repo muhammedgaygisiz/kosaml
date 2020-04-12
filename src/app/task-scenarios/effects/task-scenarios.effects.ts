@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { LoadingService } from 'src/app/site/services';
 import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
@@ -45,5 +46,6 @@ export class TaskScenariosEffects {
   constructor(
     private actions$: Actions,
     private fireDatabase: AngularFireDatabase,
+    private loadingService: LoadingService
   ) { }
 }

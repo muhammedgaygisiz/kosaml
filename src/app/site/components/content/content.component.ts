@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoadingService } from '../../services';
 
 @Component({
   selector: 'kosaml-content',
@@ -7,7 +6,5 @@ import { LoadingService } from '../../services';
   styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent {
-  constructor(
-    private loadingService: LoadingService
-  ) { }
+  constructor() { }
 }
