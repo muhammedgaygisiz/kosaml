@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FileNode } from '../../models';
 import { SidebarWidthService } from '../../services';
 
@@ -23,9 +23,6 @@ export class SidebarComponent implements AfterViewInit {
   @Input()
   width: number;
 
-  @Output()
-  logout = new EventEmitter();
-
   @ViewChild("sidenav", { static: true, read: ElementRef })
   matSideNav: ElementRef;
 
@@ -39,10 +36,6 @@ export class SidebarComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.setNewWidth(this.width);
-  }
-
-  onLogout() {
-    this.logout.emit()
   }
 
   onMouseDown(event) {

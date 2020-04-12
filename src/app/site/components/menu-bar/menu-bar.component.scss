@@ -7,3 +7,11 @@ mat-toolbar {
     right: 0;
     top: 41px;
 }
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .logoutIcon {
+      cursor: pointer;
+  }

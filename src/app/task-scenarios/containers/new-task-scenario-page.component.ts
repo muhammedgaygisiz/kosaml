@@ -9,7 +9,7 @@ import { TaskScenario } from '../models';
   selector: 'kosaml-edit-task-scenario-page',
   template: `
   <kosaml-page size="S">
-    <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
+    <h1 class="mat-display-1">New Task Scenario</h1>
     <kosaml-scenario
       (saveScenario)="onSaveScenario($event)"
     ></kosaml-scenario>

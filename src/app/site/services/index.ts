@@ -1,3 +1,5 @@
-import { SidebarWidthService } from "./sidebar-width.service";
+import { LoadingService } from "./loading/loading.service";
+import { SidebarWidthService } from "./sidebar-width/sidebar-width.service";
 
-export { SidebarWidthService };
+export { SidebarWidthService, LoadingService };
+

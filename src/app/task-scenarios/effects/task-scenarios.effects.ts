@@ -1,29 +1,24 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { LoadingService } from 'src/app/site/services';
 import { UseScenarioActions } from 'src/app/use-scenarios/actions';
 import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
-import { fromTaskScenarios } from '../reducers';
 
 @Injectable()
 export class TaskScenariosEffects {
   storeTaskScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(TaskScenarioActions.addTaskScenario),
-      withLatestFrom(this.store.pipe(select(fromTaskScenarios.selectAllTaskScenarios))),
-      switchMap(([latestAction, scenarios]) => {
-        return this.http$
-          .put(
-            'https://angular-course-370fd.firebaseio.com/taskScenarios.json',
-            scenarios
-          )
-          .pipe(
-            map(() => latestAction.taskScenario)
-          );
+      map(payload => payload.taskScenario),
+      switchMap((taskScenario: TaskScenario) => {
+        const newTsRef = this.fireDatabase.database.ref('taskScenarios').push();
+        return from(newTsRef.set(taskScenario)).pipe(
+          map(() => taskScenario)
+        );
       }),
       map((taskScenario: TaskScenario) =>
         UseScenarioActions.addUseScenario({ useScenario: taskScenario })
@@ -31,52 +26,28 @@ export class TaskScenariosEffects {
     ),
   )
 
-  // fetchTaskScenarios$ = createEffect(
-  //   () => this.actions$.pipe(
-  //     ofType(AuthActions.authenticationSucceeded),
-  //     switchMap(() => this.http$
-  //       .get<TaskScenario[]>(
-  //         'https://angular-course-370fd.firebaseio.com/taskScenarios.json'
-  //       )
-  //     ),
-  //     map(
-  //       taskScenarios => TaskScenarioActions.upsertTaskScenarios({ taskScenarios })
-  //     )
-  //   )
-  // )
-
   fetchSelectedTaskScenario$ = createEffect(
     () => this.actions$.pipe(
       ofType(TaskScenarioPageActions.selectTaskScenario),
-      mergeMap(action => {
-        return this.fetchTaskScenarios<TaskScenario[]>(
-          'https://angular-course-370fd.firebaseio.com/taskScenarios.json'
-        ).pipe(
-          tap(console.log),
-          map(scenarios => scenarios.filter(scenario => scenario.id !== action.id))
+      tap(() => this.loadingService.startLoading()),
+      switchMap(({ id }) =>
+        from(
+          this.fireDatabase.database.ref('taskScenarios').orderByChild('id').equalTo(id).once('value')
         )
+      ),
+      map(dataSnapshot => dataSnapshot.val()),
+      map(result => {
+        return TaskScenarioActions.addFetchedTaskScenario({
+          taskScenario: (Object.values(result) as TaskScenario[])[0]
+        });
       }),
-      map((taskScenarios: TaskScenario[]) => taskScenarios[0]),
-      map(
-        (taskScenario: TaskScenario) => {
-          if (taskScenario) {
-            return TaskScenarioActions.addTaskScenario({ taskScenario })
-          }
-
-          return { type: 'DUMMY' }
-        }
-      )
+      tap(() => this.loadingService.stopLoading())
     )
   );
 
-  fetchTaskScenarios<T>(url: string): Observable<T> {
-    return this.http$
-      .get<T>(url);
-  }
-
   constructor(
     private actions$: Actions,
-    private http$: HttpClient,
-    private store: Store<fromTaskScenarios.State>
+    private fireDatabase: AngularFireDatabase,
+    private loadingService: LoadingService
   ) { }
 }

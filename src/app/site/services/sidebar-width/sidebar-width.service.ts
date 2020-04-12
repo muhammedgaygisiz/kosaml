@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { fromApp } from 'src/app/store';
-import { SiteActions } from '../actions';
-import { fromSite } from '../reducers';
+import { SiteActions } from '../../actions';
+import { fromSite } from '../../reducers';
 
 @Injectable({
   providedIn: 'root'

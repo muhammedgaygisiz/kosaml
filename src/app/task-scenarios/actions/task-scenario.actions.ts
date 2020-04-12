@@ -12,6 +12,11 @@ export const addTaskScenario = createAction(
   props<{ taskScenario: TaskScenario }>(),
 );
 
+export const addFetchedTaskScenario = createAction(
+  '[TaskScenario/API] Add Fetched TaskScenario',
+  props<{ taskScenario: TaskScenario }>(),
+);
+
 export const upsertTaskScenario = createAction(
   '[TaskScenario/API] Upsert TaskScenario',
   props<{ taskScenario: TaskScenario }>(),

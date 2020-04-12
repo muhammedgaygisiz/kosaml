@@ -1,5 +1,4 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { AuthActions } from 'src/app/auth/actions';
 import { fromApp } from 'src/app/store';
 import { TaskScenarioActions } from 'src/app/task-scenarios/actions';
 import { UseScenarioActions } from 'src/app/use-scenarios/actions';
@@ -30,32 +29,24 @@ const initialState: SiteState = {
 
 export const reducer = createReducer(
   initialState,
-  // todo: Move toggling of loading spinner to own effect
-  on(
-    AuthActions.startLogin,
-    AuthActions.startSignUp,
-    state => ({ ...state, loading: true })
-  ),
+  on(SiteActions.startLoading, (state: SiteState) => ({ ...state, loading: true })),
+  on(SiteActions.stopLoading, (state: SiteState) => ({ ...state, loading: false })),
   on(
     TaskScenarioActions.loadTaskScenarios,
     UseScenarioActions.loadUseScenarios,
-    state => ({ ...state, loading: false })
-  ),
-  on(
-    AuthActions.authenticationSucceeded,
-    state => ({ ...state, loading: false })
+    (state: SiteState) => ({ ...state })
   ),
   on(
     SiteActions.toggleProjectBar,
-    state => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })
+    (state: SiteState) => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })
   ),
   on(
     SiteActions.toggleToolBar,
-    state => ({ ...state, isToolBarOpen: !state.isToolBarOpen })
+    (state: SiteState) => ({ ...state, isToolBarOpen: !state.isToolBarOpen })
   ),
   on(
     SiteActions.sidebarWidthChange,
-    (state, { width }) => ({ ...state, sidebarWidth: width })
+    (state: SiteState, { width }) => ({ ...state, sidebarWidth: width })
   ),
   on(
     TaskScenarioActions.addTaskScenario,
