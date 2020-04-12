@@ -1,6 +1,6 @@
 import { moduleMetadata } from '@storybook/angular';
-import { KosamlCardComponent } from '../..';
 import { SharedModule } from '../../..';
+import { CardComponent } from '../card.component';
 
 export default {
   title: 'Card',
@@ -12,5 +12,5 @@ export default {
 };
 
 export const emptyCard = () => ({
-  component: KosamlCardComponent,
+  component: CardComponent,
 });

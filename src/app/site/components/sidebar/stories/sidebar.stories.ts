@@ -1,13 +1,10 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTreeModule } from '@angular/material/tree';
 import { RouterTestingModule } from '@angular/router/testing';
-import { EffectsModule } from '@ngrx/effects';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { moduleMetadata } from '@storybook/angular';
-import { EmptyPageComponent } from 'src/app/shared/components';
-import { SiteModule } from 'src/app/site/site.module';
-import { fromApp } from 'src/app/store';
+import { SharedModule } from 'src/app/shared';
+import { ProjectComponent } from '../project/project.component';
 import { SidebarComponent } from '../sidebar.component';
 
 
@@ -15,18 +12,14 @@ export default {
     title: 'Sidebar',
     decorators: [
         moduleMetadata({
+            declarations: [ProjectComponent],
             imports: [
-                BrowserAnimationsModule,
-                SiteModule,
-                StoreModule.forRoot(fromApp.ROOT_REDUCERS),
-                RouterTestingModule.withRoutes([{
-                    path: "**",
-                    component: EmptyPageComponent
-                }]),
-                EffectsModule.forRoot([]),
-                HttpClientTestingModule,
+                SharedModule,
+                RouterTestingModule,
+                MatTreeModule,
+                MatSidenavModule,
+                StoreModule.forRoot({}),
             ],
-            providers: [{ provide: APP_BASE_HREF, useValue: '/' }, Store]
         })
     ]
 }
