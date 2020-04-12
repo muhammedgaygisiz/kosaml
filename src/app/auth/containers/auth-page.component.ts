@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { fromSite } from 'src/app/site/reducers';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { fromApp } from '../../store';
 import { AuthActions } from '../actions';
 import { Credentials } from '../models';
@@ -12,9 +11,7 @@ import { fromAuth } from '../reducers';
   selector: 'kosaml-auth-page',
   template: `
   <kosaml-page size="S">
-    <kosaml-loading-spinner *ngIf="(isLoading$ | async) === true"></kosaml-loading-spinner>
     <kosaml-auth
-      *ngIf="(isLoading$ | async) === false"
       (loginSubmitted)="onSubmitLogin($event)"
       (registrationSubmitted)="onSubmitRegistration($event)"
       [isAuthError]="isAuthError$ | async"
@@ -24,14 +21,10 @@ import { fromAuth } from '../reducers';
   `,
 })
 export class AuthPageComponent {
-  isLoading$: Observable<boolean> = this.store.pipe(
-    select(fromSite.selectIsLoading),
-    shareReplay()
-  );
-
   isAuthError$: Observable<boolean> = this.store.pipe(
     select(fromAuth.selectAuthError),
     map(authError => !!authError),
+    tap(console.log),
     shareReplay(),
   );
 
