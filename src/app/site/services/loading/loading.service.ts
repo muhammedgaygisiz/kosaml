@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { fromApp } from 'src/app/store';
+import { SiteActions } from '../../actions';
 import { fromSite } from '../../reducers';
 
 @Injectable({
@@ -14,5 +15,15 @@ export class LoadingService {
     shareReplay()
   );
 
-  constructor(private store: Store<fromApp.State>) { }
+  constructor(
+    private store: Store<fromApp.State>,
+  ) { }
+
+  startLoading() {
+    this.store.dispatch(SiteActions.startLoading());
+  }
+
+  stopLoading() {
+    this.store.dispatch(SiteActions.stopLoading());
+  }
 }

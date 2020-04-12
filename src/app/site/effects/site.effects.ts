@@ -28,7 +28,6 @@ export class SiteEffects {
         { dispatch: false }
     )
 
-
     fetchProject$ = createEffect(
         () => this.actions$.pipe(
             ofType(SiteActions.fetchProject),

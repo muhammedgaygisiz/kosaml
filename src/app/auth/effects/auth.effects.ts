@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { from, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { LoadingService } from 'src/app/site/services';
 import { environment } from '../../../environments/environment';
 import { AuthActions } from '../actions';
 
@@ -47,11 +48,13 @@ export class AuthEffects {
     private http: HttpClient,
     private router: Router,
     private firebaseAuth: AngularFireAuth,
+    private loadingService: LoadingService
   ) { }
 
   authLogin$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.startLogin),
+      tap(() => this.loadingService.startLoading()),
       switchMap(authData => from(this.firebaseAuth.auth.signInWithEmailAndPassword(
         authData.email,
         authData.password,
@@ -91,7 +94,8 @@ export class AuthEffects {
         if (authSuccessAction.redirect) {
           this.router.navigate(['/'])
         }
-      })
+      }),
+      tap(() => this.loadingService.stopLoading())
     )
   }, { dispatch: false });
 

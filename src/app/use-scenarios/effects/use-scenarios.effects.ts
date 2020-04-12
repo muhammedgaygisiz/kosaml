@@ -4,7 +4,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { AuthActions } from 'src/app/auth/actions';
 import { UseScenarioActions } from '../actions';
 import { UseScenario } from '../models';
 
@@ -24,21 +23,6 @@ export class UseScenariosEffects {
     ),
     { dispatch: false }
   );
-
-  fetchUseScenarios$ = createEffect(
-    () => this.actions$.pipe(
-      ofType(AuthActions.authenticationSucceeded),
-      switchMap(() => this.http$
-        .get<UseScenario[]>(
-          'https://angular-course-370fd.firebaseio.com/useScenarios.json'
-        )
-      ),
-      map(
-        useScenarios => UseScenarioActions.upsertUseScenarios({ useScenarios })
-      )
-    ),
-    { dispatch: false }
-  )
 
   constructor(
     private actions$: Actions,
