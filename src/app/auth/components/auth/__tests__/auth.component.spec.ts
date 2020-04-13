@@ -63,11 +63,11 @@ describe('PageComponent', () => {
         const pwdField = getDebugElementForFieldName('password', fixture);
 
         (emailField.nativeElement as HTMLInputElement).value = 'l@l';
-        emailField.triggerEventHandler('change', {});
+        (emailField.nativeElement as HTMLInputElement).value = 'l@l';
 
         (pwdField.nativeElement as HTMLInputElement).value = 'Test';
-
         (pwdField.nativeElement as HTMLInputElement).dispatchEvent(newEvent('input'))
+
 
         fixture.detectChanges();
 
