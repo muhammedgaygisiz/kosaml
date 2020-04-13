@@ -1,12 +1,5 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
-import { EffectsModule } from '@ngrx/effects';
-import { Store, StoreModule } from '@ngrx/store';
 import { moduleMetadata } from '@storybook/angular';
-import { SiteModule } from 'src/app/site/site.module';
-import { fromApp } from 'src/app/store';
+import { SharedModule } from 'src/app/shared';
 import { HeaderComponent } from '../header.component';
 
 
@@ -14,19 +7,18 @@ export default {
     title: 'Header',
     decorators: [
         moduleMetadata({
-            imports: [
-                BrowserAnimationsModule,
-                SiteModule,
-                StoreModule.forRoot(fromApp.ROOT_REDUCERS),
-                RouterTestingModule,
-                EffectsModule.forRoot([]),
-                HttpClientTestingModule,
-            ],
-            providers: [{ provide: APP_BASE_HREF, useValue: '/' }, Store]
+            imports: [SharedModule],
         })
     ]
 }
 
-export const emptyHeader = () => ({
+export const unauthorizedHeader = () => ({
     component: HeaderComponent,
+});
+
+export const authorizedHeader = () => ({
+    component: HeaderComponent,
+    props: {
+        isAuthenticated: true
+    }
 })
