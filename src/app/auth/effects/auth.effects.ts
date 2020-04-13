@@ -30,7 +30,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.startLogin),
       tap(() => this.loadingService.startLoading()),
-      switchMap(authData => from(this.firebaseAuth.auth.signInWithEmailAndPassword(
+      switchMap(authData => from(this.firebaseAuth.signInWithEmailAndPassword(
         authData.email,
         authData.password,
       ))),
@@ -42,7 +42,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.startSignUp),
       tap(() => this.loadingService.startLoading()),
-      switchMap(authData => from(this.firebaseAuth.auth.createUserWithEmailAndPassword(
+      switchMap(authData => from(this.firebaseAuth.createUserWithEmailAndPassword(
         authData.email,
         authData.password,
       ))),
@@ -65,7 +65,7 @@ export class AuthEffects {
   authLogout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.logout),
-      switchMap(() => of(this.firebaseAuth.auth.signOut())),
+      switchMap(() => of(this.firebaseAuth.signOut())),
       tap((result) => {
         this.router.navigate(['/auth']);
       })

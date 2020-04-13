@@ -15,7 +15,7 @@ export class PageComponent implements OnInit {
   width: number;
 
   constructor(
-    private loadingService: LoadingService
+    public loadingService: LoadingService
   ) { }
 
   ngOnInit() {

@@ -12,7 +12,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
 >
   <kosaml-card>
     <mat-card
-      class="card mat-card"
+      class="card mat-card mat-focus-indicator"
     >
       <form
         class="formFieldContainer ng-untouched ng-pristine ng-valid"
@@ -182,7 +182,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
           class="buttonContainer"
         >
           <button
-            class="mat-raised-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-raised-button mat-button-base mat-primary"
             color="primary"
             mat-raised-button=""
             ng-reflect-color="primary"
@@ -206,7 +206,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
             />
           </button>
           <button
-            class="mat-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-button mat-button-base mat-primary"
             color="primary"
             mat-button=""
             ng-reflect-color="primary"
@@ -248,7 +248,7 @@ exports[`PageComponent should render registration 1`] = `
 >
   <kosaml-card>
     <mat-card
-      class="card mat-card"
+      class="card mat-card mat-focus-indicator"
     >
       <form
         class="formFieldContainer ng-untouched ng-pristine ng-invalid"
@@ -418,7 +418,7 @@ exports[`PageComponent should render registration 1`] = `
           class="buttonContainer"
         >
           <button
-            class="mat-raised-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-raised-button mat-button-base mat-primary"
             color="primary"
             disabled="true"
             mat-raised-button=""
@@ -443,7 +443,7 @@ exports[`PageComponent should render registration 1`] = `
             />
           </button>
           <button
-            class="mat-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-button mat-button-base mat-primary"
             color="primary"
             mat-button=""
             ng-reflect-color="primary"
@@ -485,7 +485,7 @@ exports[`PageComponent should render with login button disabled 1`] = `
 >
   <kosaml-card>
     <mat-card
-      class="card mat-card"
+      class="card mat-card mat-focus-indicator"
     >
       <form
         class="formFieldContainer ng-untouched ng-pristine ng-invalid"
@@ -655,7 +655,7 @@ exports[`PageComponent should render with login button disabled 1`] = `
           class="buttonContainer"
         >
           <button
-            class="mat-raised-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-raised-button mat-button-base mat-primary"
             color="primary"
             disabled="true"
             mat-raised-button=""
@@ -680,7 +680,7 @@ exports[`PageComponent should render with login button disabled 1`] = `
             />
           </button>
           <button
-            class="mat-button mat-button-base mat-primary"
+            class="mat-focus-indicator mat-button mat-button-base mat-primary"
             color="primary"
             mat-button=""
             ng-reflect-color="primary"

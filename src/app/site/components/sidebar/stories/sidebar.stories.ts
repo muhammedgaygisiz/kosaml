@@ -1,5 +1,6 @@
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { moduleMetadata } from '@storybook/angular';
@@ -14,6 +15,7 @@ export default {
         moduleMetadata({
             declarations: [ProjectComponent],
             imports: [
+                BrowserAnimationsModule,
                 SharedModule,
                 RouterTestingModule,
                 MatTreeModule,

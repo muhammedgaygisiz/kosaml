@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from 'src/app/shared';
 import { AuthComponent } from '../auth.component';
 
@@ -12,7 +13,9 @@ describe('PageComponent', () => {
     beforeEach(async () => {
         TestBed.configureTestingModule({
             declarations: [AuthComponent],
-            imports: [SharedModule],
+            imports: [
+                BrowserAnimationsModule,
+                SharedModule],
             schemas: [NO_ERRORS_SCHEMA]
         })
             .compileComponents();
