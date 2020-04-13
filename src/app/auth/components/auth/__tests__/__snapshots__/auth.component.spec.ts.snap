@@ -15,12 +15,12 @@ exports[`PageComponent should enable button when filled out 1`] = `
       class="card mat-card"
     >
       <form
-        class="formFieldContainer ng-untouched ng-invalid ng-dirty"
+        class="formFieldContainer ng-untouched ng-pristine ng-invalid"
         ng-reflect-form="[object Object]"
         novalidate=""
       >
         <mat-form-field
-          class="mat-form-field ng-tns-c6-0 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched mat-form-field-should-float ng-dirty ng-valid"
+          class="mat-form-field ng-tns-c6-0 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-invalid mat-form-field-should-float"
         >
           <div
             class="mat-form-field-wrapper"
@@ -36,7 +36,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
                 <input
                   aria-invalid="false"
                   aria-required="false"
-                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-dirty ng-valid"
+                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-invalid"
                   formcontrolname="email"
                   id="mat-input-4"
                   matinput=""
@@ -99,7 +99,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
           </div>
         </mat-form-field>
         <mat-form-field
-          class="mat-form-field ng-tns-c6-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-invalid mat-form-field-should-float ng-dirty"
+          class="mat-form-field ng-tns-c6-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-pristine ng-invalid mat-form-field-should-float"
         >
           <div
             class="mat-form-field-wrapper"
@@ -115,7 +115,7 @@ exports[`PageComponent should enable button when filled out 1`] = `
                 <input
                   aria-invalid="false"
                   aria-required="false"
-                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-invalid ng-dirty"
+                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-invalid"
                   formcontrolname="password"
                   id="mat-input-5"
                   matinput=""

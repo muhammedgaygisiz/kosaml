@@ -65,12 +65,9 @@ describe('PageComponent', () => {
         (emailField.nativeElement as HTMLInputElement).value = 'l@l';
         emailField.triggerEventHandler('change', {});
 
-        // emailField.dispatchEvent(newEvent('input'))
-
         (pwdField.nativeElement as HTMLInputElement).value = 'Test';
-        pwdField.triggerEventHandler('change', {});
 
-        // pwdField.dispatchEvent(newEvent('input'))
+        (pwdField.nativeElement as HTMLInputElement).dispatchEvent(newEvent('input'))
 
         fixture.detectChanges();
 
