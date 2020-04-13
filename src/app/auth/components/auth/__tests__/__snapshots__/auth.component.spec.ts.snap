@@ -1,5 +1,242 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PageComponent should enable button when filled out 1`] = `
+<kosaml-auth
+  authForm={[Function FormGroup]}
+  emailFormControl={[Function FormControl]}
+  isLoginMode={[Function Boolean]}
+  loginSubmitted={[Function EventEmitter]}
+  matcher={[Function AuthErrorMatcher]}
+  passwordFormControl={[Function FormControl]}
+  registrationSubmitted={[Function EventEmitter]}
+>
+  <kosaml-card>
+    <mat-card
+      class="card mat-card"
+    >
+      <form
+        class="formFieldContainer ng-untouched ng-invalid ng-dirty"
+        ng-reflect-form="[object Object]"
+        novalidate=""
+      >
+        <mat-form-field
+          class="mat-form-field ng-tns-c6-0 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched mat-form-field-should-float ng-dirty ng-valid"
+        >
+          <div
+            class="mat-form-field-wrapper"
+          >
+            <div
+              class="mat-form-field-flex"
+            >
+              
+              
+              <div
+                class="mat-form-field-infix"
+              >
+                <input
+                  aria-invalid="false"
+                  aria-required="false"
+                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-dirty ng-valid"
+                  formcontrolname="email"
+                  id="mat-input-4"
+                  matinput=""
+                  name="email"
+                  ng-reflect-error-state-matcher="[object Object]"
+                  ng-reflect-name="email"
+                  ng-reflect-placeholder="Email"
+                  placeholder="Email"
+                />
+                <span
+                  class="mat-form-field-label-wrapper"
+                >
+                  
+                  <label
+                    aria-owns="mat-input-4"
+                    class="mat-form-field-label ng-tns-c6-0 ng-star-inserted"
+                    for="mat-input-4"
+                    id="mat-form-field-label-9"
+                    ng-reflect-disabled="true"
+                    ng-reflect-ng-switch="false"
+                  >
+                    
+                    
+                    <span
+                      class="ng-tns-c6-0 ng-star-inserted"
+                    >
+                      Email
+                    </span>
+                    
+                    
+                  </label>
+                </span>
+              </div>
+              
+            </div>
+            
+            <div
+              class="mat-form-field-underline ng-tns-c6-0 ng-star-inserted"
+            >
+              <span
+                class="mat-form-field-ripple"
+              />
+            </div>
+            <div
+              class="mat-form-field-subscript-wrapper"
+              ng-reflect-ng-switch="hint"
+            >
+              
+              
+              <div
+                class="mat-form-field-hint-wrapper ng-tns-c6-0 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+              >
+                
+                <div
+                  class="mat-form-field-hint-spacer"
+                />
+              </div>
+            </div>
+          </div>
+        </mat-form-field>
+        <mat-form-field
+          class="mat-form-field ng-tns-c6-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder ng-untouched ng-invalid mat-form-field-should-float ng-dirty"
+        >
+          <div
+            class="mat-form-field-wrapper"
+          >
+            <div
+              class="mat-form-field-flex"
+            >
+              
+              
+              <div
+                class="mat-form-field-infix"
+              >
+                <input
+                  aria-invalid="false"
+                  aria-required="false"
+                  class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-invalid ng-dirty"
+                  formcontrolname="password"
+                  id="mat-input-5"
+                  matinput=""
+                  name="password"
+                  ng-reflect-name="password"
+                  ng-reflect-placeholder="Password"
+                  ng-reflect-type="password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <span
+                  class="mat-form-field-label-wrapper"
+                >
+                  
+                  <label
+                    aria-owns="mat-input-5"
+                    class="mat-form-field-label ng-tns-c6-1 ng-star-inserted"
+                    for="mat-input-5"
+                    id="mat-form-field-label-11"
+                    ng-reflect-disabled="true"
+                    ng-reflect-ng-switch="false"
+                  >
+                    
+                    
+                    <span
+                      class="ng-tns-c6-1 ng-star-inserted"
+                    >
+                      Password
+                    </span>
+                    
+                    
+                  </label>
+                </span>
+              </div>
+              
+            </div>
+            
+            <div
+              class="mat-form-field-underline ng-tns-c6-1 ng-star-inserted"
+            >
+              <span
+                class="mat-form-field-ripple"
+              />
+            </div>
+            <div
+              class="mat-form-field-subscript-wrapper"
+              ng-reflect-ng-switch="hint"
+            >
+              
+              
+              <div
+                class="mat-form-field-hint-wrapper ng-tns-c6-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+                style="opacity:1;transform:translateY(0%);0:opacity;1:transform;"
+              >
+                
+                <div
+                  class="mat-form-field-hint-spacer"
+                />
+              </div>
+            </div>
+          </div>
+        </mat-form-field>
+        <div
+          class="buttonContainer"
+        >
+          <button
+            class="mat-raised-button mat-button-base mat-primary"
+            color="primary"
+            disabled="true"
+            mat-raised-button=""
+            ng-reflect-color="primary"
+            ng-reflect-disabled="true"
+            type="submit"
+          >
+            <span
+              class="mat-button-wrapper"
+            >
+               Login 
+            </span>
+            <div
+              class="mat-button-ripple mat-ripple"
+              matripple=""
+              ng-reflect-centered="false"
+              ng-reflect-disabled="true"
+              ng-reflect-trigger="[object HTMLButtonElement]"
+            />
+            <div
+              class="mat-button-focus-overlay"
+            />
+          </button>
+          <button
+            class="mat-button mat-button-base mat-primary"
+            color="primary"
+            mat-button=""
+            ng-reflect-color="primary"
+            type="button"
+          >
+            <span
+              class="mat-button-wrapper"
+            >
+               Switch to Sign Up 
+            </span>
+            <div
+              class="mat-button-ripple mat-ripple"
+              matripple=""
+              ng-reflect-centered="false"
+              ng-reflect-disabled="false"
+              ng-reflect-trigger="[object HTMLButtonElement]"
+            />
+            <div
+              class="mat-button-focus-overlay"
+            />
+          </button>
+        </div>
+        
+      </form>
+    </mat-card>
+  </kosaml-card>
+</kosaml-auth>
+`;
+
 exports[`PageComponent should render with login button disabled 1`] = `
 <kosaml-auth
   authForm={[Function FormGroup]}
