@@ -9,7 +9,10 @@ import { AuthErrorMatcher } from './AuthErrorMatcher';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
+
+  @Input()
   isLoginMode = true;
+
   authForm: FormGroup;
 
   emailFormControl: FormControl = new FormControl(null, [Validators.required, Validators.email]);
@@ -28,7 +31,7 @@ export class AuthComponent implements OnInit {
   @Output()
   registrationSubmitted = new EventEmitter<Credentials>();
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.authForm = new FormGroup({

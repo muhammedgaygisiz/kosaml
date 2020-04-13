@@ -1,28 +1,8 @@
-import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SharedModule } from 'src/app/shared';
 import { AuthComponent } from '../auth.component';
-
-
-const getDebugElementForFieldName =
-    (
-        fieldName: string,
-        fixture: ComponentFixture<AuthComponent>,
-    ): DebugElement =>
-        fixture.debugElement.query(By.css(`input[name='${fieldName}']`));
-
-/**
- * Create custom DOM event the old fashioned way
- *
- * https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
- * Although officially deprecated, some browsers (phantom) don't accept the preferred "new Event(eventName)"
- */
-const newEvent = (eventName: string, bubbles = false, cancelable = false) => {
-    const evt = document.createEvent('CustomEvent');  // MUST be 'CustomEvent'
-    evt.initCustomEvent(eventName, bubbles, cancelable, null);
-    return evt;
-}
 
 
 describe('PageComponent', () => {
@@ -59,20 +39,36 @@ describe('PageComponent', () => {
     it('should enable button when filled out', () => {
         fixture.detectChanges();
 
-        const emailField = getDebugElementForFieldName('email', fixture);
-        const pwdField = getDebugElementForFieldName('password', fixture);
-
-        (emailField.nativeElement as HTMLInputElement).value = 'l@l';
-        (emailField.nativeElement as HTMLInputElement).value = 'l@l';
-
-        (pwdField.nativeElement as HTMLInputElement).value = 'Test';
-        (pwdField.nativeElement as HTMLInputElement).dispatchEvent(newEvent('input'))
-
+        instance.emailFormControl.setValue('l@l.de');
+        instance.passwordFormControl.setValue('Test4711');
 
         fixture.detectChanges();
 
-        fixture.whenStable().then(() => {
-            expect(fixture).toMatchSnapshot();
-        })
+        expect(fixture).toMatchSnapshot()
+        expect(
+            (
+                fixture
+                    .debugElement
+                    .query(By.css('button[type=submit]')).nativeElement as HTMLButtonElement)
+                .disabled
+        ).toBe(false);
+    });
+
+    it('should render registration', () => {
+        fixture.detectChanges();
+
+        instance.isLoginMode = false;
+
+        fixture.detectChanges();
+
+        expect(fixture).toMatchSnapshot();
+        expect(
+            (
+                fixture
+                    .debugElement
+                    .query(By.css('button[type=submit]')).nativeElement as HTMLButtonElement)
+                .textContent.trim()
+
+        ).toBe("Sign Up");
     })
 });

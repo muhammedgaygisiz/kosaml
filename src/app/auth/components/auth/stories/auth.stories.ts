@@ -13,6 +13,13 @@ export default {
     ]
 }
 
-export const auth = () => ({
+export const login = () => ({
     component: AuthComponent,
+});
+
+export const registration = () => ({
+    component: AuthComponent,
+    props: {
+        isLoginMode: false
+    }
 })
