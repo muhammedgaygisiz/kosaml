@@ -12,7 +12,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CardComponent, EmptyPageComponent, LoadingSpinnerComponent, ScenarioComponent } from './components';
 import { PageComponent } from './components/page/page.component';
@@ -29,7 +28,6 @@ const COMPONENTS = [
   declarations: COMPONENTS,
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
     MatFormFieldModule,
