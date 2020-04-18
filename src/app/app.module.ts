@@ -28,6 +28,7 @@ import { fromApp } from './store';
         strictActionImmutability: true,
         strictStateSerializability: true,
         strictActionSerializability: true,
+        strictActionWithinNgZone: true,
       },
     }),
 
