@@ -55,7 +55,6 @@ export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
   }
 
   onDeleteScenario(id: string) {
-    //console.log(id);
     this.store.dispatch(TaskScenarioActions.deleteTaskScenario({id}));
   }
 }
