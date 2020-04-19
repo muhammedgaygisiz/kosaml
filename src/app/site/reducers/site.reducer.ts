@@ -24,7 +24,7 @@ const initialState: SiteState = {
   isToolBarOpen: false,
   loading: false,
   projectStructure: [],
-  sidebarWidth: "250px",
+  sidebarWidth: '250px',
 };
 
 export const reducer = createReducer(
@@ -34,19 +34,19 @@ export const reducer = createReducer(
   on(
     TaskScenarioActions.loadTaskScenarios,
     UseScenarioActions.loadUseScenarios,
-    (state: SiteState) => ({ ...state })
+    (state: SiteState) => ({ ...state }),
   ),
   on(
     SiteActions.toggleProjectBar,
-    (state: SiteState) => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen })
+    (state: SiteState) => ({ ...state, isProjectBarOpen: !state.isProjectBarOpen }),
   ),
   on(
     SiteActions.toggleToolBar,
-    (state: SiteState) => ({ ...state, isToolBarOpen: !state.isToolBarOpen })
+    (state: SiteState) => ({ ...state, isToolBarOpen: !state.isToolBarOpen }),
   ),
   on(
     SiteActions.sidebarWidthChange,
-    (state: SiteState, { width }) => ({ ...state, sidebarWidth: width })
+    (state: SiteState, { width }) => ({ ...state, sidebarWidth: width }),
   ),
   on(
     TaskScenarioActions.addTaskScenario,
@@ -69,19 +69,51 @@ export const reducer = createReducer(
                   : []),
                 {
                   name: taskScenario.title,
-                  type: "file",
+                  type: 'file',
                   link: `../task-scenarios/${taskScenario.id}`,
-                }
-              ]
+                },
+              ],
             },
-            ...projectStructure[0].children.slice(1)
-          ]
+            ...projectStructure[0].children.slice(1),
+          ],
         },
-        { ...projectStructure[1] }
-      ]
+        { ...projectStructure[1] },
+      ];
 
       return { ...state, projectStructure: [...newProjectStructe] };
-    }
+    },
+  ),
+  on(
+    TaskScenarioActions.deleteTaskScenario,
+    (state: SiteState, { id }) => {
+
+      if (!id) {
+        return state;
+      }
+
+      const { projectStructure } = state;
+
+      const newChildren =
+        projectStructure[0].children[0].children.filter(child => child.link.indexOf(id) === -1);
+
+      const newProjectStructe = [
+        {
+          ...projectStructure[0],
+          children: [
+            {
+              ...projectStructure[0].children[0],
+              children: [
+                ...newChildren
+              ],
+            },
+            ...projectStructure[0].children.slice(1),
+          ],
+        },
+        { ...projectStructure[1] },
+      ];
+
+      return { ...state, projectStructure: [...newProjectStructe] };
+    },
   ),
   on(
     TaskScenarioActions.upsertTaskScenarios,
@@ -97,20 +129,20 @@ export const reducer = createReducer(
                 ...taskScenarios.map<FileNode>(
                   scenario => ({
                     name: scenario.title,
-                    type: "file",
+                    type: 'file',
                     link: `../task-scenarios/${scenario.id}`,
-                  })
-                )
-              ]
+                  }),
+                ),
+              ],
             },
-            ...projectStructure[0].children.slice(1)
-          ]
+            ...projectStructure[0].children.slice(1),
+          ],
         },
-        { ...projectStructure[1] }
-      ]
+        { ...projectStructure[1] },
+      ];
 
       return { ...state, projectStructure: [...newProjectStructe] };
-    }
+    },
   ),
   on(
     UseScenarioActions.addUseScenario,
@@ -130,19 +162,19 @@ export const reducer = createReducer(
                   : []),
                 {
                   name: useScenario.title,
-                  type: "file",
+                  type: 'file',
                   link: `../use-scenarios/${useScenario.id}`,
-                }
-              ]
+                },
+              ],
             },
-            ...projectStructure[0].children.slice(2)
-          ]
+            ...projectStructure[0].children.slice(2),
+          ],
         },
-        { ...projectStructure[1] }
-      ]
+        { ...projectStructure[1] },
+      ];
 
       return { ...state, projectStructure: [...newProjectStructe] };
-    }
+    },
   ),
   on(
     UseScenarioActions.upsertUseScenarios,
@@ -159,25 +191,25 @@ export const reducer = createReducer(
                 ...useScenarios.map<FileNode>(
                   scenario => ({
                     name: scenario.title,
-                    type: "file",
+                    type: 'file',
                     link: `../task-scenarios/${scenario.id}`,
-                  })
-                )
-              ]
+                  }),
+                ),
+              ],
             },
-            ...projectStructure[0].children.slice(1)
-          ]
+            ...projectStructure[0].children.slice(1),
+          ],
         },
-        { ...projectStructure[1] }
-      ]
+        { ...projectStructure[1] },
+      ];
 
       return { ...state, projectStructure: [...newProjectStructe] };
-    }
+    },
   ),
   on(
     SiteActions.fetchedProject,
-    (state: SiteState, { projectStructure }) => ({ ...state, projectStructure: [...projectStructure] })
-  )
+    (state: SiteState, { projectStructure }) => ({ ...state, projectStructure: [...projectStructure] }),
+  ),
 );
 
 
@@ -186,30 +218,30 @@ export const reducer = createReducer(
  * This is used for selecting feature states that are loaded eagerly or lazily.
  */
 export const selectSiteState = createFeatureSelector<State, SiteState>(
-  siteFeatureKey
+  siteFeatureKey,
 );
 
 export const selectIsProjectBarOpen = createSelector(
   selectSiteState,
-  state => state.isProjectBarOpen
+  state => state.isProjectBarOpen,
 );
 
 export const selectIsToolBarOpen = createSelector(
   selectSiteState,
-  state => state.isToolBarOpen
+  state => state.isToolBarOpen,
 );
 
 export const selectProjectStructure = createSelector(
   selectSiteState,
-  state => state.projectStructure
+  state => state.projectStructure,
 );
 
 export const selectSidebarWidth = createSelector(
   selectSiteState,
-  state => state.sidebarWidth
+  state => state.sidebarWidth,
 );
 
 export const selectIsLoading = createSelector(
   selectSiteState,
-  state => state.loading
+  state => state.loading,
 );

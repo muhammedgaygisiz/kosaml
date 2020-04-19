@@ -57,8 +57,6 @@ export const clearTaskScenarios = createAction('[TaskScenario/API] Clear TaskSce
 export const fetchTaskScenarioById = createAction(
   '[TaskScenario/API] Fetch Task Scenario by id',
   props<{ id: number }>(),
-)
+);
 
-export const fetchedTaskScenario = createAction(
-  '[TaskScenario/API] Fetched Task Scenario'
-)
+export const noTaskScenarioFound = createAction('[TaskScenario/API] No Task Scenario found')

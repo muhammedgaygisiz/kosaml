@@ -1,4 +1,4 @@
-<kosaml-card [showSaveButton]="showSaveButton">
+<kosaml-card>
     <form [formGroup]="scenarioForm" class="formFieldContainer" (ngSubmit)="onSubmit()">
         <mat-form-field>
             <input matInput placeholder="Title" name="title" formControlName="title" [errorStateMatcher]="matcher" />
@@ -11,6 +11,7 @@
             <textarea matInput name="description" formControlName="description" rows="12"></textarea>
         </mat-form-field>
         <mat-card-actions align="end" class="manuelCardActionsStyle">
+            <button mat-button type="button" *ngIf="showDeleteButton" (click)="onDelete()">DELETE</button>
             <button mat-button type="submit">SAVE</button>
         </mat-card-actions>
     </form>

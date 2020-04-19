@@ -13,19 +13,23 @@ export class ScenarioComponent implements OnInit, OnChanges {
   @Input()
   model: Scenario;
 
+  @Input()
+  showDeleteButton: boolean = false;
+
   @Output()
   saveScenario = new EventEmitter<Scenario>();
 
-  showSaveButton: boolean;
+  @Output()
+  deleteScenario = new EventEmitter<string>();
+
   scenarioForm: FormGroup;
+
   matcher = new KosamlErrorMatcher();
 
   titleFormControl: FormControl = new FormControl(null, [Validators.required]);
   descriptionFormControl: FormControl = new FormControl(null);
 
   ngOnInit() {
-    this.showSaveButton = !this.model;
-
     this.setFormFields(this.model);
 
     this.scenarioForm = new FormGroup({
@@ -56,5 +60,15 @@ export class ScenarioComponent implements OnInit, OnChanges {
       this.titleFormControl.setValue(model.title);
       this.descriptionFormControl.setValue(model.description);
     }
+  }
+
+  onDelete() {
+    let id = "" ;
+
+    if (this.model?.id) {
+      id = this.model.id;
+    }
+
+    this.deleteScenario.next(id);
   }
 }
