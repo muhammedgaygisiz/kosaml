@@ -4,9 +4,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { fromApp } from 'src/app/store';
-import { TaskScenarioPageActions } from '../actions';
+import { TaskScenarioActions, TaskScenarioPageActions } from '../actions';
 import { TaskScenario } from '../models';
 import { fromTaskScenarios } from '../reducers';
+import { Scenario } from '../../shared/model';
 
 @Component({
   selector: 'kosaml-edit-task-scenario-page',
@@ -17,6 +18,7 @@ import { fromTaskScenarios } from '../reducers';
       [model]="selectedTaskScenario$ | async"
       (saveScenario)="onSaveScenario($event)"
       [showDeleteButton]="true"
+      (deleteScenario)="onDeleteScenario($event)"
     ></kosaml-scenario>
     </kosaml-page>
   `,
@@ -50,5 +52,10 @@ export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
     // this.store.dispatch(TaskScenarioActions.addTaskScenario({ taskScenario: scenario }));
 
     this.router.navigate(['./project']);
+  }
+
+  onDeleteScenario(id: string) {
+    //console.log(id);
+    this.store.dispatch(TaskScenarioActions.deleteTaskScenario({id}));
   }
 }

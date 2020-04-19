@@ -20,7 +20,7 @@ export class ScenarioComponent implements OnInit, OnChanges {
   saveScenario = new EventEmitter<Scenario>();
 
   @Output()
-  deleteScenario = new EventEmitter<Scenario>();
+  deleteScenario = new EventEmitter<string>();
 
   scenarioForm: FormGroup;
 
@@ -63,6 +63,6 @@ export class ScenarioComponent implements OnInit, OnChanges {
   }
 
   onDelete() {
-    this.deleteScenario.next(this.model);
+    this.deleteScenario.next(this.model.id);
   }
 }
