@@ -63,6 +63,12 @@ export class ScenarioComponent implements OnInit, OnChanges {
   }
 
   onDelete() {
-    this.deleteScenario.next(this.model.id);
+    let id = "" ;
+
+    if (this.model?.id) {
+      id = this.model.id;
+    }
+
+    this.deleteScenario.next(id);
   }
 }

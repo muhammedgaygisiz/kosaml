@@ -12,15 +12,15 @@ import { Scenario } from '../../shared/model';
 @Component({
   selector: 'kosaml-edit-task-scenario-page',
   template: `
-  <kosaml-page [size]="'S'">
-    <h1 class="mat-display-1">Task Scenario</h1>
-    <kosaml-scenario
-      [model]="selectedTaskScenario$ | async"
-      (saveScenario)="onSaveScenario($event)"
-      [showDeleteButton]="true"
-      (deleteScenario)="onDeleteScenario($event)"
-    ></kosaml-scenario>
-    </kosaml-page>
+      <kosaml-page [size]="'S'">
+          <h1 class="mat-display-1">Task Scenario</h1>
+          <kosaml-scenario
+                  [model]="selectedTaskScenario$ | async"
+                  (saveScenario)="onSaveScenario($event)"
+                  [showDeleteButton]="true"
+                  (deleteScenario)="onDeleteScenario($event)"
+          ></kosaml-scenario>
+      </kosaml-page>
   `,
   styles: [],
 })
@@ -35,12 +35,13 @@ export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.State>,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.selectSubscription = this.route.params.pipe(
       map(params => params.id),
-      tap(id => this.store.dispatch(TaskScenarioPageActions.selectTaskScenario({ id })))
+      tap(id => this.store.dispatch(TaskScenarioPageActions.selectTaskScenario({ id }))),
     ).subscribe();
   }
 
@@ -55,6 +56,8 @@ export class EditTaskScenarioPageComponent implements OnInit, OnDestroy {
   }
 
   onDeleteScenario(id: string) {
-    this.store.dispatch(TaskScenarioActions.deleteTaskScenario({id}));
+    this.store.dispatch(TaskScenarioActions.deleteTaskScenario({ id }));
+
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 }
