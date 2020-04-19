@@ -11,11 +11,12 @@ import { fromTaskScenarios } from '../reducers';
 @Component({
   selector: 'kosaml-edit-task-scenario-page',
   template: `
-  <kosaml-page size="S">
+  <kosaml-page [size]="'S'">
     <h1 class="mat-display-1">Task Scenario</h1>
     <kosaml-scenario
       [model]="selectedTaskScenario$ | async"
       (saveScenario)="onSaveScenario($event)"
+      [showDeleteButton]="true"
     ></kosaml-scenario>
     </kosaml-page>
   `,
